@@ -89,14 +89,14 @@
             txtTelefono.Location = new Point(267, 33);
             txtTelefono.Name = "txtTelefono";
             txtTelefono.Size = new Size(130, 23);
-            txtTelefono.TabIndex = 4;
+            txtTelefono.TabIndex = 1;
             // 
             // lblTelefono
             // 
             lblTelefono.AutoSize = true;
             lblTelefono.Location = new Point(207, 37);
             lblTelefono.Name = "lblTelefono";
-            lblTelefono.Size = new Size(55, 15);
+            lblTelefono.Size = new Size(56, 15);
             lblTelefono.TabIndex = 3;
             lblTelefono.Text = "Teléfono:";
             // 
@@ -105,7 +105,7 @@
             txtCliente.Location = new Point(66, 33);
             txtCliente.Name = "txtCliente";
             txtCliente.Size = new Size(130, 23);
-            txtCliente.TabIndex = 2;
+            txtCliente.TabIndex = 0;
             // 
             // lblCliente
             // 
@@ -126,7 +126,7 @@
             grpIngredientes.Location = new Point(433, 12);
             grpIngredientes.Name = "grpIngredientes";
             grpIngredientes.Size = new Size(291, 90);
-            grpIngredientes.TabIndex = 1;
+            grpIngredientes.TabIndex = 2;
             grpIngredientes.TabStop = false;
             grpIngredientes.Text = "Adicionales ($800 c/u)";
             // 
@@ -135,8 +135,8 @@
             chkTocino.AutoSize = true;
             chkTocino.Location = new Point(95, 46);
             chkTocino.Name = "chkTocino";
-            chkTocino.Size = new Size(61, 19);
-            chkTocino.TabIndex = 4;
+            chkTocino.Size = new Size(62, 19);
+            chkTocino.TabIndex = 9;
             chkTocino.Text = "Tocino";
             chkTocino.UseVisualStyleBackColor = true;
             // 
@@ -146,7 +146,7 @@
             chkChampinones.Location = new Point(185, 22);
             chkChampinones.Name = "chkChampinones";
             chkChampinones.Size = new Size(100, 19);
-            chkChampinones.TabIndex = 3;
+            chkChampinones.TabIndex = 7;
             chkChampinones.Text = "Champiñones";
             chkChampinones.UseVisualStyleBackColor = true;
             // 
@@ -156,7 +156,7 @@
             chkPepperoni.Location = new Point(99, 22);
             chkPepperoni.Name = "chkPepperoni";
             chkPepperoni.Size = new Size(80, 19);
-            chkPepperoni.TabIndex = 2;
+            chkPepperoni.TabIndex = 6;
             chkPepperoni.Text = "Pepperoni";
             chkPepperoni.UseVisualStyleBackColor = true;
             // 
@@ -166,7 +166,7 @@
             chkAceitunas.Location = new Point(11, 46);
             chkAceitunas.Name = "chkAceitunas";
             chkAceitunas.Size = new Size(78, 19);
-            chkAceitunas.TabIndex = 1;
+            chkAceitunas.TabIndex = 8;
             chkAceitunas.Text = "Aceitunas";
             chkAceitunas.UseVisualStyleBackColor = true;
             // 
@@ -175,8 +175,8 @@
             chkQuesoExtra.AutoSize = true;
             chkQuesoExtra.Location = new Point(11, 21);
             chkQuesoExtra.Name = "chkQuesoExtra";
-            chkQuesoExtra.Size = new Size(89, 19);
-            chkQuesoExtra.TabIndex = 0;
+            chkQuesoExtra.Size = new Size(88, 19);
+            chkQuesoExtra.TabIndex = 5;
             chkQuesoExtra.Text = "Queso extra";
             chkQuesoExtra.UseVisualStyleBackColor = true;
             // 
@@ -196,7 +196,7 @@
             groupBox1.Location = new Point(11, 246);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(713, 162);
-            groupBox1.TabIndex = 2;
+            groupBox1.TabIndex = 4;
             groupBox1.TabStop = false;
             groupBox1.Text = "Detalle de Pago";
             // 
@@ -313,7 +313,7 @@
             rdbDelivery.Location = new Point(118, 23);
             rdbDelivery.Name = "rdbDelivery";
             rdbDelivery.Size = new Size(119, 19);
-            rdbDelivery.TabIndex = 1;
+            rdbDelivery.TabIndex = 10;
             rdbDelivery.TabStop = true;
             rdbDelivery.Text = "Delivery (+$2.000)";
             rdbDelivery.UseVisualStyleBackColor = true;
@@ -336,7 +336,7 @@
             chkConvenioEstudiante.Location = new Point(9, 54);
             chkConvenioEstudiante.Name = "chkConvenioEstudiante";
             chkConvenioEstudiante.Size = new Size(226, 19);
-            chkConvenioEstudiante.TabIndex = 2;
+            chkConvenioEstudiante.TabIndex = 11;
             chkConvenioEstudiante.Text = "Convenio Estudiante/IPVG (10% Dcto)";
             chkConvenioEstudiante.UseVisualStyleBackColor = true;
             // 
@@ -346,7 +346,7 @@
             rdbRetiro.Location = new Point(9, 23);
             rdbRetiro.Name = "rdbRetiro";
             rdbRetiro.Size = new Size(103, 19);
-            rdbRetiro.TabIndex = 0;
+            rdbRetiro.TabIndex = 10;
             rdbRetiro.TabStop = true;
             rdbRetiro.Text = "Retiro en Local";
             rdbRetiro.UseVisualStyleBackColor = true;
@@ -360,7 +360,7 @@
             grpPizza.Location = new Point(12, 112);
             grpPizza.Name = "grpPizza";
             grpPizza.Size = new Size(405, 90);
-            grpPizza.TabIndex = 4;
+            grpPizza.TabIndex = 1;
             grpPizza.TabStop = false;
             grpPizza.Text = "Tamaño y Masa";
             // 
@@ -369,7 +369,7 @@
             lblMasa.AutoSize = true;
             lblMasa.Location = new Point(9, 54);
             lblMasa.Name = "lblMasa";
-            lblMasa.Size = new Size(64, 15);
+            lblMasa.Size = new Size(65, 15);
             lblMasa.TabIndex = 6;
             lblMasa.Text = "Tipo Masa:";
             // 
@@ -380,14 +380,14 @@
             cboMasa.Location = new Point(78, 50);
             cboMasa.Name = "cboMasa";
             cboMasa.Size = new Size(185, 23);
-            cboMasa.TabIndex = 5;
+            cboMasa.TabIndex = 4;
             // 
             // lblTamano
             // 
             lblTamano.AutoSize = true;
             lblTamano.Location = new Point(9, 25);
             lblTamano.Name = "lblTamano";
-            lblTamano.Size = new Size(52, 15);
+            lblTamano.Size = new Size(53, 15);
             lblTamano.TabIndex = 4;
             lblTamano.Text = "Tamaño:";
             // 
@@ -398,14 +398,14 @@
             cboTamano.Location = new Point(66, 21);
             cboTamano.Name = "cboTamano";
             cboTamano.Size = new Size(197, 23);
-            cboTamano.TabIndex = 0;
+            cboTamano.TabIndex = 2;
             // 
             // btnCalcular
             // 
             btnCalcular.Location = new Point(145, 217);
             btnCalcular.Name = "btnCalcular";
             btnCalcular.Size = new Size(136, 23);
-            btnCalcular.TabIndex = 5;
+            btnCalcular.TabIndex = 11;
             btnCalcular.Text = "⚡Calcular Total";
             btnCalcular.UseVisualStyleBackColor = true;
             btnCalcular.Click += btnCalcular_Click;
@@ -415,7 +415,7 @@
             btnLimpiar.Location = new Point(286, 217);
             btnLimpiar.Name = "btnLimpiar";
             btnLimpiar.Size = new Size(136, 23);
-            btnLimpiar.TabIndex = 6;
+            btnLimpiar.TabIndex = 12;
             btnLimpiar.Text = "\U0001f9f9 Nuevo Pedido";
             btnLimpiar.UseVisualStyleBackColor = true;
             btnLimpiar.Click += btnLimpiar_Click;
@@ -425,7 +425,7 @@
             btnConfirmar.Location = new Point(427, 217);
             btnConfirmar.Name = "btnConfirmar";
             btnConfirmar.Size = new Size(136, 23);
-            btnConfirmar.TabIndex = 7;
+            btnConfirmar.TabIndex = 13;
             btnConfirmar.Text = "✅ Confirmar Pedido";
             btnConfirmar.UseVisualStyleBackColor = true;
             btnConfirmar.Click += btnConfirmar_Click;
@@ -443,8 +443,12 @@
             Controls.Add(groupBox1);
             Controls.Add(grpIngredientes);
             Controls.Add(grpCliente);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Sistema de Pedidos - Pizzería Bella Italia (v1.0)";
             Load += Form1_Load;
             grpCliente.ResumeLayout(false);

@@ -36,14 +36,18 @@ namespace BellaItalia
                 MessageBox.Show("Por favor, ingrese el nombre del cliente.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtCliente.Focus();
                 return;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtTelefono.Text))
+            } else if (string.IsNullOrWhiteSpace(txtTelefono.Text))
             {
                 MessageBox.Show("Por favor, ingrese un número telefónico de contacto.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtTelefono.Focus();
                 return;
+            } else if (!int.TryParse(txtTelefono.Text, out int telefono))
+            {
+                MessageBox.Show("Por favor, ingrese un número telefónico de contacto válido.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtTelefono.Focus();
+                return;
             }
+
 
             // Instanciación del objeto de Dominio
             PedidoPizza pedido = new PedidoPizza(
