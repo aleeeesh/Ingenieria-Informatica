@@ -52,23 +52,25 @@ namespace BellaItalia
         // MÉTODOS PUROS DE CÁLCULO DE NEGOCIO (SRP)
         public double CalcularPrecioTamano()
         {
-            switch (Tamano)
-            {
-                case "Personal" :
-                    return PRECIO_PERSONAL;
-                case "Mediana":
-                    return PRECIO_MEDIANA;
-                case "Familiar":
-                    return PRECIO_FAMILIAR;
-                default:
-                    return PRECIO_MEDIANA;
 
+            if (Tamano.Contains("Personal"))
+            {
+                return PRECIO_PERSONAL;
+            } else if (Tamano.Contains("Mediana"))
+            {
+                return PRECIO_MEDIANA;
+            } else if (Tamano.Contains("Familiar"))
+            {
+                return PRECIO_FAMILIAR;
+            } else
+            {
+                return PRECIO_MEDIANA;
             }
         }
 
         public double CalcularCostoMasa()
         {
-            if (TipoMasa == "Borde de Queso")
+            if (TipoMasa.Contains("Borde de Queso"))
             {
                 return CalcularPrecioTamano() + PRECIO_BORDE_QUESO;
             }

@@ -53,8 +53,8 @@ namespace BellaItalia
             PedidoPizza pedido = new PedidoPizza(
                 txtCliente.Text,
                 txtTelefono.Text,
-                cboTamano.Text.Split(" ")[0],
-                cboMasa.Text.Split(" (")[0],
+                cboTamano.Text,
+                cboMasa.Text,
                 chkQuesoExtra.Checked,
                 chkPepperoni.Checked,
                 chkChampinones.Checked,

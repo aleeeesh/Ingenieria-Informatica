@@ -40,7 +40,7 @@
             chkPepperoni = new CheckBox();
             chkAceitunas = new CheckBox();
             chkQuesoExtra = new CheckBox();
-            groupBox1 = new GroupBox();
+            grpDetalles = new GroupBox();
             txtTotalValor = new Label();
             txtIvaValor = new Label();
             txtDeliveryValor = new Label();
@@ -64,9 +64,10 @@
             btnCalcular = new Button();
             btnLimpiar = new Button();
             btnConfirmar = new Button();
+            Pedidos = new GroupBox();
             grpCliente.SuspendLayout();
             grpIngredientes.SuspendLayout();
-            groupBox1.SuspendLayout();
+            grpDetalles.SuspendLayout();
             grpEntrega.SuspendLayout();
             grpPizza.SuspendLayout();
             SuspendLayout();
@@ -180,25 +181,25 @@
             chkQuesoExtra.Text = "Queso extra";
             chkQuesoExtra.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // grpDetalles
             // 
-            groupBox1.Controls.Add(txtTotalValor);
-            groupBox1.Controls.Add(txtIvaValor);
-            groupBox1.Controls.Add(txtDeliveryValor);
-            groupBox1.Controls.Add(txtDescuentoValor);
-            groupBox1.Controls.Add(txtSubtotalValor);
-            groupBox1.Controls.Add(lblTotalValor);
-            groupBox1.Controls.Add(lblSeparador);
-            groupBox1.Controls.Add(lblIvaValor);
-            groupBox1.Controls.Add(lblDeliveryValor);
-            groupBox1.Controls.Add(lblDescuentoValor);
-            groupBox1.Controls.Add(lblSubtotalValor);
-            groupBox1.Location = new Point(11, 246);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(713, 162);
-            groupBox1.TabIndex = 4;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Detalle de Pago";
+            grpDetalles.Controls.Add(txtTotalValor);
+            grpDetalles.Controls.Add(txtIvaValor);
+            grpDetalles.Controls.Add(txtDeliveryValor);
+            grpDetalles.Controls.Add(txtDescuentoValor);
+            grpDetalles.Controls.Add(txtSubtotalValor);
+            grpDetalles.Controls.Add(lblTotalValor);
+            grpDetalles.Controls.Add(lblSeparador);
+            grpDetalles.Controls.Add(lblIvaValor);
+            grpDetalles.Controls.Add(lblDeliveryValor);
+            grpDetalles.Controls.Add(lblDescuentoValor);
+            grpDetalles.Controls.Add(lblSubtotalValor);
+            grpDetalles.Location = new Point(11, 246);
+            grpDetalles.Name = "grpDetalles";
+            grpDetalles.Size = new Size(336, 162);
+            grpDetalles.TabIndex = 4;
+            grpDetalles.TabStop = false;
+            grpDetalles.Text = "Detalle de Pago";
             // 
             // txtTotalValor
             // 
@@ -430,17 +431,27 @@
             btnConfirmar.UseVisualStyleBackColor = true;
             btnConfirmar.Click += btnConfirmar_Click;
             // 
+            // Pedidos
+            // 
+            Pedidos.Location = new Point(363, 253);
+            Pedidos.Name = "Pedidos";
+            Pedidos.Size = new Size(361, 155);
+            Pedidos.TabIndex = 14;
+            Pedidos.TabStop = false;
+            Pedidos.Text = "groupBox2";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(735, 420);
+            Controls.Add(Pedidos);
             Controls.Add(btnConfirmar);
             Controls.Add(btnLimpiar);
             Controls.Add(btnCalcular);
             Controls.Add(grpPizza);
             Controls.Add(grpEntrega);
-            Controls.Add(groupBox1);
+            Controls.Add(grpDetalles);
             Controls.Add(grpIngredientes);
             Controls.Add(grpCliente);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -455,8 +466,8 @@
             grpCliente.PerformLayout();
             grpIngredientes.ResumeLayout(false);
             grpIngredientes.PerformLayout();
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
+            grpDetalles.ResumeLayout(false);
+            grpDetalles.PerformLayout();
             grpEntrega.ResumeLayout(false);
             grpEntrega.PerformLayout();
             grpPizza.ResumeLayout(false);
@@ -472,7 +483,7 @@
         private Label lblTelefono;
         private TextBox txtCliente;
         private Label lblCliente;
-        private GroupBox groupBox1;
+        private GroupBox grpDetalles;
         private GroupBox grpEntrega;
         private GroupBox grpPizza;
         private Label lblTamano;
@@ -501,5 +512,6 @@
         private Label txtDeliveryValor;
         private Label txtDescuentoValor;
         private Label txtSubtotalValor;
+        private GroupBox Pedidos;
     }
 }
