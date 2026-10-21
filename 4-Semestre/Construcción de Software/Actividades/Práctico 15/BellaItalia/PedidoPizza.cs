@@ -6,143 +6,101 @@ namespace BellaItalia
 {
     public class PedidoPizza
     {
-        // Propiedades auto-implementadas de Entidad ({ get; set; })
         public string Cliente { get; set; } = string.Empty;
         public string Telefono { get; set; } = string.Empty;
-        public string Tamano { get; set; } = "Mediana";
-        public string TipoMasa { get; set; } = "Tradicional";
+        public string TamanoNombre { get; set; } = string.Empty;
+        public int PrecioBaseTamano { get; set; }
+        public string MasaNombre { get; set; } = string.Empty;
+        public int RecargoMasa { get; set; }
 
-        // Adicionales
         public bool QuesoExtra { get; set; }
         public bool Pepperoni { get; set; }
         public bool Champinones { get; set; }
         public bool Aceitunas { get; set; }
         public bool Tocino { get; set; }
 
-        // Opciones de Entrega y Beneficio
         public bool EsDelivery { get; set; }
         public bool AplicaConvenioEstudiante { get; set; }
 
-        // Constantes de Precios de Negocio
-        private const double PRECIO_PERSONAL = 5000.0;
-        private const double PRECIO_MEDIANA = 8500.0;
-        private const double PRECIO_FAMILIAR = 12000.0;
-        private const double PRECIO_BORDE_QUESO = 1500.0;
-        private const double PRECIO_INGREDIENTE_EXTRA = 800.0;
-        private const double RECARGO_DELIVERY = 2000.0;
-        private const double TASA_DESCUENTO = 0.10; // 10%
-        private const double TASA_IVA = 0.19; // 19%
+        private const int PRECIO_INGREDIENTE_EXTRA = 800;
+        private const int RECARGO_DELIVERY = 2000;
+        private const double TASA_DESCUENTO = 0.10;
+        private const double TASA_IVA = 0.19;
 
-        // CONSTRUCTOR
-        public PedidoPizza(string cliente, string telefono, string tamano, string tipoMasa, bool quesoExtra, bool pepperoni, bool champinones, bool aceitunas, bool tocino, bool esDelivery, bool aplicaDescuento)
+        // Constructores sobrecargados
+        public PedidoPizza() { }
+
+        public PedidoPizza(string cliente, string telefono, string tamanoNombre, int precioBaseTamano, string masaNombre, int recargoMasa)
         {
             Cliente = cliente;
             Telefono = telefono;
-            Tamano = tamano;
-            TipoMasa = tipoMasa;
+            TamanoNombre = tamanoNombre;
+            PrecioBaseTamano = precioBaseTamano;
+            MasaNombre = masaNombre;
+            RecargoMasa = recargoMasa;
+        }
+
+        public PedidoPizza(
+            string cliente, string telefono, string tamanoNombre, int precioBaseTamano,
+            string masaNombre, int recargoMasa, bool quesoExtra, bool pepperoni,
+            bool champinones, bool aceitunas, bool tocino, bool esDelivery, bool aplicaConvenioEstudiante)
+            : this(cliente, telefono, tamanoNombre, precioBaseTamano, masaNombre, recargoMasa)
+        {
             QuesoExtra = quesoExtra;
             Pepperoni = pepperoni;
             Champinones = champinones;
             Aceitunas = aceitunas;
             Tocino = tocino;
             EsDelivery = esDelivery;
-            AplicaConvenioEstudiante = aplicaDescuento;
-        }
-
-        // MÉTODOS PUROS DE CÁLCULO DE NEGOCIO (SRP)
-        public double CalcularPrecioTamano()
-        {
-
-            if (Tamano.Contains("Personal"))
-            {
-                return PRECIO_PERSONAL;
-            } else if (Tamano.Contains("Mediana"))
-            {
-                return PRECIO_MEDIANA;
-            } else if (Tamano.Contains("Familiar"))
-            {
-                return PRECIO_FAMILIAR;
-            } else
-            {
-                return PRECIO_MEDIANA;
-            }
-        }
-
-        public double CalcularCostoMasa()
-        {
-            if (TipoMasa.Contains("Borde de Queso"))
-            {
-                return CalcularPrecioTamano() + PRECIO_BORDE_QUESO;
-            }
-
-            return CalcularPrecioTamano();
+            AplicaConvenioEstudiante = aplicaConvenioEstudiante;
         }
 
         public int ContarIngredientesExtra()
         {
-            int cantidadIngredientesExtras = 0;
-
-            if (QuesoExtra)
-            {
-                cantidadIngredientesExtras++;
-            }
-            
-            if (Pepperoni)
-            {
-                cantidadIngredientesExtras++;
-            }
-            
-            if (Champinones)
-            {
-                cantidadIngredientesExtras++;
-            } 
-            
-            if (Aceitunas)
-            {
-                cantidadIngredientesExtras++;
-            } 
-            
-            if (Tocino)
-            {
-                cantidadIngredientesExtras++;
-            }
-
-            return cantidadIngredientesExtras;
+            int total = 0;
+            if (QuesoExtra) total++;
+            if (Pepperoni) total++;
+            if (Champinones) total++;
+            if (Aceitunas) total++;
+            if (Tocino) total++;
+            return total;
         }
-        
-        public double CalcularCostoIngredientes()
+
+        public int CalcularSubtotalPizza()
         {
-            return PRECIO_INGREDIENTE_EXTRA * ContarIngredientesExtra();
-        }
-        
-        public double CalcularSubtotalPizza()
-        {
-            return CalcularCostoMasa() + CalcularCostoIngredientes();
+            return PrecioBaseTamano + RecargoMasa + (ContarIngredientesExtra() * PRECIO_INGREDIENTE_EXTRA);
         }
 
-        public double CalcularMontoDescuento()
+        public int CalcularMontoDescuento()
         {
-            return AplicaConvenioEstudiante ? CalcularSubtotalPizza() * TASA_DESCUENTO : 0;
+            return AplicaConvenioEstudiante ? (int)(CalcularSubtotalPizza() * TASA_DESCUENTO) : 0;
         }
 
-        public double CalcularCostoDelivery()
+        public int CalcularCostoDelivery()
         {
             return EsDelivery ? RECARGO_DELIVERY : 0;
         }
 
-        public double CalcularNetoAfecto()
+        public int CalcularNetoAfecto()
         {
-            return CalcularSubtotalPizza() + CalcularCostoDelivery() - CalcularMontoDescuento();
+            return (CalcularSubtotalPizza() - CalcularMontoDescuento()) + CalcularCostoDelivery();
         }
 
-        public double CalcularMontoIva()
+        public int CalcularMontoIva()
         {
-            return CalcularNetoAfecto() * TASA_IVA;
+            return (int)(CalcularNetoAfecto() * TASA_IVA);
         }
 
-        public double CalcularTotalPagar()
+        public int CalcularTotalPagar()
         {
             return CalcularNetoAfecto() + CalcularMontoIva();
+        }
+
+        // Sobrescritura clave para renderizar en ListBox
+        public override string ToString()
+        {
+            string tipoAtencion = EsDelivery ? "Delivery" : "Retiro";
+            return $"{Cliente} | {TamanoNombre} ({MasaNombre}) [{tipoAtencion}] -> $ {CalcularTotalPagar():N0} CLP";
         }
     }
 }

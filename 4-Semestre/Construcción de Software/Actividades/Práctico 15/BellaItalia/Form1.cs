@@ -2,30 +2,21 @@ using System.Globalization;
 
 namespace BellaItalia
 {
-    public partial class Form1 : Form
+    public partial class FormTallerPizzeria : Form
     {
-        public Form1()
+        private readonly List<PedidoPizza> historialPedidos = new List<PedidoPizza>();
+
+        public FormTallerPizzeria()
         {
             InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Poblar ComboBoxes de forma dinámica
-            cboTamano.Items.Clear();
-            cboTamano.Items.Add("Personal ($5.000)");
-            cboTamano.Items.Add("Mediana ($8.500)");
-            cboTamano.Items.Add("Familiar ($12.000)");
-            cboTamano.SelectedIndex = 1; // Mediana por defecto
-
-            cboMasa.Items.Clear();
-            cboMasa.Items.Add("Tradicional");
-            cboMasa.Items.Add("Delgada");
-            cboMasa.Items.Add("Borde de Queso (+$1.500)");
-            cboMasa.SelectedIndex = 0; // Tradicional por defecto
-
-            rdbRetiro.Checked = true;
-            LimpiarResumen();
+            CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+            PoblarComboBoxesConDiccionarios();
+            LimpiarFormulario();
+            ActualizarMetricasJornada();
         }
 
         private void btnCalcular_Click(object sender, EventArgs e)
@@ -36,12 +27,15 @@ namespace BellaItalia
                 MessageBox.Show("Por favor, ingrese el nombre del cliente.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtCliente.Focus();
                 return;
-            } else if (string.IsNullOrWhiteSpace(txtTelefono.Text))
+            }
+
+            if (string.IsNullOrWhiteSpace(txtTelefono.Text))
             {
                 MessageBox.Show("Por favor, ingrese un número telefónico de contacto.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtTelefono.Focus();
                 return;
-            } else if (!int.TryParse(txtTelefono.Text, out int telefono))
+            }
+            else if (!int.TryParse(txtTelefono.Text, out int telefono))
             {
                 MessageBox.Show("Por favor, ingrese un número telefónico de contacto válido.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtTelefono.Focus();
@@ -49,12 +43,32 @@ namespace BellaItalia
             }
 
 
+            if (cboTamano.SelectedValue == null || cboMasa.SelectedValue == null)
+            {
+                MessageBox.Show(
+                    "Seleccione el tamaño y tipo de masa.",
+                    "Atención",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                return;
+            }
+
+            string nombreTamano = cboTamano.Text;
+            int precioBaseTamano = (int)cboTamano.SelectedValue;
+
+            string nombreMasa = cboMasa.Text;
+            int recargoMasa = (int)cboMasa.SelectedValue;
+
             // Instanciación del objeto de Dominio
             PedidoPizza pedido = new PedidoPizza(
-                txtCliente.Text,
-                txtTelefono.Text,
-                cboTamano.Text,
-                cboMasa.Text,
+                txtCliente.Text.Trim(),
+                txtTelefono.Text.Trim(),
+                nombreTamano,
+                precioBaseTamano,
+                nombreMasa,
+                recargoMasa,
                 chkQuesoExtra.Checked,
                 chkPepperoni.Checked,
                 chkChampinones.Checked,
@@ -63,15 +77,6 @@ namespace BellaItalia
                 rdbDelivery.Checked,
                 chkConvenioEstudiante.Checked
             );
-
-            // Determinar tamaño seleccionado
-            double precioTamano = pedido.CalcularPrecioTamano();
-
-            // Determinar tipo de masa
-            double costoMasa = pedido.CalcularCostoMasa();
-
-            // Asignar adicionales
-            double costoIngredientesAdicionales = pedido.CalcularCostoIngredientes();
 
             // Entrega y descuento
             double subtotal = pedido.CalcularSubtotalPizza();
@@ -86,13 +91,13 @@ namespace BellaItalia
 
             txtDescuentoValor.Text = $"-${montoDescuento:N2} CLP";
             txtDescuentoValor.ForeColor = Color.Red;
-            txtDescuentoValor.Left = 207;
+            txtDescuentoValor.Left = 191;
 
             txtDeliveryValor.Text = $"+${costoDelivery:N2} CLP";
-            txtDeliveryValor.Left = 204;
+            txtDeliveryValor.Left = 191;
 
             txtIvaValor.Text = $"+${montoIva:N2} CLP";
-            txtIvaValor.Left = 204;
+            txtIvaValor.Left = 191;
 
             txtTotalValor.Text = $"${totalPagar:N2} CLP";
 
@@ -115,39 +120,132 @@ namespace BellaItalia
             rdbRetiro.Checked = true;
             chkConvenioEstudiante.Checked = false;
 
-            LimpiarResumen();
+            LimpiarFormulario();
             txtCliente.Focus();
         }
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
+            // Reinstanciar el pedido actual
+            PedidoPizza pedidoConfirmado = new PedidoPizza(
+                txtCliente.Text.Trim(),
+                txtTelefono.Text.Trim(),
+                cboTamano.Text,
+                (int)cboTamano.SelectedValue,
+                cboMasa.Text,
+                (int)cboMasa.SelectedValue,
+                chkQuesoExtra.Checked,
+                chkPepperoni.Checked,
+                chkChampinones.Checked,
+                chkAceitunas.Checked,
+                chkTocino.Checked,
+                rdbDelivery.Checked,
+                chkConvenioEstudiante.Checked
+            );
+
+            // 1. Agregar a la lista
+            historialPedidos.Add(pedidoConfirmado);
+
+            // 2. Refrescar el ListBox
+            lstHistorial.DataSource = null;
+            lstHistorial.DataSource = historialPedidos;
+
+            // 3. Actualizar resumen de la jornada
+            ActualizarMetricasJornada();
+
+            MessageBox.Show("Pedido registrado exitosamente en el historial de la sesión.",
+                            "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            LimpiarFormulario();
+        }
+
+        private void btnReiniciarJornada_Click(object sender, EventArgs e)
+        {
             DialogResult dr = MessageBox.Show(
-                $"¿Desea registrar y enviar el pedido de {txtCliente.Text.Trim()} por un total de {txtTotalValor.Text}?",
-                "Confirmación de Pedido",
+                "¿Desea reiniciar la jornada?",
+                "Jornada",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question
             );
 
             if (dr == DialogResult.Yes)
             {
-                MessageBox.Show("¡Pedido registrado exitosamente! Se ha enviado a la cocina.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                btnLimpiar_Click(sender, e);
+                lstHistorial.Items.Clear();
+                txtRecaudacionTotal.Text = "$0 CLP";
+                txtCantidadPedidos.Text = "0";
+                txtPromedioVenta.Text = "$0 CLP";
             }
         }
 
-        private void LimpiarResumen()
+        private void PoblarComboBoxesConDiccionarios()
         {
+            // Diccionario 1: Tamaños de Pizza
+            Dictionary<string, int> opcionesTamano = new Dictionary<string, int>
+            {
+                { "Personal (1 Persona)", 5000 },
+                { "Mediana (2 a 3 Personas)", 8500 },
+                { "Familiar (4 a 5 Personas)", 12000 }
+            };
+
+            cboTamano.DataSource = new BindingSource(opcionesTamano, null);
+            cboTamano.DisplayMember = "Key";
+            cboTamano.ValueMember = "Value";
+            cboTamano.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            // Diccionario 2: Tipos de Masa
+            Dictionary<string, int> opcionesMasa = new Dictionary<string, int>
+            {
+                { "Masa Tradicional (Sin Recargo)", 0 },
+                { "Masa Delgada (Sin Recargo)", 0 },
+                { "Borde de Queso (+$1.500)", 1500 }
+            };
+
+            cboMasa.DataSource = new BindingSource(opcionesMasa, null);
+            cboMasa.DisplayMember = "Key";
+            cboMasa.ValueMember = "Value";
+            cboMasa.DropDownStyle = ComboBoxStyle.DropDownList;
+        }
+
+        private void ActualizarMetricasJornada()
+        {
+            int totalVentas = historialPedidos.Sum(p => p.CalcularTotalPagar());
+            int cantidadPedidos = historialPedidos.Count;
+            double promedioVenta = cantidadPedidos > 0 ? historialPedidos.Average(p => p.CalcularTotalPagar()) : 0;
+
+            txtRecaudacionTotal.Text = $"$ {totalVentas:N0} CLP";
+            txtCantidadPedidos.Text = $"{cantidadPedidos} pedidos";
+            txtPromedioVenta.Text = $"$ {promedioVenta:N0} CLP";
+        }
+
+        private void LimpiarFormulario()
+        {
+            txtCliente.Clear();
+            txtTelefono.Clear();
+
+            if (cboTamano.Items.Count > 0) cboTamano.SelectedIndex = 0;
+            if (cboMasa.Items.Count > 0) cboMasa.SelectedIndex = 0;
+
+            chkQuesoExtra.Checked = false;
+            chkPepperoni.Checked = false;
+            chkChampinones.Checked = false;
+            chkAceitunas.Checked = false;
+            chkTocino.Checked = false;
+
+            rdbRetiro.Checked = true;
+            chkConvenioEstudiante.Checked = false;
+
             txtSubtotalValor.Text = "$0 CLP";
             txtDescuentoValor.Text = "$0 CLP";
             txtDescuentoValor.ForeColor = Color.Black;
-            txtDescuentoValor.Left = 212;
+            txtDescuentoValor.Left = 197;
             txtDeliveryValor.Text = "$0 CLP";
-            txtDeliveryValor.Left = 212;
+            txtDeliveryValor.Left = 197;
             txtIvaValor.Text = "$0 CLP";
-            txtIvaValor.Left = 212;
+            txtIvaValor.Left = 197;
             txtTotalValor.Text = "$0 CLP";
 
             btnConfirmar.Enabled = false;
+            txtCliente.Focus();
         }
     }
 }
