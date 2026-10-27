@@ -161,6 +161,8 @@ namespace BellaItalia
 
         private void btnReiniciarJornada_Click(object sender, EventArgs e)
         {
+            if (lstHistorial.Items.Count == 0) return;
+
             DialogResult dr = MessageBox.Show(
                 "¿Desea reiniciar la jornada?",
                 "Jornada",

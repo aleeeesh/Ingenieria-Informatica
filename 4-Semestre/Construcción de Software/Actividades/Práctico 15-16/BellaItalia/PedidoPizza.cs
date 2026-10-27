@@ -96,7 +96,6 @@ namespace BellaItalia
             return CalcularNetoAfecto() + CalcularMontoIva();
         }
 
-        // Sobrescritura clave para renderizar en ListBox
         public override string ToString()
         {
             string tipoAtencion = EsDelivery ? "Delivery" : "Retiro";
