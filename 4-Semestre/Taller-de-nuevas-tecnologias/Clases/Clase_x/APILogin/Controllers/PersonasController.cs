@@ -45,7 +45,6 @@ namespace APILogin.Controllers
             }
         }
 
-
         [HttpPost("InsertarPersona")]
         public IActionResult InsertarPersona([FromBody] Persona persona)
         {
@@ -66,7 +65,7 @@ namespace APILogin.Controllers
                 return StatusCode(StatusCodes.Status200OK, new
                 {
                     respuesta = "OK",
-                    mensaje = $"Persona insertada correctamente"
+                    mensaje = "Persona insertada correctamente"
                 });
             }
             catch (Exception ex)
@@ -86,20 +85,30 @@ namespace APILogin.Controllers
             {
                 using (var db = new ArchivoContext())
                 {
-                    var consulta = db.Personas.Where(p => p.IdPersona == IdPersona).First();
+                    var personaExistente = db.Personas.Where(p => p.IdPersona == IdPersona).FirstOrDefault();
 
-                    consulta.NomPersona = persona.NomPersona;
-                    consulta.ApePersona = persona.ApePersona;
-                    consulta.Edad = persona.Edad;
+                    if (personaExistente == null)
+                    {
+                        return StatusCode(StatusCodes.Status200OK, new
+                        {
+                            respuesta = "Error",
+                            mensaje = "Persona no encontrada"
+                        });
+                    } else
+                    {
+                        personaExistente.NomPersona = persona.NomPersona;
+                        personaExistente.ApePersona = persona.ApePersona;
+                        personaExistente.Edad = persona.Edad;
 
-                    db.SaveChanges();
+                        db.SaveChanges();
+
+                        return StatusCode(StatusCodes.Status200OK, new
+                        {
+                            respuesta = "OK",
+                            mensaje = "Persona actualizada correctamente"
+                        });
+                    }
                 }
-
-                return StatusCode(StatusCodes.Status200OK, new
-                {
-                    respuesta = "OK",
-                    mensaje = $"Persona actualizada correctamente"
-                });
             }
             catch (Exception ex)
             {
@@ -118,17 +127,27 @@ namespace APILogin.Controllers
             {
                 using (var db = new ArchivoContext())
                 {
-                    var consulta = db.Personas.Where(p => p.IdPersona == idPersona).First();
-                    
-                    db.Personas.Remove(consulta);
-                    db.SaveChanges();
-                }
+                    var personaExistente = db.Personas.Where(p => p.IdPersona == idPersona).FirstOrDefault();
 
-                return StatusCode(StatusCodes.Status200OK, new
-                {
-                    respuesta = "OK",
-                    mensaje = "eliminado correctamente"
-                });
+                    if (personaExistente == null)
+                    {
+                        return StatusCode(StatusCodes.Status200OK, new
+                        {
+                            respuesta = "Error",
+                            mensaje = "Persona no encontrada"
+                        });
+                    } else
+                    {
+                        db.Personas.Remove(personaExistente);
+                        db.SaveChanges();
+
+                        return StatusCode(StatusCodes.Status200OK, new
+                        {
+                            respuesta = "OK",
+                            mensaje = "Eliminado correctamente"
+                        });
+                    }
+                }
             }
             catch (Exception ex)
             {

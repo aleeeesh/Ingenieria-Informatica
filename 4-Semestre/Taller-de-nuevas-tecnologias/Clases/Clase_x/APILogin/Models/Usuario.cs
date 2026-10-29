@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace APILogin.Models;
 
@@ -11,7 +12,9 @@ public partial class Usuario
 
     public int IdEstado { get; set; }
 
+    [JsonIgnore]
     public virtual Estado IdEstadoNavigation { get; set; } = null!;
 
+    [JsonIgnore]
     public virtual Persona IdPersonaNavigation { get; set; } = null!;
 }
