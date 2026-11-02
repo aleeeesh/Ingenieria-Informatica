@@ -7,7 +7,7 @@ namespace APILogin.Controllers
     public class PersonasController : Controller
     {
         [HttpGet("ConsultarPersonas")]
-        public IActionResult ListadoPersonas()
+        public IActionResult ConsultarPersonas()
         {
             List<Persona> listado = new List<Persona>();
 

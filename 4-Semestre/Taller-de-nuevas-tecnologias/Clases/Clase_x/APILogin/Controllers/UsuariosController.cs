@@ -88,6 +88,7 @@ namespace APILogin.Controllers
                             {
                                 NomUsuario = usuario.NomUsuario,
                                 IdPersona = usuario.IdPersona,
+                                IdEstado = usuario.IdEstado
                             });
 
                             db.SaveChanges();
@@ -106,7 +107,7 @@ namespace APILogin.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new
                 {
                     respuesta = "Error",
-                    mensaje = ex.Message
+                    mensaje = ex.ToString()
                 });
             }
         }
