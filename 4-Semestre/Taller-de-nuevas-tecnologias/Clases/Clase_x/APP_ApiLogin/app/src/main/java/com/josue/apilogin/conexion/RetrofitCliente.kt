@@ -5,11 +5,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitCliente {
-    val direccion = ""
-    val puerto = "5004"
+    val direccion = "192.168.56.1"
+    val puerto = "5017"
 
     val ruta = Retrofit.Builder()
-        .baseUrl("http://$direccion:$puerto/ListadoPersonas/")
+        .baseUrl("http://$direccion:$puerto/")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
         .create(Funciones::class.java)

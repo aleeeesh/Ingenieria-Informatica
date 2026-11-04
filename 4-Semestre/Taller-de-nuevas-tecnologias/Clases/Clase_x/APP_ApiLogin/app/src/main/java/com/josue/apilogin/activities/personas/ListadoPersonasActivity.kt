@@ -1,13 +1,17 @@
-package com.josue.apilogin
+package com.josue.apilogin.activities.personas
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.josue.apilogin.MainActivity
+import com.josue.apilogin.R
 import com.josue.apilogin.clases.DatosPersonas
 import com.josue.apilogin.conexion.RetrofitCliente
 import kotlinx.coroutines.CoroutineScope
@@ -34,16 +38,22 @@ class ListadoPersonasActivity : AppCompatActivity() {
             finish()
         }
 
+        listadoPersonas.setOnItemClickListener { parent, view, position, texto ->
+            Toast.makeText(this, "Elemento: $position", Toast.LENGTH_SHORT).show()
+        }
+
         cargarPersonas(listadoPersonas)
     }
 
     fun cargarPersonas(listado: ListView) {
+        val listadoPersona = ArrayList<String>()
+
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val llamada = RetrofitCliente.ruta.ConsultarPersonas()
+                val llamada = RetrofitCliente.ruta.ListadoPersonas()
 
                 if (llamada.isSuccessful) {
-                    val cuerpo: DatosPersonas? = llamada.body()
+                    val cuerpo: DatosPersonas? = llamada.body()!!
 
                     withContext(Dispatchers.Main) {
                         val respuesta = cuerpo?.respuesta
@@ -54,12 +64,17 @@ class ListadoPersonasActivity : AppCompatActivity() {
                             val id = persona.idPersona
                             val nombre = persona.nomPersona
                             val apellido = persona.apePersona
-                            val edac = persona.edad
+                            val edad = persona.edad
+
+                            listadoPersona.add("($id) $nombre ${apellido}\n$edad años")
                         }
+
+                        listado.adapter = ArrayAdapter(this@ListadoPersonasActivity, android.R.layout.simple_list_item_1, listadoPersona)
                     }
                 }
             } catch (ex: Exception) {
-
+    var dasd= ex.toString()
+                var asdasd = 1
             }
         }
     }

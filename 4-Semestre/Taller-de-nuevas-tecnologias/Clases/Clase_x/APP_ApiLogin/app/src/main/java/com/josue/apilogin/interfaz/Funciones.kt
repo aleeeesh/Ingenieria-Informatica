@@ -5,6 +5,6 @@ import retrofit2.Response
 import retrofit2.http.GET
 
 interface Funciones {
-    @GET("ConsultarPersonas")
-    suspend fun ConsultarPersonas(): Response<DatosPersonas>
+    @GET("ListadoPersonas")
+    suspend fun ListadoPersonas(): Response<DatosPersonas>
 }

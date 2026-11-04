@@ -7,6 +7,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.josue.apilogin.activities.personas.InsertarPersonaActivity
+import com.josue.apilogin.activities.personas.ListadoPersonasActivity
+import com.josue.apilogin.activities.usuarios.InsertarUsuarioActivity
+import com.josue.apilogin.activities.usuarios.ListadoUsuariosActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,13 +24,25 @@ class MainActivity : AppCompatActivity() {
         }
 
         val btnListadoPersonas = findViewById<Button>(R.id.btnPersonas)
-        val btnListadoUsuarios = findViewById<Button>(R.id.btnUsuarios)
-
         val btnInsertarPersona = findViewById<Button>(R.id.btnInsertarPersona)
+
+        val btnListadoUsuarios = findViewById<Button>(R.id.btnUsuarios)
         val btnInsertarUsuario = findViewById<Button>(R.id.btnInsertarUsuario)
 
         btnListadoPersonas.setOnClickListener {
             startActivity(Intent(this, ListadoPersonasActivity::class.java))
+        }
+
+        btnInsertarPersona.setOnClickListener {
+            startActivity(Intent(this, InsertarPersonaActivity::class.java))
+        }
+
+        btnListadoUsuarios.setOnClickListener {
+            startActivity(Intent(this, ListadoUsuariosActivity::class.java))
+        }
+
+        btnInsertarUsuario.setOnClickListener {
+            startActivity(Intent(this, InsertarUsuarioActivity::class.java))
         }
     }
 }
