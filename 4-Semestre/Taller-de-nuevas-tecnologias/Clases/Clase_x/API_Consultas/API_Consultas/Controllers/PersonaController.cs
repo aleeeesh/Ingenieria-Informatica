@@ -65,7 +65,7 @@ namespace API_Consultas.Controllers
                     db.SaveChanges();
                 }
 
-                return StatusCode(StatusCodes.Status200OK,
+                return StatusCode(StatusCodes.Status201Created,
                     new
                     {
                         respuesta = "OK",
@@ -95,7 +95,7 @@ namespace API_Consultas.Controllers
 
                     if (persona_ == null)
                     {
-                        return StatusCode(StatusCodes.Status200OK,
+                        return StatusCode(StatusCodes.Status404NotFound,
                            new
                            {
                                respuesta = "ERROR",
@@ -143,7 +143,7 @@ namespace API_Consultas.Controllers
 
                     if (persona_ == null)
                     {
-                        return StatusCode(StatusCodes.Status200OK,
+                        return StatusCode(StatusCodes.Status404NotFound,
                            new
                            {
                                respuesta = "ERROR",

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API_Consultas.Controllers
 {
-    public class EstadoController : Controller
+    public class EstadoController : ControllerBase
     {
         [HttpGet]
         [Route("ListadoEstados")]

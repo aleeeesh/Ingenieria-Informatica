@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API_Consultas.Controllers
 {
-    public class UsuarioController : Controller
+    public class UsuarioController : ControllerBase
     {
         [HttpGet]
         [Route("ListadoUsuarios")]
@@ -33,7 +33,7 @@ namespace API_Consultas.Controllers
                             NomUsuario = item.NomUsuario,
                             NombreApellido = $"{item.NomPersona} {item.ApePersona}",
                             Edad = item.Edad,
-                            Nom_estado = item.NomEstado
+                            NomEstado = item.NomEstado
                         });
                     }
                 }
@@ -89,10 +89,10 @@ namespace API_Consultas.Controllers
                             db.Usuarios.Add(insertar);
                             db.SaveChanges();
 
-                            return StatusCode(StatusCodes.Status200OK,
+                            return StatusCode(StatusCodes.Status201Created,
                                new
                                {
-                                   respuesta = "ERROR",
+                                   respuesta = "OK",
                                    mensaje = "Usuario insertado correctamente"
                                });
                         }
