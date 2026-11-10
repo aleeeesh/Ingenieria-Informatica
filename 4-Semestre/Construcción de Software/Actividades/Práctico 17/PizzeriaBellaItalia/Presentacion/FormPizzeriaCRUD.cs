@@ -4,7 +4,7 @@ using PizzeriaBellaItalia.Dominio;
 using System.Data;
 using System.Globalization;
 
-namespace PizzeriaBellaItalia.Presentacion
+namespace PizzeriaBellaItalia
 {
     public partial class FormPizzeriaCRUD : Form
     {
@@ -66,12 +66,12 @@ namespace PizzeriaBellaItalia.Presentacion
             {
                 totalAcumulado += Convert.ToInt32(row["Total"]);
             }
-            lblTotalRecaudado.Text = $"$ {totalAcumulado:N0} CLP";
-            lblCantidadPedidos.Text = $"{dt.Rows.Count} pedido(s)";
+            txtRecaudacionTotal.Text = $"$ {totalAcumulado:N0} CLP";
+            txtCantidadPedidos.Text = $"{dt.Rows.Count} pedido(s)";
         }
 
         // C1: CREAR (INSERT)
-        private void btnGuardarSQL_Click(object sender, EventArgs e)
+        /*private void btnGuardarSQL_Click(object sender, EventArgs e)
         {
             if (!ValidarFormulario()) return;
 
@@ -94,7 +94,7 @@ namespace PizzeriaBellaItalia.Presentacion
             {
                 MessageBox.Show("Ocurrió un error al intentar guardar el pedido.", "Error SQL", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
+        }*/
 
         // C2: CARGAR SELECCIÓN PARA EDICIÓN
         private void dgvPedidos_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -108,16 +108,16 @@ namespace PizzeriaBellaItalia.Presentacion
                 {
                     txtCliente.Text = p.Cliente;
                     txtTelefono.Text = p.Telefono;
-                    lblModo.Text = $"Modo: EDICIÓN (Pedido ID #{idPedidoSeleccionado})";
+                    /*lblModo.Text = $"Modo: EDICIÓN (Pedido ID #{idPedidoSeleccionado})";
                     btnGuardarSQL.Enabled = false;
                     btnModificarSQL.Enabled = true;
-                    btnEliminarSQL.Enabled = true;
+                    btnEliminarSQL.Enabled = true;*/
                 }
             }
         }
 
         // C3: ACTUALIZAR (UPDATE)
-        private void btnModificarSQL_Click(object sender, EventArgs e)
+        /*private void btnModificarSQL_Click(object sender, EventArgs e)
         {
             if (idPedidoSeleccionado <= 0)
             {
@@ -185,7 +185,7 @@ namespace PizzeriaBellaItalia.Presentacion
             DataTable dtFiltrada = pedidoDAO.BuscarPedidosPorCliente(filtro);
             dgvPedidos.DataSource = dtFiltrada;
             CalcularMetricas(dtFiltrada);
-        }
+        }*/
 
         private bool ValidarFormulario()
         {
@@ -196,13 +196,13 @@ namespace PizzeriaBellaItalia.Presentacion
                 return false;
             }
 
-            if (!int.TryParse(txtCantidad.Text.Trim(), out int cantidad) || cantidad <= 0)
+            /*if (!int.TryParse(txtCantidad.Text.Trim(), out int cantidad) || cantidad <= 0)
             {
                 MessageBox.Show("La cantidad debe ser un entero positivo mayor a 0.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtCantidad.SelectAll();
                 txtCantidad.Focus();
                 return false;
-            }
+            }*/
 
             return true;
         }
@@ -216,7 +216,7 @@ namespace PizzeriaBellaItalia.Presentacion
         {
             txtCliente.Clear();
             txtTelefono.Clear();
-            txtCantidad.Text = "1";
+            //txtCantidad.Text = "1";
             chkQuesoExtra.Checked = false;
             if (cboTamano.Items.Count > 0) cboTamano.SelectedIndex = 0;
             EstablecerModoInsercion();
@@ -226,10 +226,10 @@ namespace PizzeriaBellaItalia.Presentacion
         private void EstablecerModoInsercion()
         {
             idPedidoSeleccionado = 0;
-            lblModo.Text = "Modo: NUEVO REGISTRO";
+            /*lblModo.Text = "Modo: NUEVO REGISTRO";
             btnGuardarSQL.Enabled = true;
             btnModificarSQL.Enabled = false;
-            btnEliminarSQL.Enabled = false;
+            btnEliminarSQL.Enabled = false;*/
         }
     }
 }

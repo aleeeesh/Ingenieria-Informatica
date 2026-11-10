@@ -64,10 +64,8 @@
             cboTamano = new ComboBox();
             btnCalcular = new Button();
             btnLimpiar = new Button();
-            btnConfirmar = new Button();
             grpHistorial = new GroupBox();
             dgvPedidos = new DataGridView();
-            btnReiniciarJornada = new Button();
             txtPromedioVenta = new Label();
             lblPromedioVenta = new Label();
             txtCantidadPedidos = new Label();
@@ -112,7 +110,7 @@
             lblTelefono.AutoSize = true;
             lblTelefono.Location = new Point(204, 35);
             lblTelefono.Name = "lblTelefono";
-            lblTelefono.Size = new Size(56, 15);
+            lblTelefono.Size = new Size(55, 15);
             lblTelefono.TabIndex = 3;
             lblTelefono.Text = "Teléfono:";
             // 
@@ -151,7 +149,7 @@
             chkTocino.AutoSize = true;
             chkTocino.Location = new Point(108, 45);
             chkTocino.Name = "chkTocino";
-            chkTocino.Size = new Size(62, 19);
+            chkTocino.Size = new Size(61, 19);
             chkTocino.TabIndex = 9;
             chkTocino.Text = "Tocino";
             chkTocino.UseVisualStyleBackColor = true;
@@ -191,7 +189,7 @@
             chkQuesoExtra.AutoSize = true;
             chkQuesoExtra.Location = new Point(7, 21);
             chkQuesoExtra.Name = "chkQuesoExtra";
-            chkQuesoExtra.Size = new Size(88, 19);
+            chkQuesoExtra.Size = new Size(89, 19);
             chkQuesoExtra.TabIndex = 5;
             chkQuesoExtra.Text = "Queso extra";
             chkQuesoExtra.UseVisualStyleBackColor = true;
@@ -385,7 +383,7 @@
             lblMasa.AutoSize = true;
             lblMasa.Location = new Point(9, 54);
             lblMasa.Name = "lblMasa";
-            lblMasa.Size = new Size(65, 15);
+            lblMasa.Size = new Size(64, 15);
             lblMasa.TabIndex = 6;
             lblMasa.Text = "Tipo Masa:";
             // 
@@ -403,7 +401,7 @@
             lblTamano.AutoSize = true;
             lblTamano.Location = new Point(24, 25);
             lblTamano.Name = "lblTamano";
-            lblTamano.Size = new Size(53, 15);
+            lblTamano.Size = new Size(52, 15);
             lblTamano.TabIndex = 4;
             lblTamano.Text = "Tamaño:";
             // 
@@ -424,7 +422,6 @@
             btnCalcular.TabIndex = 11;
             btnCalcular.Text = "⚡Calcular Total";
             btnCalcular.UseVisualStyleBackColor = true;
-            btnCalcular.Click += btnCalcular_Click;
             // 
             // btnLimpiar
             // 
@@ -436,20 +433,9 @@
             btnLimpiar.UseVisualStyleBackColor = true;
             btnLimpiar.Click += btnLimpiar_Click;
             // 
-            // btnConfirmar
-            // 
-            btnConfirmar.Location = new Point(455, 217);
-            btnConfirmar.Name = "btnConfirmar";
-            btnConfirmar.Size = new Size(136, 23);
-            btnConfirmar.TabIndex = 13;
-            btnConfirmar.Text = "✅ Confirmar Pedido";
-            btnConfirmar.UseVisualStyleBackColor = true;
-            btnConfirmar.Click += btnConfirmar_Click;
-            // 
             // grpHistorial
             // 
             grpHistorial.Controls.Add(dgvPedidos);
-            grpHistorial.Controls.Add(btnReiniciarJornada);
             grpHistorial.Controls.Add(txtPromedioVenta);
             grpHistorial.Controls.Add(lblPromedioVenta);
             grpHistorial.Controls.Add(txtCantidadPedidos);
@@ -471,16 +457,6 @@
             dgvPedidos.Size = new Size(382, 111);
             dgvPedidos.TabIndex = 17;
             // 
-            // btnReiniciarJornada
-            // 
-            btnReiniciarJornada.Location = new Point(112, 190);
-            btnReiniciarJornada.Name = "btnReiniciarJornada";
-            btnReiniciarJornada.Size = new Size(136, 23);
-            btnReiniciarJornada.TabIndex = 15;
-            btnReiniciarJornada.Text = "🔄 Reiniciar Jornada";
-            btnReiniciarJornada.UseVisualStyleBackColor = true;
-            btnReiniciarJornada.Click += btnReiniciarJornada_Click;
-            // 
             // txtPromedioVenta
             // 
             txtPromedioVenta.AutoSize = true;
@@ -493,7 +469,7 @@
             // lblPromedioVenta
             // 
             lblPromedioVenta.AutoSize = true;
-            lblPromedioVenta.Location = new Point(46, 170);
+            lblPromedioVenta.Location = new Point(40, 170);
             lblPromedioVenta.Name = "lblPromedioVenta";
             lblPromedioVenta.Size = new Size(62, 15);
             lblPromedioVenta.TabIndex = 15;
@@ -511,7 +487,7 @@
             // lblCantidadPedidos
             // 
             lblCantidadPedidos.AutoSize = true;
-            lblCantidadPedidos.Location = new Point(58, 151);
+            lblCantidadPedidos.Location = new Point(50, 151);
             lblCantidadPedidos.Name = "lblCantidadPedidos";
             lblCantidadPedidos.Size = new Size(52, 15);
             lblCantidadPedidos.TabIndex = 13;
@@ -531,7 +507,7 @@
             lblRecaudacionTotal.AutoSize = true;
             lblRecaudacionTotal.Location = new Point(5, 131);
             lblRecaudacionTotal.Name = "lblRecaudacionTotal";
-            lblRecaudacionTotal.Size = new Size(98, 15);
+            lblRecaudacionTotal.Size = new Size(97, 15);
             lblRecaudacionTotal.TabIndex = 11;
             lblRecaudacionTotal.Text = "Total Recaudado:";
             // 
@@ -541,7 +517,7 @@
             lblEstadoConexion.ForeColor = Color.Red;
             lblEstadoConexion.Location = new Point(11, 472);
             lblEstadoConexion.Name = "lblEstadoConexion";
-            lblEstadoConexion.Size = new Size(198, 15);
+            lblEstadoConexion.Size = new Size(199, 15);
             lblEstadoConexion.TabIndex = 15;
             lblEstadoConexion.Text = "● Estado SQL Express: No conectado";
             // 
@@ -549,7 +525,7 @@
             // 
             label1.AutoSize = true;
             label1.ForeColor = SystemColors.ActiveCaptionText;
-            label1.Location = new Point(579, 472);
+            label1.Location = new Point(282, 472);
             label1.Name = "label1";
             label1.Size = new Size(42, 15);
             label1.TabIndex = 16;
@@ -563,7 +539,6 @@
             Controls.Add(label1);
             Controls.Add(lblEstadoConexion);
             Controls.Add(grpHistorial);
-            Controls.Add(btnConfirmar);
             Controls.Add(btnLimpiar);
             Controls.Add(btnCalcular);
             Controls.Add(grpPizza);
@@ -628,7 +603,6 @@
         private Label lblSeparador;
         private Button btnCalcular;
         private Button btnLimpiar;
-        private Button btnConfirmar;
         private Label txtTotalValor;
         private Label txtIvaValor;
         private Label txtDeliveryValor;
@@ -641,7 +615,6 @@
         private Label lblRecaudacionTotal;
         private Label txtPromedioVenta;
         private Label lblPromedioVenta;
-        private Button btnReiniciarJornada;
         private BindingSource pedidoPizzaBindingSource;
         private Label lblEstadoConexion;
         private DataGridView dgvPedidos;
