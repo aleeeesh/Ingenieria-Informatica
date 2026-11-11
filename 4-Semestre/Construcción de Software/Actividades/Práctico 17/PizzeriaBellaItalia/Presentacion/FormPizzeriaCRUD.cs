@@ -23,33 +23,51 @@ namespace PizzeriaBellaItalia
             if (ConexionBD.ProbarConexion())
             {
                 lblEstadoConexion.Text = "● Estado SQL Express: Conectado (PizzeriaDB)";
-                lblEstadoConexion.ForeColor = System.Drawing.Color.Green;
+                lblEstadoConexion.ForeColor = Color.Green;
             }
             else
             {
                 lblEstadoConexion.Text = "● Estado SQL Express: Error de Conexión";
-                lblEstadoConexion.ForeColor = System.Drawing.Color.Red;
+                lblEstadoConexion.ForeColor = Color.Red;
             }
 
-            PoblarTamanios();
+            PoblarComboBoxesConDiccionarios();
             CargarGrillaPedidos();
             EstablecerModoInsercion();
         }
 
-        private void PoblarTamanios()
+        private void PoblarComboBoxesConDiccionarios()
         {
-            var tamanios = new System.Collections.Generic.Dictionary<string, int>
-            {
-                { "Personal (4 Cortes) - $ 5.900", 5900 },
-                { "Mediana (8 Cortes) - $ 8.900", 8900 },
-                { "Familiar (12 Cortes) - $ 12.900", 12900 },
-                { "XL Fiesta (16 Cortes) - $ 15.900", 15900 }
-            };
+            // 1. Diccionario de Tamaños (Key: Nombre del Tamaño, Value: Precio Base)
+            Dictionary<string, int> opcionesTamano = new Dictionary<string, int>
+                {
+                    {"Seleccione uno",-1 },
+                    { "Personal (1 Persona)", 5000 },
+                    { "Mediana (2 a 3 Personas)", 8500 },
+                    { "Familiar (4 a 5 Personas)", 12000 }
+                };
 
-            cboTamano.DataSource = new BindingSource(tamanios, null);
-            cboTamano.DisplayMember = "Key";
-            cboTamano.ValueMember = "Value";
+            cboTamano.DataSource = new BindingSource(opcionesTamano, null);
+            cboTamano.DisplayMember = "Key";    // Lo que el usuario VE en el desplegable
+            cboTamano.ValueMember = "Value";    // El VALOR numérico devuelto por SelectedValue
             cboTamano.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            // 2. Diccionario de Masas (Key: Nombre del Tipo de Masa, Value: Recargo Adicional)
+            Dictionary<string, int> opcionesMasa = new Dictionary<string, int>
+                {
+                    {"Seleccione uno",-1 },
+                    { "Masa Tradicional (Sin Recargo)", 0 },
+                    { "Masa Delgada (Sin Recargo)", 0 },
+                    { "Borde de Queso (+$1.500)", 1500 }
+                };
+
+
+            BindingSource bs = new BindingSource();
+            bs.DataSource = opcionesMasa;
+            cboMasa.DataSource = bs;
+            cboMasa.DisplayMember = "Key";
+            cboMasa.ValueMember = "Value";
+            cboMasa.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void CargarGrillaPedidos()
@@ -71,7 +89,7 @@ namespace PizzeriaBellaItalia
         }
 
         // C1: CREAR (INSERT)
-        /*private void btnGuardarSQL_Click(object sender, EventArgs e)
+        private void btnGuardarSQL_Click(object sender, EventArgs e)
         {
             if (!ValidarFormulario()) return;
 
@@ -79,7 +97,7 @@ namespace PizzeriaBellaItalia
             string telefono = txtTelefono.Text.Trim();
             string tamanoTexto = cboTamano.Text;
             int precioTamano = (int)cboTamano.SelectedValue;
-            int cantidad = int.Parse(txtCantidad.Text.Trim());
+            int cantidad = 1;//int.Parse(txtCantidad.Text.Trim());
             bool quesoExtra = chkQuesoExtra.Checked;
 
             PedidoPizza nuevoPedido = new PedidoPizza(cliente, telefono, tamanoTexto, precioTamano, cantidad, "Tradicional", quesoExtra);
@@ -94,13 +112,13 @@ namespace PizzeriaBellaItalia
             {
                 MessageBox.Show("Ocurrió un error al intentar guardar el pedido.", "Error SQL", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }*/
+        }
 
         // C2: CARGAR SELECCIÓN PARA EDICIÓN
         private void dgvPedidos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && dgvPedidos.Rows[e.RowIndex].Cells["Id"].Value != null)
-            {
+            {   
                 idPedidoSeleccionado = Convert.ToInt32(dgvPedidos.Rows[e.RowIndex].Cells["Id"].Value);
                 PedidoPizza? p = pedidoDAO.ObtenerPedidoPorId(idPedidoSeleccionado);
 
@@ -108,16 +126,16 @@ namespace PizzeriaBellaItalia
                 {
                     txtCliente.Text = p.Cliente;
                     txtTelefono.Text = p.Telefono;
-                    /*lblModo.Text = $"Modo: EDICIÓN (Pedido ID #{idPedidoSeleccionado})";
+                    lblModo.Text = $"Modo: EDICIÓN (Pedido ID #{idPedidoSeleccionado})";
                     btnGuardarSQL.Enabled = false;
                     btnModificarSQL.Enabled = true;
-                    btnEliminarSQL.Enabled = true;*/
+                    btnEliminarSQL.Enabled = true;
                 }
             }
         }
 
         // C3: ACTUALIZAR (UPDATE)
-        /*private void btnModificarSQL_Click(object sender, EventArgs e)
+        private void btnModificarSQL_Click(object sender, EventArgs e)
         {
             if (idPedidoSeleccionado <= 0)
             {
@@ -131,10 +149,15 @@ namespace PizzeriaBellaItalia
             string telefono = txtTelefono.Text.Trim();
             string tamanoTexto = cboTamano.Text;
             int precioTamano = (int)cboTamano.SelectedValue;
-            int cantidad = int.Parse(txtCantidad.Text.Trim());
-            bool quesoExtra = chkQuesoExtra.Checked;
+            int cantidad = 0;
 
-            PedidoPizza pedidoEditado = new PedidoPizza(idPedidoSeleccionado, cliente, telefono, tamanoTexto, precioTamano, cantidad, "Tradicional", quesoExtra);
+            if (chkQuesoExtra.Checked) cantidad++;
+            if (chkAceitunas.Checked) cantidad++;
+            if (chkPepperoni.Checked) cantidad++;
+            if (chkTocino.Checked) cantidad++;
+            if (chkChampinones.Checked) cantidad++;
+
+            PedidoPizza pedidoEditado = new PedidoPizza(idPedidoSeleccionado, cliente, telefono, tamanoTexto, precioTamano, cantidad, "Tradicional", chkQuesoExtra.Checked);
 
             if (pedidoDAO.ActualizarPedido(pedidoEditado))
             {
@@ -185,13 +208,20 @@ namespace PizzeriaBellaItalia
             DataTable dtFiltrada = pedidoDAO.BuscarPedidosPorCliente(filtro);
             dgvPedidos.DataSource = dtFiltrada;
             CalcularMetricas(dtFiltrada);
-        }*/
+        }
 
         private bool ValidarFormulario()
         {
             if (string.IsNullOrWhiteSpace(txtCliente.Text) || string.IsNullOrWhiteSpace(txtTelefono.Text))
             {
                 MessageBox.Show("Nombre del cliente y teléfono son obligatorios.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtCliente.Focus();
+                return false;
+            }
+
+            if (cboTamano.SelectedIndex.Equals(0) || cboMasa.SelectedIndex.Equals(0))
+            {
+                MessageBox.Show("Tamaño y masa son obligatorios.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtCliente.Focus();
                 return false;
             }
@@ -226,10 +256,10 @@ namespace PizzeriaBellaItalia
         private void EstablecerModoInsercion()
         {
             idPedidoSeleccionado = 0;
-            /*lblModo.Text = "Modo: NUEVO REGISTRO";
+            lblModo.Text = "Modo: NUEVO REGISTRO";
             btnGuardarSQL.Enabled = true;
             btnModificarSQL.Enabled = false;
-            btnEliminarSQL.Enabled = false;*/
+            btnEliminarSQL.Enabled = false;
         }
     }
 }
