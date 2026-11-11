@@ -1,4 +1,6 @@
 
+using APILogin.Models;
+
 namespace API_Consultas
 {
     public class Program
@@ -10,6 +12,7 @@ namespace API_Consultas
             {
                 options.ListenAnyIP(5017); // Esto abre el puerto 5017 a todo dispositivo (incluido el emulador)
             });            
+            builder.Services.AddDbContext<ArchivoContext>();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

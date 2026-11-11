@@ -5,34 +5,39 @@ namespace API_Consultas.Controllers
 {
      public class PersonaController : ControllerBase
     {
+        private readonly ArchivoContext _context;
+
+        public PersonaController(ArchivoContext context)
+        {
+            _context = context;
+        }
+
         [HttpGet]
-        [Route("ListadoPersonas")]
+        [Route("api/ListadoPersonas")]
         public IActionResult ListadoPersonas()
         {
             List<Persona> listado = new List<Persona>();
             try
             {
-                using (var db = new ArchivoContext())
-                {
-                    var consulta = db.Personas.ToList();
+                var consulta = _context.Personas.ToList();
 
-                    foreach (var item in consulta)
+                foreach (var item in consulta)
+                {
+                    listado.Add(new Persona()
                     {
-                        listado.Add(new Persona()
-                        {
-                            IdPersona = item.IdPersona,
-                            NomPersona = item.NomPersona,
-                            ApePersona = item.ApePersona,
-                            Edad = item.Edad
-                        });
-                    }
+                        IdPersona = item.IdPersona,
+                        NomPersona = item.NomPersona,
+                        ApePersona = item.ApePersona,
+                        Edad = item.Edad
+                    });
                 }
+
                 return StatusCode(StatusCodes.Status200OK,
                     new
                     {
-                        respuesta = "OK",
+                        exito = true,
                         mensaje = "Cargado correctamente",
-                        lista = listado
+                        datos = listado
                     });
             }
             catch (Exception ex)
@@ -40,35 +45,31 @@ namespace API_Consultas.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     new
                     {
-                        respuesta = "ERROR",
-                        mensaje = ex.Message,
-                        lista = listado
+                        exito = false,
+                        mensaje = ex.Message
                     });
             }
         }
 
         [HttpPost]
-        [Route("InsertarPersona")]
+        [Route("api/InsertarPersona")]
         public IActionResult InsertarPersona([FromBody] Persona persona)
         {
             try
             {
 
-                using (var db = new ArchivoContext())
-                {
-                    Persona insertar = new Persona();
-                    insertar.NomPersona = persona.NomPersona;
-                    insertar.ApePersona = persona.ApePersona;
-                    insertar.Edad = persona.Edad;
+                Persona insertar = new Persona();
+                insertar.NomPersona = persona.NomPersona;
+                insertar.ApePersona = persona.ApePersona;
+                insertar.Edad = persona.Edad;
 
-                    db.Personas.Add(insertar);
-                    db.SaveChanges();
-                }
+                _context.Personas.Add(insertar);
+                _context.SaveChanges();
 
                 return StatusCode(StatusCodes.Status201Created,
                     new
                     {
-                        respuesta = "OK",
+                        exito = true,
                         mensaje = "Insertado correctamente"
                     });
             }
@@ -77,46 +78,43 @@ namespace API_Consultas.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     new
                     {
-                        respuesta = "ERROR",
+                        exito = false,
                         mensaje = ex.Message
                     });
             }
         }
 
         [HttpPut]
-        [Route("EditarPersona")]
+        [Route("api/EditarPersona")]
         public IActionResult EditarPersona([FromBody] Persona persona)
         {
             try
             {
-                using (var db = new ArchivoContext())
+                var persona_ = _context.Personas.FirstOrDefault(x => x.IdPersona == persona.IdPersona);
+
+                if (persona_ == null)
                 {
-                    var persona_ = db.Personas.FirstOrDefault(x => x.IdPersona == persona.IdPersona);
+                    return StatusCode(StatusCodes.Status404NotFound,
+                       new
+                       {
+                           exito = false,
+                           mensaje = "Persona no encontrada"
+                       });
+                }
+                else
+                {
+                    persona_.NomPersona = persona.NomPersona;
+                    persona_.ApePersona = persona.ApePersona;
+                    persona_.Edad = persona.Edad;
 
-                    if (persona_ == null)
-                    {
-                        return StatusCode(StatusCodes.Status404NotFound,
-                           new
-                           {
-                               respuesta = "ERROR",
-                               mensaje = "Persona no se encuentra"
-                           });
-                    }
-                    else
-                    {
-                        persona_.NomPersona = persona.NomPersona;
-                        persona_.ApePersona = persona.ApePersona;
-                        persona_.Edad = persona.Edad;
+                    _context.SaveChanges();
 
-                        db.SaveChanges();
-
-                        return StatusCode(StatusCodes.Status200OK,
-                           new
-                           {
-                               respuesta = "OK",
-                               mensaje = "Editado correctamente"
-                           });
-                    }
+                    return StatusCode(StatusCodes.Status200OK,
+                       new
+                       {
+                           exito = true,
+                           mensaje = $"Persona ID #{persona_.IdPersona} editada correctamente"
+                       });
                 }
             }
             catch (Exception ex)
@@ -124,7 +122,7 @@ namespace API_Consultas.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     new
                     {
-                        respuesta = "ERROR",
+                        exito = false,
                         mensaje = ex.Message
                     });
             }
@@ -132,37 +130,33 @@ namespace API_Consultas.Controllers
         }
 
         [HttpDelete]
-        [Route("EliminarPersona")]
+        [Route("api/EliminarPersona")]
         public IActionResult EliminarPersona([FromBody] Persona persona)
         {
             try
             {
-                using (var db = new ArchivoContext())
+                var persona_ = _context.Personas.FirstOrDefault(x => x.IdPersona == persona.IdPersona);
+
+                if (persona_ == null)
                 {
-                    var persona_ = db.Personas.FirstOrDefault(x => x.IdPersona == persona.IdPersona);
+                    return StatusCode(StatusCodes.Status404NotFound,
+                       new
+                       {
+                           exito = false,
+                           mensaje = "Persona no se encuentra"
+                       });
+                }
+                else
+                {
+                    _context.Personas.Remove(persona_);
+                    _context.SaveChanges();
 
-                    if (persona_ == null)
-                    {
-                        return StatusCode(StatusCodes.Status404NotFound,
-                           new
-                           {
-                               respuesta = "ERROR",
-                               mensaje = "Persona no se encuentra"
-                           });
-                    }
-                    else
-                    {
-                        db.Personas.Remove(persona_);
-                        db.SaveChanges();
-
-                        return StatusCode(StatusCodes.Status200OK,
-                           new
-                           {
-                               respuesta = "OK",
-                               mensaje = "Persona eliminada correctamente"
-                           });
-                    }
-
+                    return StatusCode(StatusCodes.Status200OK,
+                       new
+                       {
+                           exito = true,
+                           mensaje = "Persona eliminada correctamente"
+                       });
                 }
             }
             catch (Exception ex)
@@ -170,7 +164,7 @@ namespace API_Consultas.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     new
                     {
-                        respuesta = "ERROR",
+                        exito = false,
                         mensaje = ex.Message
                     });
             }

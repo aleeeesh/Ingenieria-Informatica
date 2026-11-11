@@ -1,4 +1,4 @@
-﻿using APILogin.Models;
+﻿/*using APILogin.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_Consultas.Controllers
@@ -45,4 +45,4 @@ namespace API_Consultas.Controllers
             }
         }
     }
-}
+}*/

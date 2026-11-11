@@ -5,44 +5,50 @@ namespace API_Consultas.Controllers
 {
     public class UsuarioController : ControllerBase
     {
+        private readonly ArchivoContext _context;
+
+        public UsuarioController(ArchivoContext context)
+        {
+            _context = context;
+        }
+
         [HttpGet]
-        [Route("ListadoUsuarios")]
+        [Route("api/ListadoUsuarios")]
         public IActionResult ListadoUsuarios()
         {
             try
             {
                 List<UsuarioPersona> listado = new List<UsuarioPersona>();
-                using (var db = new ArchivoContext())
-                {
-                    var query = from U in db.Usuarios
-                                join P in db.Personas on U.IdPersona equals P.IdPersona
-                                join E in db.Estados on U.IdEstado equals E.IdEstado
-                                select new
-                                {
-                                    U.NomUsuario,
-                                    P.NomPersona,
-                                    P.ApePersona,
-                                    P.Edad,
-                                    E.NomEstado
-                                };
 
-                    foreach (var item in query)
+                var query = from U in _context.Usuarios
+                            join P in _context.Personas on U.IdPersona equals P.IdPersona
+                            join E in _context.Estados on U.IdEstado equals E.IdEstado
+                            select new
+                            {
+                                U.NomUsuario,
+                                P.NomPersona,
+                                P.ApePersona,
+                                P.Edad,
+                                E.NomEstado
+                            };
+
+                foreach (var item in query)
+                {
+                    listado.Add(new UsuarioPersona
                     {
-                        listado.Add(new UsuarioPersona
-                        {
-                            NomUsuario = item.NomUsuario,
-                            NombreApellido = $"{item.NomPersona} {item.ApePersona}",
-                            Edad = item.Edad,
-                            NomEstado = item.NomEstado
-                        });
-                    }
+                        NomUsuario = item.NomUsuario,
+                        NombreApellido = $"{item.NomPersona} {item.ApePersona}",
+                        Edad = item.Edad,
+                        NomEstado = item.NomEstado
+                    });
                 }
+
                 return StatusCode(StatusCodes.Status200OK,
                    new
                    {
-                       respuesta = "OK",
+                       exito = true,
                        mensaje = "Cargado correctamente",
-                       lista = listado
+                       datos = listado
                    });
             }
             catch (Exception ex)
@@ -50,62 +56,59 @@ namespace API_Consultas.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     new
                     {
-                        respuesta = "ERROR",
+                        exito = false,
                         mensaje = ex.Message
                     });
             }
         }
 
         [HttpPost]
-        [Route("InsertarUsuario")]
+        [Route("api/InsertarUsuario")]
         public IActionResult InsertarUsuario([FromBody] Usuario usuario)
         {
             try
             {
-                using (var db = new ArchivoContext())
+                bool existeUsuario = _context.Usuarios.Any(x => x.NomUsuario == usuario.NomUsuario);
+
+                if (!existeUsuario)
                 {
-                    bool existeUsuario = db.Usuarios.Any(x => x.NomUsuario == usuario.NomUsuario);
+                    bool existePersona = _context.Personas.Any(x => x.IdPersona == usuario.IdPersona);
 
-                    if (!existeUsuario)
+                    if (!existePersona)
                     {
-                        bool existePersona = db.Personas.Any(x => x.IdPersona == usuario.IdPersona);
-
-                        if (!existePersona)
-                        {
-                            return StatusCode(StatusCodes.Status404NotFound,
-                            new
-                            {
-                                respuesta = "ERROR",
-                                mensaje = "Persona no se encuentra en el sistema"
-                            });
-                        }
-                        else
-                        {
-                            Usuario insertar = new Usuario();
-                            insertar.NomUsuario = usuario.NomUsuario;
-                            insertar.IdPersona = usuario.IdPersona;
-                            insertar.IdEstado = usuario.IdEstado;
-
-                            db.Usuarios.Add(insertar);
-                            db.SaveChanges();
-
-                            return StatusCode(StatusCodes.Status201Created,
-                               new
-                               {
-                                   respuesta = "OK",
-                                   mensaje = "Usuario insertado correctamente"
-                               });
-                        }
-                    }
-                    else
-                    {
-                        return StatusCode(StatusCodes.Status409Conflict,
+                        return StatusCode(StatusCodes.Status404NotFound,
                         new
                         {
                             respuesta = "ERROR",
-                            mensaje = "Usuario ya se encuentra en el sistema"
+                            mensaje = "Persona no se encuentra en el sistema"
                         });
                     }
+                    else
+                    {
+                        Usuario insertar = new Usuario();
+                        insertar.NomUsuario = usuario.NomUsuario;
+                        insertar.IdPersona = usuario.IdPersona;
+                        insertar.IdEstado = usuario.IdEstado;
+
+                        _context.Usuarios.Add(insertar);
+                        _context.SaveChanges();
+
+                        return StatusCode(StatusCodes.Status201Created,
+                           new
+                           {
+                               exito = true,
+                               mensaje = "Usuario insertado correctamente"
+                           });
+                    }
+                }
+                else
+                {
+                    return StatusCode(StatusCodes.Status409Conflict,
+                    new
+                    {
+                        exito = false,
+                        mensaje = "Usuario ya se encuentra en el sistema"
+                    });
                 }
             }
             catch (Exception ex)
@@ -113,7 +116,47 @@ namespace API_Consultas.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     new
                     {
-                        respuesta = "ERROR",
+                        exito = false,
+                        mensaje = ex.Message
+                    });
+            }
+        }
+
+        [HttpPost]
+        [Route("api/BuscarUsuario")]
+        public IActionResult BuscarUsuario([FromBody] Usuario usuario)
+        {
+            try
+            {
+                var usuarioBuscar = _context.Usuarios.Where(u => u.NomUsuario == usuario.NomUsuario).FirstOrDefault();
+
+                if (usuarioBuscar == null)
+                {
+                    return StatusCode(StatusCodes.Status404NotFound,
+                        new
+                        {
+                            exito = false,
+                            mensaje = "Usuario no se encuentra en el sistema"
+                        });
+                }
+                else
+                {
+                    int estado = usuarioBuscar.IdEstado;
+
+                    return StatusCode(StatusCodes.Status200OK,
+                        new
+                        {
+                            exito = true,
+                            mensaje = estado == 1 ? "Usuario habilitado" : "Usuario deshabilitado"
+                        });
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new
+                    {
+                        exito = false,
                         mensaje = ex.Message
                     });
             }
