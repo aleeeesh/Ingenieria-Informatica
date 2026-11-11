@@ -32,7 +32,7 @@ namespace PizzeriaBellaItalia.AccesoDatos
         public DataTable ObtenerPedidosDataTable()
         {
             DataTable dt = new DataTable();
-            string query = "SELECT Id, Cliente, Telefono, TamanoNombre AS Tamaño, TotalPagar AS Total, FechaRegistro FROM Pedidos ORDER BY Id DESC";
+            string query = "SELECT Id, Cliente, Telefono, TamanoNombre AS Tamaño, TotalPagar AS Total, FechaRegistro FROM Pedidos ORDER BY Id ASC";
 
             using (SqlConnection conexion = ConexionBD.ObtenerConexion())
             using (SqlDataAdapter adapter = new SqlDataAdapter(query, conexion))
@@ -51,12 +51,12 @@ namespace PizzeriaBellaItalia.AccesoDatos
             string query = @"SELECT Id, Cliente, Telefono, TamanoNombre AS Tamaño, TotalPagar AS Total, FechaRegistro 
                             FROM Pedidos 
                             WHERE Cliente LIKE @Filtro 
-                            ORDER BY Id DESC";
+                            ORDER BY Id ASC";
 
             using (SqlConnection conexion = ConexionBD.ObtenerConexion())
             using (SqlCommand cmd = new SqlCommand(query, conexion))
             {
-                cmd.Parameters.AddWithValue("@Filtro", "%" + filtroCliente + "%");
+                cmd.Parameters.AddWithValue("@Filtro", $"%{filtroCliente}%");
                 using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
                 {
                     adapter.Fill(dt);

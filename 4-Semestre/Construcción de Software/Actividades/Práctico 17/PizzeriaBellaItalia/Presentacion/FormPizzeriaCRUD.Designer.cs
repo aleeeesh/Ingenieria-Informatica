@@ -79,6 +79,8 @@
             btnEliminarSQL = new Button();
             btnModificarSQL = new Button();
             btnSalir = new Button();
+            txtCantidad = new TextBox();
+            lblCantidad = new Label();
             grpCliente.SuspendLayout();
             grpIngredientes.SuspendLayout();
             grpDetalles.SuspendLayout();
@@ -95,46 +97,42 @@
             grpCliente.Controls.Add(lblTelefono);
             grpCliente.Controls.Add(txtCliente);
             grpCliente.Controls.Add(lblCliente);
-            grpCliente.Location = new Point(14, 16);
-            grpCliente.Margin = new Padding(3, 4, 3, 4);
+            grpCliente.Location = new Point(12, 12);
             grpCliente.Name = "grpCliente";
-            grpCliente.Padding = new Padding(3, 4, 3, 4);
-            grpCliente.Size = new Size(363, 97);
+            grpCliente.Size = new Size(318, 73);
             grpCliente.TabIndex = 0;
             grpCliente.TabStop = false;
             grpCliente.Text = "Datos del Cliente";
             // 
             // txtTelefono
             // 
-            txtTelefono.Location = new Point(79, 57);
-            txtTelefono.Margin = new Padding(3, 4, 3, 4);
+            txtTelefono.Location = new Point(69, 43);
             txtTelefono.Name = "txtTelefono";
-            txtTelefono.Size = new Size(278, 27);
+            txtTelefono.Size = new Size(244, 23);
             txtTelefono.TabIndex = 1;
             // 
             // lblTelefono
             // 
             lblTelefono.AutoSize = true;
-            lblTelefono.Location = new Point(3, 60);
+            lblTelefono.Location = new Point(3, 45);
             lblTelefono.Name = "lblTelefono";
-            lblTelefono.Size = new Size(70, 20);
+            lblTelefono.Size = new Size(55, 15);
             lblTelefono.TabIndex = 3;
             lblTelefono.Text = "Teléfono:";
             // 
             // txtCliente
             // 
-            txtCliente.Location = new Point(79, 25);
-            txtCliente.Margin = new Padding(3, 4, 3, 4);
+            txtCliente.Location = new Point(69, 19);
             txtCliente.Name = "txtCliente";
-            txtCliente.Size = new Size(278, 27);
+            txtCliente.Size = new Size(244, 23);
             txtCliente.TabIndex = 0;
             // 
             // lblCliente
             // 
             lblCliente.AutoSize = true;
-            lblCliente.Location = new Point(6, 28);
+            lblCliente.Location = new Point(5, 21);
             lblCliente.Name = "lblCliente";
-            lblCliente.Size = new Size(67, 20);
+            lblCliente.Size = new Size(54, 15);
             lblCliente.TabIndex = 0;
             lblCliente.Text = "Nombre:";
             // 
@@ -145,11 +143,9 @@
             grpIngredientes.Controls.Add(chkPepperoni);
             grpIngredientes.Controls.Add(chkAceitunas);
             grpIngredientes.Controls.Add(chkQuesoExtra);
-            grpIngredientes.Location = new Point(383, 16);
-            grpIngredientes.Margin = new Padding(3, 4, 3, 4);
+            grpIngredientes.Location = new Point(335, 12);
             grpIngredientes.Name = "grpIngredientes";
-            grpIngredientes.Padding = new Padding(3, 4, 3, 4);
-            grpIngredientes.Size = new Size(354, 97);
+            grpIngredientes.Size = new Size(310, 73);
             grpIngredientes.TabIndex = 2;
             grpIngredientes.TabStop = false;
             grpIngredientes.Text = "Adicionales ($800 c/u)";
@@ -157,10 +153,9 @@
             // chkTocino
             // 
             chkTocino.AutoSize = true;
-            chkTocino.Location = new Point(123, 60);
-            chkTocino.Margin = new Padding(3, 4, 3, 4);
+            chkTocino.Location = new Point(108, 45);
             chkTocino.Name = "chkTocino";
-            chkTocino.Size = new Size(75, 24);
+            chkTocino.Size = new Size(61, 19);
             chkTocino.TabIndex = 9;
             chkTocino.Text = "Tocino";
             chkTocino.UseVisualStyleBackColor = true;
@@ -168,10 +163,9 @@
             // chkChampinones
             // 
             chkChampinones.AutoSize = true;
-            chkChampinones.Location = new Point(229, 29);
-            chkChampinones.Margin = new Padding(3, 4, 3, 4);
+            chkChampinones.Location = new Point(200, 22);
             chkChampinones.Name = "chkChampinones";
-            chkChampinones.Size = new Size(121, 24);
+            chkChampinones.Size = new Size(100, 19);
             chkChampinones.TabIndex = 7;
             chkChampinones.Text = "Champiñones";
             chkChampinones.UseVisualStyleBackColor = true;
@@ -179,10 +173,9 @@
             // chkPepperoni
             // 
             chkPepperoni.AutoSize = true;
-            chkPepperoni.Location = new Point(123, 29);
-            chkPepperoni.Margin = new Padding(3, 4, 3, 4);
+            chkPepperoni.Location = new Point(108, 22);
             chkPepperoni.Name = "chkPepperoni";
-            chkPepperoni.Size = new Size(98, 24);
+            chkPepperoni.Size = new Size(80, 19);
             chkPepperoni.TabIndex = 6;
             chkPepperoni.Text = "Pepperoni";
             chkPepperoni.UseVisualStyleBackColor = true;
@@ -190,10 +183,9 @@
             // chkAceitunas
             // 
             chkAceitunas.AutoSize = true;
-            chkAceitunas.Location = new Point(8, 60);
-            chkAceitunas.Margin = new Padding(3, 4, 3, 4);
+            chkAceitunas.Location = new Point(7, 45);
             chkAceitunas.Name = "chkAceitunas";
-            chkAceitunas.Size = new Size(95, 24);
+            chkAceitunas.Size = new Size(78, 19);
             chkAceitunas.TabIndex = 8;
             chkAceitunas.Text = "Aceitunas";
             chkAceitunas.UseVisualStyleBackColor = true;
@@ -201,10 +193,9 @@
             // chkQuesoExtra
             // 
             chkQuesoExtra.AutoSize = true;
-            chkQuesoExtra.Location = new Point(8, 28);
-            chkQuesoExtra.Margin = new Padding(3, 4, 3, 4);
+            chkQuesoExtra.Location = new Point(7, 21);
             chkQuesoExtra.Name = "chkQuesoExtra";
-            chkQuesoExtra.Size = new Size(110, 24);
+            chkQuesoExtra.Size = new Size(89, 19);
             chkQuesoExtra.TabIndex = 5;
             chkQuesoExtra.Text = "Queso extra";
             chkQuesoExtra.UseVisualStyleBackColor = true;
@@ -222,11 +213,9 @@
             grpDetalles.Controls.Add(lblDeliveryValor);
             grpDetalles.Controls.Add(lblDescuentoValor);
             grpDetalles.Controls.Add(lblSubtotalValor);
-            grpDetalles.Location = new Point(14, 230);
-            grpDetalles.Margin = new Padding(3, 4, 3, 4);
+            grpDetalles.Location = new Point(10, 198);
             grpDetalles.Name = "grpDetalles";
-            grpDetalles.Padding = new Padding(3, 4, 3, 4);
-            grpDetalles.Size = new Size(363, 213);
+            grpDetalles.Size = new Size(319, 134);
             grpDetalles.TabIndex = 4;
             grpDetalles.TabStop = false;
             grpDetalles.Text = "Detalle de Pago";
@@ -236,9 +225,9 @@
             txtTotalValor.AutoSize = true;
             txtTotalValor.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             txtTotalValor.ForeColor = Color.DarkGreen;
-            txtTotalValor.Location = new Point(197, 175);
+            txtTotalValor.Location = new Point(177, 108);
             txtTotalValor.Name = "txtTotalValor";
-            txtTotalValor.Size = new Size(73, 25);
+            txtTotalValor.Size = new Size(57, 20);
             txtTotalValor.TabIndex = 10;
             txtTotalValor.Text = "$0 CLP";
             txtTotalValor.TextAlign = ContentAlignment.TopRight;
@@ -246,18 +235,18 @@
             // txtIvaValor
             // 
             txtIvaValor.AutoSize = true;
-            txtIvaValor.Location = new Point(197, 121);
+            txtIvaValor.Location = new Point(183, 80);
             txtIvaValor.Name = "txtIvaValor";
-            txtIvaValor.Size = new Size(53, 20);
+            txtIvaValor.Size = new Size(43, 15);
             txtIvaValor.TabIndex = 9;
             txtIvaValor.Text = "$0 CLP";
             // 
             // txtDeliveryValor
             // 
             txtDeliveryValor.AutoSize = true;
-            txtDeliveryValor.Location = new Point(197, 95);
+            txtDeliveryValor.Location = new Point(183, 60);
             txtDeliveryValor.Name = "txtDeliveryValor";
-            txtDeliveryValor.Size = new Size(53, 20);
+            txtDeliveryValor.Size = new Size(43, 15);
             txtDeliveryValor.TabIndex = 8;
             txtDeliveryValor.Text = "$0 CLP";
             // 
@@ -265,9 +254,9 @@
             // 
             txtDescuentoValor.AutoSize = true;
             txtDescuentoValor.ForeColor = SystemColors.ControlText;
-            txtDescuentoValor.Location = new Point(197, 69);
+            txtDescuentoValor.Location = new Point(183, 41);
             txtDescuentoValor.Name = "txtDescuentoValor";
-            txtDescuentoValor.Size = new Size(53, 20);
+            txtDescuentoValor.Size = new Size(43, 15);
             txtDescuentoValor.TabIndex = 7;
             txtDescuentoValor.Text = "$0 CLP";
             txtDescuentoValor.TextAlign = ContentAlignment.MiddleRight;
@@ -275,9 +264,9 @@
             // txtSubtotalValor
             // 
             txtSubtotalValor.AutoSize = true;
-            txtSubtotalValor.Location = new Point(197, 43);
+            txtSubtotalValor.Location = new Point(183, 21);
             txtSubtotalValor.Name = "txtSubtotalValor";
-            txtSubtotalValor.Size = new Size(53, 20);
+            txtSubtotalValor.Size = new Size(43, 15);
             txtSubtotalValor.TabIndex = 6;
             txtSubtotalValor.Text = "$0 CLP";
             txtSubtotalValor.TextAlign = ContentAlignment.TopRight;
@@ -287,64 +276,63 @@
             lblTotalValor.AutoSize = true;
             lblTotalValor.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblTotalValor.ForeColor = Color.DarkGreen;
-            lblTotalValor.Location = new Point(11, 175);
+            lblTotalValor.Location = new Point(15, 108);
             lblTotalValor.Name = "lblTotalValor";
-            lblTotalValor.Size = new Size(169, 28);
+            lblTotalValor.Size = new Size(131, 21);
             lblTotalValor.TabIndex = 5;
             lblTotalValor.Text = "TOTAL A PAGAR:";
             // 
             // lblSeparador
             // 
             lblSeparador.AutoSize = true;
-            lblSeparador.Location = new Point(10, 143);
+            lblSeparador.Location = new Point(12, 93);
             lblSeparador.Name = "lblSeparador";
-            lblSeparador.Size = new Size(267, 20);
+            lblSeparador.Size = new Size(222, 15);
             lblSeparador.TabIndex = 4;
             lblSeparador.Text = "___________________________________________";
             // 
             // lblIvaValor
             // 
             lblIvaValor.AutoSize = true;
-            lblIvaValor.Location = new Point(10, 121);
+            lblIvaValor.Location = new Point(21, 80);
             lblIvaValor.Name = "lblIvaValor";
-            lblIvaValor.Size = new Size(130, 20);
+            lblIvaValor.Size = new Size(104, 15);
             lblIvaValor.TabIndex = 3;
             lblIvaValor.Text = "IVA Chileno (19%):";
             // 
             // lblDeliveryValor
             // 
             lblDeliveryValor.AutoSize = true;
-            lblDeliveryValor.Location = new Point(15, 95);
+            lblDeliveryValor.Location = new Point(27, 59);
             lblDeliveryValor.Name = "lblDeliveryValor";
-            lblDeliveryValor.Size = new Size(125, 20);
+            lblDeliveryValor.Size = new Size(98, 15);
             lblDeliveryValor.TabIndex = 2;
             lblDeliveryValor.Text = "Recargo Delivery:";
             // 
             // lblDescuentoValor
             // 
             lblDescuentoValor.AutoSize = true;
-            lblDescuentoValor.Location = new Point(16, 69);
+            lblDescuentoValor.Location = new Point(27, 41);
             lblDescuentoValor.Name = "lblDescuentoValor";
-            lblDescuentoValor.Size = new Size(124, 20);
+            lblDescuentoValor.Size = new Size(99, 15);
             lblDescuentoValor.TabIndex = 1;
             lblDescuentoValor.Text = "Descuento (10%):";
             // 
             // lblSubtotalValor
             // 
             lblSubtotalValor.AutoSize = true;
-            lblSubtotalValor.Location = new Point(34, 43);
+            lblSubtotalValor.Location = new Point(43, 21);
             lblSubtotalValor.Name = "lblSubtotalValor";
-            lblSubtotalValor.Size = new Size(106, 20);
+            lblSubtotalValor.Size = new Size(83, 15);
             lblSubtotalValor.TabIndex = 0;
             lblSubtotalValor.Text = "Subtotal Pizza:";
             // 
             // rdbDelivery
             // 
             rdbDelivery.AutoSize = true;
-            rdbDelivery.Location = new Point(168, 31);
-            rdbDelivery.Margin = new Padding(3, 4, 3, 4);
+            rdbDelivery.Location = new Point(147, 23);
             rdbDelivery.Name = "rdbDelivery";
-            rdbDelivery.Size = new Size(151, 24);
+            rdbDelivery.Size = new Size(119, 19);
             rdbDelivery.TabIndex = 10;
             rdbDelivery.TabStop = true;
             rdbDelivery.Text = "Delivery (+$2.000)";
@@ -355,11 +343,9 @@
             grpEntrega.Controls.Add(chkConvenioEstudiante);
             grpEntrega.Controls.Add(rdbDelivery);
             grpEntrega.Controls.Add(rdbRetiro);
-            grpEntrega.Location = new Point(383, 121);
-            grpEntrega.Margin = new Padding(3, 4, 3, 4);
+            grpEntrega.Location = new Point(335, 91);
             grpEntrega.Name = "grpEntrega";
-            grpEntrega.Padding = new Padding(3, 4, 3, 4);
-            grpEntrega.Size = new Size(354, 101);
+            grpEntrega.Size = new Size(310, 76);
             grpEntrega.TabIndex = 3;
             grpEntrega.TabStop = false;
             grpEntrega.Text = "Servicio y Descuento";
@@ -367,10 +353,9 @@
             // chkConvenioEstudiante
             // 
             chkConvenioEstudiante.AutoSize = true;
-            chkConvenioEstudiante.Location = new Point(27, 63);
-            chkConvenioEstudiante.Margin = new Padding(3, 4, 3, 4);
+            chkConvenioEstudiante.Location = new Point(24, 47);
             chkConvenioEstudiante.Name = "chkConvenioEstudiante";
-            chkConvenioEstudiante.Size = new Size(281, 24);
+            chkConvenioEstudiante.Size = new Size(226, 19);
             chkConvenioEstudiante.TabIndex = 11;
             chkConvenioEstudiante.Text = "Convenio Estudiante/IPVG (10% Dcto)";
             chkConvenioEstudiante.UseVisualStyleBackColor = true;
@@ -378,10 +363,9 @@
             // rdbRetiro
             // 
             rdbRetiro.AutoSize = true;
-            rdbRetiro.Location = new Point(27, 31);
-            rdbRetiro.Margin = new Padding(3, 4, 3, 4);
+            rdbRetiro.Location = new Point(24, 23);
             rdbRetiro.Name = "rdbRetiro";
-            rdbRetiro.Size = new Size(129, 24);
+            rdbRetiro.Size = new Size(103, 19);
             rdbRetiro.TabIndex = 10;
             rdbRetiro.TabStop = true;
             rdbRetiro.Text = "Retiro en Local";
@@ -389,15 +373,15 @@
             // 
             // grpPizza
             // 
+            grpPizza.Controls.Add(txtCantidad);
+            grpPizza.Controls.Add(lblCantidad);
             grpPizza.Controls.Add(lblMasa);
             grpPizza.Controls.Add(cboMasa);
             grpPizza.Controls.Add(lblTamano);
             grpPizza.Controls.Add(cboTamano);
-            grpPizza.Location = new Point(12, 121);
-            grpPizza.Margin = new Padding(3, 4, 3, 4);
+            grpPizza.Location = new Point(10, 91);
             grpPizza.Name = "grpPizza";
-            grpPizza.Padding = new Padding(3, 4, 3, 4);
-            grpPizza.Size = new Size(365, 101);
+            grpPizza.Size = new Size(319, 101);
             grpPizza.TabIndex = 1;
             grpPizza.TabStop = false;
             grpPizza.Text = "Tamaño y Masa";
@@ -405,9 +389,9 @@
             // lblMasa
             // 
             lblMasa.AutoSize = true;
-            lblMasa.Location = new Point(10, 68);
+            lblMasa.Location = new Point(5, 51);
             lblMasa.Name = "lblMasa";
-            lblMasa.Size = new Size(81, 20);
+            lblMasa.Size = new Size(64, 15);
             lblMasa.TabIndex = 6;
             lblMasa.Text = "Tipo Masa:";
             // 
@@ -415,18 +399,17 @@
             // 
             cboMasa.DropDownStyle = ComboBoxStyle.DropDownList;
             cboMasa.FormattingEnabled = true;
-            cboMasa.Location = new Point(112, 63);
-            cboMasa.Margin = new Padding(3, 4, 3, 4);
+            cboMasa.Location = new Point(98, 45);
             cboMasa.Name = "cboMasa";
-            cboMasa.Size = new Size(247, 28);
+            cboMasa.Size = new Size(217, 23);
             cboMasa.TabIndex = 4;
             // 
             // lblTamano
             // 
             lblTamano.AutoSize = true;
-            lblTamano.Location = new Point(27, 29);
+            lblTamano.Location = new Point(18, 27);
             lblTamano.Name = "lblTamano";
-            lblTamano.Size = new Size(64, 20);
+            lblTamano.Size = new Size(52, 15);
             lblTamano.TabIndex = 4;
             lblTamano.Text = "Tamaño:";
             // 
@@ -434,18 +417,16 @@
             // 
             cboTamano.DropDownStyle = ComboBoxStyle.DropDownList;
             cboTamano.FormattingEnabled = true;
-            cboTamano.Location = new Point(112, 27);
-            cboTamano.Margin = new Padding(3, 4, 3, 4);
+            cboTamano.Location = new Point(98, 20);
             cboTamano.Name = "cboTamano";
-            cboTamano.Size = new Size(247, 28);
+            cboTamano.Size = new Size(217, 23);
             cboTamano.TabIndex = 2;
             // 
             // btnGuardarSQL
             // 
-            btnGuardarSQL.Location = new Point(388, 250);
-            btnGuardarSQL.Margin = new Padding(3, 4, 3, 4);
+            btnGuardarSQL.Location = new Point(340, 188);
             btnGuardarSQL.Name = "btnGuardarSQL";
-            btnGuardarSQL.Size = new Size(155, 31);
+            btnGuardarSQL.Size = new Size(136, 23);
             btnGuardarSQL.TabIndex = 11;
             btnGuardarSQL.Text = "⚡Calcular Total";
             btnGuardarSQL.UseVisualStyleBackColor = true;
@@ -462,95 +443,91 @@
             grpPedidos.Controls.Add(lblCantidadPedidos);
             grpPedidos.Controls.Add(txtRecaudacionTotal);
             grpPedidos.Controls.Add(lblRecaudacionTotal);
-            grpPedidos.Location = new Point(14, 451);
-            grpPedidos.Margin = new Padding(3, 4, 3, 4);
+            grpPedidos.Location = new Point(12, 338);
             grpPedidos.Name = "grpPedidos";
-            grpPedidos.Padding = new Padding(3, 4, 3, 4);
-            grpPedidos.Size = new Size(719, 297);
+            grpPedidos.Size = new Size(629, 223);
             grpPedidos.TabIndex = 14;
             grpPedidos.TabStop = false;
             grpPedidos.Text = "Pedidos";
             // 
             // txtBuscarCliente
             // 
-            txtBuscarCliente.Location = new Point(119, 28);
-            txtBuscarCliente.Margin = new Padding(3, 4, 3, 4);
+            txtBuscarCliente.Location = new Point(104, 21);
             txtBuscarCliente.Name = "txtBuscarCliente";
-            txtBuscarCliente.Size = new Size(268, 27);
+            txtBuscarCliente.Size = new Size(235, 23);
             txtBuscarCliente.TabIndex = 4;
             txtBuscarCliente.TextChanged += txtBuscarCliente_TextChanged;
             // 
             // lblBuscarCliente
             // 
             lblBuscarCliente.AutoSize = true;
-            lblBuscarCliente.Location = new Point(10, 31);
+            lblBuscarCliente.Location = new Point(9, 23);
             lblBuscarCliente.Name = "lblBuscarCliente";
-            lblBuscarCliente.Size = new Size(103, 20);
+            lblBuscarCliente.Size = new Size(83, 15);
             lblBuscarCliente.TabIndex = 5;
             lblBuscarCliente.Text = "Buscar cliente:";
             // 
             // dgvPedidos
             // 
             dgvPedidos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvPedidos.Location = new Point(6, 72);
-            dgvPedidos.Margin = new Padding(3, 4, 3, 4);
+            dgvPedidos.Location = new Point(5, 54);
             dgvPedidos.Name = "dgvPedidos";
             dgvPedidos.RowHeadersWidth = 51;
-            dgvPedidos.Size = new Size(707, 148);
+            dgvPedidos.Size = new Size(619, 111);
             dgvPedidos.TabIndex = 17;
             dgvPedidos.CellClick += dgvPedidos_CellClick;
             // 
             // txtPromedioVenta
             // 
             txtPromedioVenta.AutoSize = true;
-            txtPromedioVenta.Location = new Point(165, 264);
+            txtPromedioVenta.Location = new Point(144, 198);
             txtPromedioVenta.Name = "txtPromedioVenta";
-            txtPromedioVenta.Size = new Size(53, 20);
+            txtPromedioVenta.Size = new Size(43, 15);
             txtPromedioVenta.TabIndex = 16;
             txtPromedioVenta.Text = "$0 CLP";
             // 
             // lblPromedioVenta
             // 
             lblPromedioVenta.AutoSize = true;
-            lblPromedioVenta.Location = new Point(53, 264);
+            lblPromedioVenta.Location = new Point(46, 198);
             lblPromedioVenta.Name = "lblPromedioVenta";
-            lblPromedioVenta.Size = new Size(77, 20);
+            lblPromedioVenta.Size = new Size(62, 15);
             lblPromedioVenta.TabIndex = 15;
             lblPromedioVenta.Text = "Promedio:";
             // 
             // txtCantidadPedidos
             // 
             txtCantidadPedidos.AutoSize = true;
-            txtCantidadPedidos.Location = new Point(165, 244);
+            txtCantidadPedidos.Location = new Point(144, 183);
             txtCantidadPedidos.Name = "txtCantidadPedidos";
-            txtCantidadPedidos.Size = new Size(17, 20);
+            txtCantidadPedidos.Size = new Size(13, 15);
             txtCantidadPedidos.TabIndex = 14;
             txtCantidadPedidos.Text = "0";
             // 
             // lblCantidadPedidos
             // 
             lblCantidadPedidos.AutoSize = true;
-            lblCantidadPedidos.Location = new Point(66, 244);
+            lblCantidadPedidos.Location = new Point(58, 183);
             lblCantidadPedidos.Name = "lblCantidadPedidos";
-            lblCantidadPedidos.Size = new Size(64, 20);
+            lblCantidadPedidos.Size = new Size(52, 15);
             lblCantidadPedidos.TabIndex = 13;
             lblCantidadPedidos.Text = "Pedidos:";
             // 
             // txtRecaudacionTotal
             // 
             txtRecaudacionTotal.AutoSize = true;
-            txtRecaudacionTotal.Location = new Point(165, 224);
+            txtRecaudacionTotal.Location = new Point(144, 168);
             txtRecaudacionTotal.Name = "txtRecaudacionTotal";
-            txtRecaudacionTotal.Size = new Size(53, 20);
+            txtRecaudacionTotal.Size = new Size(43, 15);
             txtRecaudacionTotal.TabIndex = 12;
             txtRecaudacionTotal.Text = "$0 CLP";
             // 
             // lblRecaudacionTotal
             // 
             lblRecaudacionTotal.AutoSize = true;
-            lblRecaudacionTotal.Location = new Point(6, 224);
+            lblRecaudacionTotal.Location = new Point(5, 168);
             lblRecaudacionTotal.Name = "lblRecaudacionTotal";
-            lblRecaudacionTotal.Size = new Size(124, 20);
+            lblRecaudacionTotal.Size = new Size(97, 15);
             lblRecaudacionTotal.TabIndex = 11;
             lblRecaudacionTotal.Text = "Total Recaudado:";
             // 
@@ -558,9 +535,9 @@
             // 
             lblEstadoConexion.AutoSize = true;
             lblEstadoConexion.ForeColor = Color.Red;
-            lblEstadoConexion.Location = new Point(388, 339);
+            lblEstadoConexion.Location = new Point(340, 254);
             lblEstadoConexion.Name = "lblEstadoConexion";
-            lblEstadoConexion.Size = new Size(251, 20);
+            lblEstadoConexion.Size = new Size(199, 15);
             lblEstadoConexion.TabIndex = 15;
             lblEstadoConexion.Text = "● Estado SQL Express: No conectado";
             // 
@@ -568,18 +545,17 @@
             // 
             lblModo.AutoSize = true;
             lblModo.ForeColor = SystemColors.ActiveCaptionText;
-            lblModo.Location = new Point(388, 373);
+            lblModo.Location = new Point(340, 280);
             lblModo.Name = "lblModo";
-            lblModo.Size = new Size(55, 20);
+            lblModo.Size = new Size(44, 15);
             lblModo.TabIndex = 16;
             lblModo.Text = "Prueba";
             // 
             // btnEliminarSQL
             // 
-            btnEliminarSQL.Location = new Point(578, 288);
-            btnEliminarSQL.Margin = new Padding(3, 4, 3, 4);
+            btnEliminarSQL.Location = new Point(506, 216);
             btnEliminarSQL.Name = "btnEliminarSQL";
-            btnEliminarSQL.Size = new Size(155, 31);
+            btnEliminarSQL.Size = new Size(136, 23);
             btnEliminarSQL.TabIndex = 17;
             btnEliminarSQL.Text = "✖ Eliminar Pedido";
             btnEliminarSQL.UseVisualStyleBackColor = true;
@@ -587,10 +563,9 @@
             // 
             // btnModificarSQL
             // 
-            btnModificarSQL.Location = new Point(578, 249);
-            btnModificarSQL.Margin = new Padding(3, 4, 3, 4);
+            btnModificarSQL.Location = new Point(506, 187);
             btnModificarSQL.Name = "btnModificarSQL";
-            btnModificarSQL.Size = new Size(155, 31);
+            btnModificarSQL.Size = new Size(136, 23);
             btnModificarSQL.TabIndex = 18;
             btnModificarSQL.Text = "✏️ Editar Pedido";
             btnModificarSQL.UseVisualStyleBackColor = true;
@@ -598,19 +573,34 @@
             // 
             // btnSalir
             // 
-            btnSalir.Location = new Point(388, 289);
-            btnSalir.Margin = new Padding(3, 4, 3, 4);
+            btnSalir.Location = new Point(340, 217);
             btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(155, 31);
+            btnSalir.Size = new Size(136, 23);
             btnSalir.TabIndex = 19;
             btnSalir.Text = "⛔ Salir";
             btnSalir.UseVisualStyleBackColor = true;
             // 
+            // txtCantidad
+            // 
+            txtCantidad.Location = new Point(98, 71);
+            txtCantidad.Name = "txtCantidad";
+            txtCantidad.Size = new Size(88, 23);
+            txtCantidad.TabIndex = 4;
+            // 
+            // lblCantidad
+            // 
+            lblCantidad.AutoSize = true;
+            lblCantidad.Location = new Point(15, 74);
+            lblCantidad.Name = "lblCantidad";
+            lblCantidad.Size = new Size(58, 15);
+            lblCantidad.TabIndex = 5;
+            lblCantidad.Text = "Cantidad:";
+            // 
             // FormPizzeriaCRUD
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(749, 760);
+            ClientSize = new Size(655, 570);
             Controls.Add(btnSalir);
             Controls.Add(btnModificarSQL);
             Controls.Add(btnEliminarSQL);
@@ -625,7 +615,6 @@
             Controls.Add(grpCliente);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "FormPizzeriaCRUD";
@@ -701,5 +690,7 @@
         private Button btnModificarSQL;
         private Button btnSalir;
         private Button btnGuardarSQL;
+        private TextBox txtCantidad;
+        private Label lblCantidad;
     }
 }

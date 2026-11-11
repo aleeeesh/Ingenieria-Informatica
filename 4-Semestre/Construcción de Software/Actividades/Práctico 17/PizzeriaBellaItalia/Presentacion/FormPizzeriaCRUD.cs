@@ -9,7 +9,7 @@ namespace PizzeriaBellaItalia
     public partial class FormPizzeriaCRUD : Form
     {
         private PedidoDAO pedidoDAO = new PedidoDAO();
-        private int idPedidoSeleccionado = 0; // 0 = Modo Nuevo Registro; >0 = Modo Edición
+        private int idPedidoSeleccionado = 0; // 0 = Modo Nuevo Registro; > 0 = Modo Edición
 
         public FormPizzeriaCRUD()
         {
@@ -38,7 +38,6 @@ namespace PizzeriaBellaItalia
 
         private void PoblarComboBoxesConDiccionarios()
         {
-            // 1. Diccionario de Tamaños (Key: Nombre del Tamaño, Value: Precio Base)
             Dictionary<string, int> opcionesTamano = new Dictionary<string, int>
                 {
                     {"Seleccione uno",-1 },
@@ -48,11 +47,10 @@ namespace PizzeriaBellaItalia
                 };
 
             cboTamano.DataSource = new BindingSource(opcionesTamano, null);
-            cboTamano.DisplayMember = "Key";    // Lo que el usuario VE en el desplegable
-            cboTamano.ValueMember = "Value";    // El VALOR numérico devuelto por SelectedValue
+            cboTamano.DisplayMember = "Key";
+            cboTamano.ValueMember = "Value";
             cboTamano.DropDownStyle = ComboBoxStyle.DropDownList;
 
-            // 2. Diccionario de Masas (Key: Nombre del Tipo de Masa, Value: Recargo Adicional)
             Dictionary<string, int> opcionesMasa = new Dictionary<string, int>
                 {
                     {"Seleccione uno",-1 },
@@ -97,7 +95,7 @@ namespace PizzeriaBellaItalia
             string telefono = txtTelefono.Text.Trim();
             string tamanoTexto = cboTamano.Text;
             int precioTamano = (int)cboTamano.SelectedValue;
-            int cantidad = 1;//int.Parse(txtCantidad.Text.Trim());
+            int cantidad = int.Parse(txtCantidad.Text.Trim());
             bool quesoExtra = chkQuesoExtra.Checked;
 
             PedidoPizza nuevoPedido = new PedidoPizza(cliente, telefono, tamanoTexto, precioTamano, cantidad, "Tradicional", quesoExtra);
@@ -118,8 +116,9 @@ namespace PizzeriaBellaItalia
         private void dgvPedidos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && dgvPedidos.Rows[e.RowIndex].Cells["Id"].Value != null)
-            {   
+            {
                 idPedidoSeleccionado = Convert.ToInt32(dgvPedidos.Rows[e.RowIndex].Cells["Id"].Value);
+
                 PedidoPizza? p = pedidoDAO.ObtenerPedidoPorId(idPedidoSeleccionado);
 
                 if (p != null)
@@ -131,6 +130,9 @@ namespace PizzeriaBellaItalia
                     btnModificarSQL.Enabled = true;
                     btnEliminarSQL.Enabled = true;
                 }
+            } else
+            {
+                LimpiarFormulario();
             }
         }
 
@@ -149,13 +151,13 @@ namespace PizzeriaBellaItalia
             string telefono = txtTelefono.Text.Trim();
             string tamanoTexto = cboTamano.Text;
             int precioTamano = (int)cboTamano.SelectedValue;
-            int cantidad = 0;
+            int cantidad = int.Parse(txtCantidad.Text.Trim());
 
-            if (chkQuesoExtra.Checked) cantidad++;
+            /*if (chkQuesoExtra.Checked) cantidad++;
             if (chkAceitunas.Checked) cantidad++;
             if (chkPepperoni.Checked) cantidad++;
             if (chkTocino.Checked) cantidad++;
-            if (chkChampinones.Checked) cantidad++;
+            if (chkChampinones.Checked) cantidad++;*/
 
             PedidoPizza pedidoEditado = new PedidoPizza(idPedidoSeleccionado, cliente, telefono, tamanoTexto, precioTamano, cantidad, "Tradicional", chkQuesoExtra.Checked);
 
@@ -226,13 +228,13 @@ namespace PizzeriaBellaItalia
                 return false;
             }
 
-            /*if (!int.TryParse(txtCantidad.Text.Trim(), out int cantidad) || cantidad <= 0)
+            if (!int.TryParse(txtCantidad.Text.Trim(), out int cantidad) || cantidad <= 0)
             {
                 MessageBox.Show("La cantidad debe ser un entero positivo mayor a 0.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtCantidad.SelectAll();
                 txtCantidad.Focus();
                 return false;
-            }*/
+            }
 
             return true;
         }
@@ -246,7 +248,7 @@ namespace PizzeriaBellaItalia
         {
             txtCliente.Clear();
             txtTelefono.Clear();
-            //txtCantidad.Text = "1";
+            txtCantidad.Text = "1";
             chkQuesoExtra.Checked = false;
             if (cboTamano.Items.Count > 0) cboTamano.SelectedIndex = 0;
             EstablecerModoInsercion();
