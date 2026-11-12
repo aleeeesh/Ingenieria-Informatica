@@ -42,6 +42,24 @@
             RecargoTamano = recargoTamano;
             MasaNombre = masaNombre;
             RecargoMasa = recargoMasa;
+
+            Subtotal = CalcularSubtotal();
+            MontoIva = CalcularMontoIva();
+            TotalPagar = CalcularTotalPagar();
+        }
+
+        public PedidoPizza(string cliente, string telefono, string tamanoNombre, int recargoTamano, string masaNombre, int recargoMasa)
+        {
+            Cliente = cliente;
+            Telefono = telefono;
+            TamanoNombre = tamanoNombre;
+            RecargoTamano = recargoTamano;
+            MasaNombre = masaNombre;
+            RecargoMasa = recargoMasa;
+
+            Subtotal = CalcularSubtotal();
+            MontoIva = CalcularMontoIva();
+            TotalPagar = CalcularTotalPagar();
         }
 
         public PedidoPizza(
