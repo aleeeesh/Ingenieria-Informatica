@@ -85,8 +85,11 @@ namespace PizzeriaBellaItalia
             txtRecaudacionTotal.Text = $"$ {totalAcumulado:N0} CLP";
             txtCantidadPedidos.Text = $"{dt.Rows.Count} pedido(s)";
 
-            int promedioVenta = totalAcumulado / dt.Rows.Count;
-            txtPromedioVenta.Text = $"{promedioVenta}";
+            if (dt.Rows.Count != 0)
+            {
+                int promedioVenta = totalAcumulado / dt.Rows.Count;
+                txtPromedioVenta.Text = $"${promedioVenta:N0} CLP";
+            }
         }
 
         // C1: CREAR (INSERT)
@@ -99,23 +102,38 @@ namespace PizzeriaBellaItalia
             string tamanoTexto = cboTamano.Text;
             int precioTamano = (int)cboTamano.SelectedValue;
             string masaTexto = cboMasa.Text;
+            int precioMasa = (int)cboMasa.SelectedValue;
 
-            int cantidad = 0;
+            bool quesoExtra = chkQuesoExtra.Checked;
+            bool pepperoniExtra = chkPepperoni.Checked;
+            bool champinonesExtra = chkChampinones.Checked;
+            bool aceitunasExtra = chkAceitunas.Checked;
+            bool tocinoExtra = chkTocino.Checked;
 
-            if (chkQuesoExtra.Checked) cantidad++;
-            if (chkPepperoni.Checked) cantidad++;
-            if (chkChampinones.Checked) cantidad++;
-            if (chkAceitunas.Checked) cantidad++;
-            if (chkTocino.Checked) cantidad++;
+            bool esDelivery = rdbDelivery.Checked;
+            bool aplicaConvenio = chkConvenioEstudiante.Checked;
 
+            PedidoPizza nuevoPedido = new PedidoPizza(
+                cliente,
+                telefono,
+                tamanoTexto,
+                precioTamano,
+                masaTexto,
+                precioMasa,
+                quesoExtra,
+                pepperoniExtra,
+                champinonesExtra,
+                aceitunasExtra, 
+                tocinoExtra,
+                esDelivery,
+                aplicaConvenio
+            );
 
-            PedidoPizza nuevoPedido = new PedidoPizza(cliente, telefono, tamanoTexto, precioTamano, cantidad, masaTexto);
-
-            int subtotal = nuevoPedido.CalcularSubtotal();
-            int descuento = nuevoPedido.CalcularMontoDescuento();
-
-            txtSubtotalValor.Text = $"${subtotal:N2}";
-            txtTotalValor.Text = $"${nuevoPedido.TotalPagar:N2}";
+            txtSubtotalValor.Text = $"${nuevoPedido.Subtotal:N0} CLP";
+            txtDescuentoValor.Text = $"-${nuevoPedido.Descuento:N0} CLP";
+            txtDeliveryValor.Text = $"${nuevoPedido.RecargoDelivery:N0} CLP";
+            txtIvaValor.Text = $"${nuevoPedido.MontoIva:N0} CLP";
+            txtTotalValor.Text = $"${nuevoPedido.TotalPagar:N0} CLP";
 
             if (pedidoDAO.InsertarPedido(nuevoPedido))
             {
@@ -132,8 +150,7 @@ namespace PizzeriaBellaItalia
         // C2: CARGAR SELECCIÓN PARA EDICIÓN
         private void dgvPedidos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && dgvPedidos.Rows[e.RowIndex].Cells["Id"].Value != null)
-            {
+            if (e.RowIndex >= 0 && dgvPedidos.Rows[e.RowIndex].Cells["Id"].Value != null) {
                 idPedidoSeleccionado = Convert.ToInt32(dgvPedidos.Rows[e.RowIndex].Cells["Id"].Value);
 
                 PedidoPizza? p = pedidoDAO.ObtenerPedidoPorId(idPedidoSeleccionado);
@@ -142,6 +159,21 @@ namespace PizzeriaBellaItalia
                 {
                     txtCliente.Text = p.Cliente;
                     txtTelefono.Text = p.Telefono;
+
+                    /*cboTamano.Text
+                    string masaTexto = cboMasa.Text;
+
+                    chkQuesoExtra.Checked = p.QuesoExtra:
+                    bool pepperoniExtra = chkPepperoni.Checked;
+                    bool champinonesExtra = chkChampinones.Checked;
+                    bool aceitunasExtra = chkAceitunas.Checked;
+                    bool tocinoExtra = chkTocino.Checked;
+
+                    bool esDelivery = rdbDelivery.Checked;
+                    bool aplicaConvenio = chkConvenioEstudiante.Checked;*/
+
+                    txtTotalValor.Text = $"${p.TotalPagar:N0}";
+
                     lblModo.Text = $"Modo: EDICIÓN (Pedido ID #{idPedidoSeleccionado})";
                     btnGuardarSQL.Enabled = false;
                     btnModificarSQL.Enabled = true;
@@ -168,15 +200,25 @@ namespace PizzeriaBellaItalia
             string telefono = txtTelefono.Text.Trim();
             string tamanoTexto = cboTamano.Text;
             int precioTamano = (int)cboTamano.SelectedValue;
-            int cantidad = int.Parse(txtCantidad.Text.Trim());
+            string masaTexto = cboMasa.Text;
+            int precioMasa = (int)cboMasa.SelectedValue;
 
-            /*if (chkQuesoExtra.Checked) cantidad++;
-            if (chkAceitunas.Checked) cantidad++;
-            if (chkPepperoni.Checked) cantidad++;
-            if (chkTocino.Checked) cantidad++;
-            if (chkChampinones.Checked) cantidad++;*/
+            /*bool quesoExtra = chkQuesoExtra.Checked;
+            bool pepperoniExtra = chkPepperoni.Checked;
+            bool champinonesExtra = chkChampinones.Checked;
+            bool aceitunasExtra = chkAceitunas.Checked;
+            bool tocinoExtra = chkTocino.Checked;
 
-            PedidoPizza pedidoEditado = new PedidoPizza(idPedidoSeleccionado, cliente, telefono, tamanoTexto, precioTamano, cantidad, "Tradicional", chkQuesoExtra.Checked);
+            bool esDelivery = rdbDelivery.Checked;
+            bool aplicaConvenio = chkConvenioEstudiante.Checked;*/
+
+            PedidoPizza pedidoEditado = new PedidoPizza(cliente, telefono, tamanoTexto, precioTamano, masaTexto, precioMasa);
+
+            txtSubtotalValor.Text = "$0";
+            txtDescuentoValor.Text = "$0";
+            txtDeliveryValor.Text = "$0";
+            txtIvaValor.Text = "$0";
+            txtTotalValor.Text = $"${pedidoEditado.TotalPagar:N0} CLP";
 
             if (pedidoDAO.ActualizarPedido(pedidoEditado))
             {
@@ -224,8 +266,10 @@ namespace PizzeriaBellaItalia
         private void txtBuscarCliente_TextChanged(object sender, EventArgs e)
         {
             string filtro = txtBuscarCliente.Text.Trim();
+
             DataTable dtFiltrada = pedidoDAO.BuscarPedidosPorCliente(filtro);
             dgvPedidos.DataSource = dtFiltrada;
+
             CalcularMetricas(dtFiltrada);
         }
 
@@ -233,43 +277,49 @@ namespace PizzeriaBellaItalia
         {
             if (string.IsNullOrWhiteSpace(txtCliente.Text) || string.IsNullOrWhiteSpace(txtTelefono.Text))
             {
-                MessageBox.Show("Nombre del cliente y teléfono son obligatorios.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Nombre del cliente es obligatorio.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtCliente.Focus();
                 return false;
             }
 
-            if (cboTamano.SelectedIndex.Equals(0) || cboMasa.SelectedIndex.Equals(0))
+            if (string.IsNullOrWhiteSpace(txtTelefono.Text))
             {
-                MessageBox.Show("Tamaño y masa son obligatorios.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtCliente.Focus();
+                MessageBox.Show("teléfono del cliente es obligatorio.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtTelefono.Focus();
                 return false;
             }
 
-            if (!int.TryParse(txtCantidad.Text.Trim(), out int cantidad) || cantidad <= 0)
+            if (cboTamano.SelectedIndex.Equals(0))
             {
-                MessageBox.Show("La cantidad debe ser un entero positivo mayor a 0.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtCantidad.SelectAll();
-                txtCantidad.Focus();
+                MessageBox.Show("Tamaño es obligatorios.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cboTamano.Focus();
                 return false;
             }
 
+            if (cboMasa.SelectedIndex.Equals(0))
+            {
+                MessageBox.Show("Masa es obligatorios.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cboMasa.Focus();
+                return false;
+            }
+            
             return true;
-        }
-
-        private void btnLimpiar_Click(object sender, EventArgs e)
-        {
-            LimpiarFormulario();
         }
 
         private void LimpiarFormulario()
         {
             txtCliente.Clear();
             txtTelefono.Clear();
-            txtCantidad.Text = "1";
             chkQuesoExtra.Checked = false;
             if (cboTamano.Items.Count > 0) cboTamano.SelectedIndex = 0;
             EstablecerModoInsercion();
             txtCliente.Focus();
+
+            txtSubtotalValor.Text = "$0";
+            txtDescuentoValor.Text = "$0";
+            txtDeliveryValor.Text = "$0";
+            txtIvaValor.Text = "$0";
+            txtTotalValor.Text = "$0";
         }
 
         private void EstablecerModoInsercion()

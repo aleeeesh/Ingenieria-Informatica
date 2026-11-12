@@ -79,8 +79,6 @@
             btnEliminarSQL = new Button();
             btnModificarSQL = new Button();
             btnSalir = new Button();
-            txtCantidad = new TextBox();
-            lblCantidad = new Label();
             grpCliente.SuspendLayout();
             grpIngredientes.SuspendLayout();
             grpDetalles.SuspendLayout();
@@ -116,7 +114,7 @@
             lblTelefono.AutoSize = true;
             lblTelefono.Location = new Point(3, 45);
             lblTelefono.Name = "lblTelefono";
-            lblTelefono.Size = new Size(55, 15);
+            lblTelefono.Size = new Size(56, 15);
             lblTelefono.TabIndex = 3;
             lblTelefono.Text = "Teléfono:";
             // 
@@ -155,7 +153,7 @@
             chkTocino.AutoSize = true;
             chkTocino.Location = new Point(108, 45);
             chkTocino.Name = "chkTocino";
-            chkTocino.Size = new Size(61, 19);
+            chkTocino.Size = new Size(62, 19);
             chkTocino.TabIndex = 9;
             chkTocino.Text = "Tocino";
             chkTocino.UseVisualStyleBackColor = true;
@@ -195,7 +193,7 @@
             chkQuesoExtra.AutoSize = true;
             chkQuesoExtra.Location = new Point(7, 21);
             chkQuesoExtra.Name = "chkQuesoExtra";
-            chkQuesoExtra.Size = new Size(89, 19);
+            chkQuesoExtra.Size = new Size(88, 19);
             chkQuesoExtra.TabIndex = 5;
             chkQuesoExtra.Text = "Queso extra";
             chkQuesoExtra.UseVisualStyleBackColor = true;
@@ -213,7 +211,7 @@
             grpDetalles.Controls.Add(lblDeliveryValor);
             grpDetalles.Controls.Add(lblDescuentoValor);
             grpDetalles.Controls.Add(lblSubtotalValor);
-            grpDetalles.Location = new Point(10, 198);
+            grpDetalles.Location = new Point(12, 173);
             grpDetalles.Name = "grpDetalles";
             grpDetalles.Size = new Size(319, 134);
             grpDetalles.TabIndex = 4;
@@ -373,15 +371,13 @@
             // 
             // grpPizza
             // 
-            grpPizza.Controls.Add(txtCantidad);
-            grpPizza.Controls.Add(lblCantidad);
             grpPizza.Controls.Add(lblMasa);
             grpPizza.Controls.Add(cboMasa);
             grpPizza.Controls.Add(lblTamano);
             grpPizza.Controls.Add(cboTamano);
             grpPizza.Location = new Point(10, 91);
             grpPizza.Name = "grpPizza";
-            grpPizza.Size = new Size(319, 101);
+            grpPizza.Size = new Size(319, 76);
             grpPizza.TabIndex = 1;
             grpPizza.TabStop = false;
             grpPizza.Text = "Tamaño y Masa";
@@ -391,7 +387,7 @@
             lblMasa.AutoSize = true;
             lblMasa.Location = new Point(5, 51);
             lblMasa.Name = "lblMasa";
-            lblMasa.Size = new Size(64, 15);
+            lblMasa.Size = new Size(65, 15);
             lblMasa.TabIndex = 6;
             lblMasa.Text = "Tipo Masa:";
             // 
@@ -409,7 +405,7 @@
             lblTamano.AutoSize = true;
             lblTamano.Location = new Point(18, 27);
             lblTamano.Name = "lblTamano";
-            lblTamano.Size = new Size(52, 15);
+            lblTamano.Size = new Size(53, 15);
             lblTamano.TabIndex = 4;
             lblTamano.Text = "Tamaño:";
             // 
@@ -424,7 +420,7 @@
             // 
             // btnGuardarSQL
             // 
-            btnGuardarSQL.Location = new Point(340, 188);
+            btnGuardarSQL.Location = new Point(337, 173);
             btnGuardarSQL.Name = "btnGuardarSQL";
             btnGuardarSQL.Size = new Size(136, 23);
             btnGuardarSQL.TabIndex = 11;
@@ -443,7 +439,7 @@
             grpPedidos.Controls.Add(lblCantidadPedidos);
             grpPedidos.Controls.Add(txtRecaudacionTotal);
             grpPedidos.Controls.Add(lblRecaudacionTotal);
-            grpPedidos.Location = new Point(12, 338);
+            grpPedidos.Location = new Point(12, 313);
             grpPedidos.Name = "grpPedidos";
             grpPedidos.Size = new Size(629, 223);
             grpPedidos.TabIndex = 14;
@@ -469,10 +465,17 @@
             // 
             // dgvPedidos
             // 
+            dgvPedidos.AllowUserToAddRows = false;
+            dgvPedidos.AllowUserToDeleteRows = false;
+            dgvPedidos.BackgroundColor = SystemColors.Control;
+            dgvPedidos.BorderStyle = BorderStyle.None;
             dgvPedidos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvPedidos.EditMode = DataGridViewEditMode.EditProgrammatically;
             dgvPedidos.Location = new Point(5, 54);
             dgvPedidos.Name = "dgvPedidos";
+            dgvPedidos.ReadOnly = true;
             dgvPedidos.RowHeadersWidth = 51;
+            dgvPedidos.ShowCellToolTips = false;
             dgvPedidos.Size = new Size(619, 111);
             dgvPedidos.TabIndex = 17;
             dgvPedidos.CellClick += dgvPedidos_CellClick;
@@ -489,7 +492,7 @@
             // lblPromedioVenta
             // 
             lblPromedioVenta.AutoSize = true;
-            lblPromedioVenta.Location = new Point(46, 198);
+            lblPromedioVenta.Location = new Point(41, 198);
             lblPromedioVenta.Name = "lblPromedioVenta";
             lblPromedioVenta.Size = new Size(62, 15);
             lblPromedioVenta.TabIndex = 15;
@@ -507,7 +510,7 @@
             // lblCantidadPedidos
             // 
             lblCantidadPedidos.AutoSize = true;
-            lblCantidadPedidos.Location = new Point(58, 183);
+            lblCantidadPedidos.Location = new Point(51, 183);
             lblCantidadPedidos.Name = "lblCantidadPedidos";
             lblCantidadPedidos.Size = new Size(52, 15);
             lblCantidadPedidos.TabIndex = 13;
@@ -527,7 +530,7 @@
             lblRecaudacionTotal.AutoSize = true;
             lblRecaudacionTotal.Location = new Point(5, 168);
             lblRecaudacionTotal.Name = "lblRecaudacionTotal";
-            lblRecaudacionTotal.Size = new Size(97, 15);
+            lblRecaudacionTotal.Size = new Size(98, 15);
             lblRecaudacionTotal.TabIndex = 11;
             lblRecaudacionTotal.Text = "Total Recaudado:";
             // 
@@ -535,9 +538,9 @@
             // 
             lblEstadoConexion.AutoSize = true;
             lblEstadoConexion.ForeColor = Color.Red;
-            lblEstadoConexion.Location = new Point(340, 254);
+            lblEstadoConexion.Location = new Point(337, 239);
             lblEstadoConexion.Name = "lblEstadoConexion";
-            lblEstadoConexion.Size = new Size(199, 15);
+            lblEstadoConexion.Size = new Size(198, 15);
             lblEstadoConexion.TabIndex = 15;
             lblEstadoConexion.Text = "● Estado SQL Express: No conectado";
             // 
@@ -545,15 +548,15 @@
             // 
             lblModo.AutoSize = true;
             lblModo.ForeColor = SystemColors.ActiveCaptionText;
-            lblModo.Location = new Point(340, 280);
+            lblModo.Location = new Point(337, 265);
             lblModo.Name = "lblModo";
-            lblModo.Size = new Size(44, 15);
+            lblModo.Size = new Size(42, 15);
             lblModo.TabIndex = 16;
-            lblModo.Text = "Prueba";
+            lblModo.Text = "Modo:";
             // 
             // btnEliminarSQL
             // 
-            btnEliminarSQL.Location = new Point(506, 216);
+            btnEliminarSQL.Location = new Point(503, 202);
             btnEliminarSQL.Name = "btnEliminarSQL";
             btnEliminarSQL.Size = new Size(136, 23);
             btnEliminarSQL.TabIndex = 17;
@@ -563,7 +566,7 @@
             // 
             // btnModificarSQL
             // 
-            btnModificarSQL.Location = new Point(506, 187);
+            btnModificarSQL.Location = new Point(503, 172);
             btnModificarSQL.Name = "btnModificarSQL";
             btnModificarSQL.Size = new Size(136, 23);
             btnModificarSQL.TabIndex = 18;
@@ -573,34 +576,18 @@
             // 
             // btnSalir
             // 
-            btnSalir.Location = new Point(340, 217);
+            btnSalir.Location = new Point(337, 202);
             btnSalir.Name = "btnSalir";
             btnSalir.Size = new Size(136, 23);
             btnSalir.TabIndex = 19;
             btnSalir.Text = "⛔ Salir";
             btnSalir.UseVisualStyleBackColor = true;
             // 
-            // txtCantidad
-            // 
-            txtCantidad.Location = new Point(98, 71);
-            txtCantidad.Name = "txtCantidad";
-            txtCantidad.Size = new Size(88, 23);
-            txtCantidad.TabIndex = 4;
-            // 
-            // lblCantidad
-            // 
-            lblCantidad.AutoSize = true;
-            lblCantidad.Location = new Point(15, 74);
-            lblCantidad.Name = "lblCantidad";
-            lblCantidad.Size = new Size(58, 15);
-            lblCantidad.TabIndex = 5;
-            lblCantidad.Text = "Cantidad:";
-            // 
             // FormPizzeriaCRUD
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(655, 570);
+            ClientSize = new Size(655, 544);
             Controls.Add(btnSalir);
             Controls.Add(btnModificarSQL);
             Controls.Add(btnEliminarSQL);
@@ -690,7 +677,5 @@
         private Button btnModificarSQL;
         private Button btnSalir;
         private Button btnGuardarSQL;
-        private TextBox txtCantidad;
-        private Label lblCantidad;
     }
 }

@@ -1,101 +1,111 @@
-﻿namespace PizzeriaBellaItalia.Dominio;
-
-public class PedidoPizza
+﻿namespace PizzeriaBellaItalia.Dominio
 {
-    public int Id { get; set; }
-    public string Cliente { get; set; } = string.Empty;
-    public string Telefono { get; set; } = string.Empty;
-    public string TamanoNombre { get; set; } = string.Empty;
-    public int PrecioTamano { get; set; }
-    public int CantidadIngredientes { get; set; } = 1;
-    public string TipoMasa { get; set; } = "Tradicional";
-
-    public bool TieneDescuento { get; set; } = false;
-
-    public bool EsDelivery { get; set; } = false;
-
-    public int TotalPagar { get; internal set; }
-    public int PrecioBaseTamano { get; internal set; }
-    public string MasaNombre { get; internal set; } = string.Empty;
-    public int RecargoMasa { get; internal set; }
-
-    public bool AplicaConvenioEstudiante { get; internal set; }
-
-    private const double TASA_IVA = 0.19;
-
-    public PedidoPizza() { }
-
-    public PedidoPizza(string cliente, string telefono, string tamanoNombre, int precioTamano, int cantidad, string tipoMasa)
+    public class PedidoPizza
     {
-        Cliente = cliente;
-        Telefono = telefono;
-        TamanoNombre = tamanoNombre;
-        PrecioBaseTamano = precioTamano;
-        TipoMasa = tipoMasa;
-        CantidadIngredientes = cantidad;
+        public int Id { get; set; }
+        public string Cliente { get; set; } = string.Empty;
+        public string Telefono { get; set; } = string.Empty;
+        public string TamanoNombre { get; set; } = string.Empty;
+        public int RecargoTamano { get; set; }
+        public string MasaNombre { get; set; } = string.Empty;
+        public int RecargoMasa { get; set; }
 
-        RecargoMasa = CalcularRecargoMasa(tipoMasa);
-        TotalPagar = CalcularTotal();
-    }
+        public bool QuesoExtra { get; set; }
+        public bool PepperoniExtra { get; set; }
+        public bool ChampinonesExtra { get; set; }
+        public bool AceitunasExtra { get; set; }
+        public bool TocinoExtra { get; set; }
 
-    public PedidoPizza(int id, string cliente, string telefono, string tamanoNombre, int precioTamano, int cantidad, string tipoMasa,)
-        : this(cliente, telefono, tamanoNombre, precioTamano, cantidad, tipoMasa)
-    {
-        Id = id;
-    }
+        public bool EsDelivery { get; set; }
+        public bool AplicaConvenioEstudiante { get; set; }
 
-    private int CalcularRecargoMasa(string tipoMasa)
-    {
-        switch (tipoMasa)
+        public int Subtotal { get; internal set; }
+        public int Descuento { get; internal set; }
+        public int RecargoDelivery { get; internal set; }
+        public int MontoIva { get; internal set; }
+        public int TotalPagar { get; internal set; }
+
+        private const int PRECIO_INGREDIENTE_EXTRA = 800;
+        private const int RECARGO_DELIVERY = 2000;
+        private const double TASA_DESCUENTO = 0.10;
+        private const double TASA_IVA = 0.19;
+
+        
+        public PedidoPizza() { }
+
+        public PedidoPizza(int id, string cliente, string telefono, string tamanoNombre, int recargoTamano, string masaNombre, int recargoMasa)
         {
-            case "Borde de Queso":
-                return 1500;
-            default:
-                return 0;
+            Id = id;
+            Cliente = cliente;
+            Telefono = telefono;
+            TamanoNombre = tamanoNombre;
+            RecargoTamano = recargoTamano;
+            MasaNombre = masaNombre;
+            RecargoMasa = recargoMasa;
         }
-    }
 
-    internal int CalcularSubtotal()
-    {
-        int subtotalBase = PrecioTamano;
-        subtotalBase += (1500 * CantidadIngredientes);
-        return subtotalBase;
-    }
-
-    internal int CalcularTotal()
-    {
-        int subtotal = CalcularSubtotal();
-        int iva = CalcularMontoIva(subtotal);
-        return subtotal + iva;
-    }
-
-
-    internal decimal CalcularMontoDescuento()
-    {
-        if (TieneDescuento)
+        public PedidoPizza(
+            string cliente, string telefono, string tamanoNombre, int recargoTamano,
+            string masaNombre, int recargoMasa, bool quesoExtra, bool pepperoni,
+            bool champinones, bool aceitunas, bool tocino, bool esDelivery, bool aplicaConvenioEstudiante)
+            : this(cliente, telefono, tamanoNombre, recargoTamano, masaNombre, recargoMasa)
         {
-            return CalcularSubtotal() * 0.10m; // 10% de descuento
-        }
-        else
-        {
-            return 0;
-        }
-    }
+            QuesoExtra = quesoExtra;
+            PepperoniExtra = pepperoni;
+            ChampinonesExtra = champinones;
+            AceitunasExtra = aceitunas;
+            TocinoExtra = tocino;
+            EsDelivery = esDelivery;
+            AplicaConvenioEstudiante = aplicaConvenioEstudiante;
 
-    internal int CalcularCostoDelivery()
-    {
-        if (EsDelivery)
-        {
-            return 2000; // Costo fijo de delivery
+            Subtotal = CalcularSubtotal();
+            Descuento = CalcularMontoDescuento();
+            RecargoDelivery = CalcularCostoDelivery();
+            MontoIva = CalcularMontoIva();
+            TotalPagar = CalcularTotalPagar();
         }
-        else
-        {
-            return 0;
-        }
-    }
 
-    internal int CalcularMontoIva(int v)
-    {
-        return (int)(v * TASA_IVA);
+        private int ContarIngredientesExtra()
+        {
+            int total = 0;
+
+            if (QuesoExtra) total++;
+            if (PepperoniExtra) total++;
+            if (ChampinonesExtra) total++;
+            if (AceitunasExtra) total++;
+            if (TocinoExtra) total++;
+
+            return total;
+        }
+
+        internal int CalcularSubtotal()
+        {
+            return RecargoTamano + RecargoMasa + (ContarIngredientesExtra() * PRECIO_INGREDIENTE_EXTRA);
+        }
+
+        internal int CalcularMontoDescuento()
+        {
+            return AplicaConvenioEstudiante ? (int)(CalcularSubtotal() * TASA_DESCUENTO) : 0;
+        }
+
+        internal int CalcularCostoDelivery()
+        {
+            return EsDelivery ? RECARGO_DELIVERY : 0;
+        }
+
+        private int CalcularNetoAfecto()
+        {
+            return (CalcularSubtotal() - CalcularMontoDescuento()) + CalcularCostoDelivery();
+        }
+
+        internal int CalcularMontoIva()
+        {
+            return (int)(CalcularNetoAfecto() * TASA_IVA);
+        }
+
+        internal int CalcularTotalPagar()
+        {
+            return CalcularNetoAfecto() + CalcularMontoIva();
+        }
     }
 }
