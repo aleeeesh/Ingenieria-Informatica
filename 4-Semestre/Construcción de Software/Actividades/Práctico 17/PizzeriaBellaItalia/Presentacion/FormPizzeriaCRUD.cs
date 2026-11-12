@@ -84,6 +84,9 @@ namespace PizzeriaBellaItalia
             }
             txtRecaudacionTotal.Text = $"$ {totalAcumulado:N0} CLP";
             txtCantidadPedidos.Text = $"{dt.Rows.Count} pedido(s)";
+
+            int promedioVenta = totalAcumulado / dt.Rows.Count;
+            txtPromedioVenta.Text = $"{promedioVenta}";
         }
 
         // C1: CREAR (INSERT)
@@ -95,10 +98,24 @@ namespace PizzeriaBellaItalia
             string telefono = txtTelefono.Text.Trim();
             string tamanoTexto = cboTamano.Text;
             int precioTamano = (int)cboTamano.SelectedValue;
-            int cantidad = int.Parse(txtCantidad.Text.Trim());
-            bool quesoExtra = chkQuesoExtra.Checked;
+            string masaTexto = cboMasa.Text;
 
-            PedidoPizza nuevoPedido = new PedidoPizza(cliente, telefono, tamanoTexto, precioTamano, cantidad, "Tradicional", quesoExtra);
+            int cantidad = 0;
+
+            if (chkQuesoExtra.Checked) cantidad++;
+            if (chkPepperoni.Checked) cantidad++;
+            if (chkChampinones.Checked) cantidad++;
+            if (chkAceitunas.Checked) cantidad++;
+            if (chkTocino.Checked) cantidad++;
+
+
+            PedidoPizza nuevoPedido = new PedidoPizza(cliente, telefono, tamanoTexto, precioTamano, cantidad, masaTexto);
+
+            int subtotal = nuevoPedido.CalcularSubtotal();
+            int descuento = nuevoPedido.CalcularMontoDescuento();
+
+            txtSubtotalValor.Text = $"${subtotal:N2}";
+            txtTotalValor.Text = $"${nuevoPedido.TotalPagar:N2}";
 
             if (pedidoDAO.InsertarPedido(nuevoPedido))
             {
