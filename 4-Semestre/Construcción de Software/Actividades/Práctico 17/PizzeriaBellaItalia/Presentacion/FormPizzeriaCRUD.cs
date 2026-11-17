@@ -151,6 +151,8 @@ namespace PizzeriaBellaItalia
         // C2: CARGAR SELECCIÓN PARA EDICIÓN
         private void dgvPedidos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            LimpiarFormulario();
+
             if (e.RowIndex >= 0 && dgvPedidos.Rows[e.RowIndex].Cells["Id"].Value != null)
             {
                 idPedidoSeleccionado = Convert.ToInt32(dgvPedidos.Rows[e.RowIndex].Cells["Id"].Value);
@@ -159,13 +161,14 @@ namespace PizzeriaBellaItalia
 
                 if (p != null)
                 {
+
                     txtCliente.Text = p.Cliente;
                     txtTelefono.Text = p.Telefono;
 
-                    /*cboTamano.Text
-                    string masaTexto = cboMasa.Text;
+                    cboTamano.Text = p.TamanoNombre;
+                    /*string masaTexto = cboMasa.Text;
 
-                    chkQuesoExtra.Checked = p.QuesoExtra:
+                    chkQuesoExtra.Checked = p.QuesoExtra;
                     bool pepperoniExtra = chkPepperoni.Checked;
                     bool champinonesExtra = chkChampinones.Checked;
                     bool aceitunasExtra = chkAceitunas.Checked;
@@ -180,12 +183,8 @@ namespace PizzeriaBellaItalia
                     btnGuardarSQL.Enabled = false;
                     btnModificarSQL.Enabled = true;
                     btnEliminarSQL.Enabled = true;
-                    btnCancelarEdición.Visible = true;
+                    btnCancelarEdicion.Visible = true;
                 }
-            }
-            else
-            {
-                LimpiarFormulario();
             }
         }
 
@@ -207,16 +206,30 @@ namespace PizzeriaBellaItalia
             string masaTexto = cboMasa.Text;
             int precioMasa = (int)cboMasa.SelectedValue;
 
-            /*bool quesoExtra = chkQuesoExtra.Checked;
+            bool quesoExtra = chkQuesoExtra.Checked;
             bool pepperoniExtra = chkPepperoni.Checked;
             bool champinonesExtra = chkChampinones.Checked;
             bool aceitunasExtra = chkAceitunas.Checked;
             bool tocinoExtra = chkTocino.Checked;
 
             bool esDelivery = rdbDelivery.Checked;
-            bool aplicaConvenio = chkConvenioEstudiante.Checked;*/
+            bool aplicaConvenio = chkConvenioEstudiante.Checked;
 
-            PedidoPizza pedidoEditado = new PedidoPizza(idPedidoSeleccionado, cliente, telefono, tamanoTexto, precioTamano, masaTexto, precioMasa);
+            PedidoPizza pedidoEditado = new PedidoPizza(
+                cliente,
+                telefono,
+                tamanoTexto,
+                precioTamano,
+                masaTexto,
+                precioMasa,
+                quesoExtra,
+                pepperoniExtra,
+                champinonesExtra,
+                aceitunasExtra,
+                tocinoExtra,
+                esDelivery,
+                aplicaConvenio
+            );
 
             txtSubtotalValor.Text = $"${pedidoEditado.Subtotal} CLP";
             txtDescuentoValor.Text = $"-${pedidoEditado.Descuento} CLP";
@@ -227,10 +240,9 @@ namespace PizzeriaBellaItalia
             if (pedidoDAO.ActualizarPedido(pedidoEditado))
             {
                 MessageBox.Show($"¡Pedido #{idPedidoSeleccionado} actualizado correctamente!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                
                 CargarGrillaPedidos();
                 LimpiarFormulario();
-
-                btnCancelarEdición.Visible = false;
             }
             else
             {
@@ -258,6 +270,7 @@ namespace PizzeriaBellaItalia
                 if (pedidoDAO.EliminarPedido(idPedidoSeleccionado))
                 {
                     MessageBox.Show("Pedido eliminado de la base de datos.", "Eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
                     CargarGrillaPedidos();
                     LimpiarFormulario();
                 }
@@ -309,7 +322,7 @@ namespace PizzeriaBellaItalia
                 return false;
             }
 
-            if (!rdbRetiro.Checked || !rdbDelivery.Checked)
+            if (!rdbRetiro.Checked && !rdbDelivery.Checked)
             {
                 MessageBox.Show("Modo de entrega es obligatorio.", "Validación - Servicios", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
@@ -344,13 +357,13 @@ namespace PizzeriaBellaItalia
             btnGuardarSQL.Enabled = true;
             btnModificarSQL.Enabled = false;
             btnEliminarSQL.Enabled = false;
+
+            btnCancelarEdicion.Visible = false;
         }
 
         private void btnCancelarEdición_Click(object sender, EventArgs e)
         {
             LimpiarFormulario();
-
-            btnCancelarEdición.Visible = false;
         }
     }
 }
