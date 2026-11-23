@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SubirActivity">
+
+    <Button
+        android:id="@+id/btnVolverEditar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:text="Volver al menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lblPromedio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Promedio:"
+        app:layout_constraintEnd_toEndOf="@+id/txtPromedio"
+        app:layout_constraintStart_toStartOf="@+id/txtPromedio"
+        app:layout_constraintTop_toBottomOf="@+id/txtNota2" />
+
+    <Spinner
+        android:id="@+id/spnCurso"
+        android:layout_width="289dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblCursos" />
+
+    <Spinner
+        android:id="@+id/spnAlumno"
+        android:layout_width="289dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblAlumnos" />
+
+    <EditText
+        android:id="@+id/txtNota1"
+        android:layout_width="73dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblNota1" />
+
+    <EditText
+        android:id="@+id/txtNota2"
+        android:layout_width="73dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toStartOf="@+id/txtNota3"
+        app:layout_constraintStart_toEndOf="@+id/txtNota1"
+        app:layout_constraintTop_toBottomOf="@+id/lblNota2" />
+
+    <EditText
+        android:id="@+id/txtNota3"
+        android:layout_width="73dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="60dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblNota3" />
+
+    <TextView
+        android:id="@+id/lblNota1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:text="Nota 1:"
+        app:layout_constraintEnd_toEndOf="@+id/txtNota1"
+        app:layout_constraintStart_toStartOf="@+id/txtNota1"
+        app:layout_constraintTop_toBottomOf="@+id/spnAlumno" />
+
+    <TextView
+        android:id="@+id/lblNota2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:text="Nota 2:"
+        app:layout_constraintEnd_toEndOf="@+id/txtNota2"
+        app:layout_constraintStart_toStartOf="@+id/txtNota2"
+        app:layout_constraintTop_toBottomOf="@+id/spnAlumno" />
+
+    <TextView
+        android:id="@+id/lblNota3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:text="Nota 3:"
+        app:layout_constraintEnd_toEndOf="@+id/txtNota3"
+        app:layout_constraintStart_toStartOf="@+id/txtNota3"
+        app:layout_constraintTop_toBottomOf="@+id/spnAlumno" />
+
+    <TextView
+        android:id="@+id/lblCursos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="Seleccione Asignatura:"
+        app:layout_constraintEnd_toEndOf="@+id/spnCurso"
+        app:layout_constraintStart_toStartOf="@+id/spnCurso"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lblAlumnos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Seleccione Alumno:"
+        app:layout_constraintEnd_toEndOf="@+id/spnAlumno"
+        app:layout_constraintStart_toStartOf="@+id/spnAlumno"
+        app:layout_constraintTop_toBottomOf="@+id/spnCurso" />
+
+    <EditText
+        android:id="@+id/txtPromedio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:enabled="false"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblPromedio" />
+
+    <Button
+        android:id="@+id/btnActualizarNota"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Actualizar nota"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPromedio" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

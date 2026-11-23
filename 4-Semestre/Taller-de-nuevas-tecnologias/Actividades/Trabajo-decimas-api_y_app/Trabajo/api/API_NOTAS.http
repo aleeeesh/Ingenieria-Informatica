@@ -1,0 +1,6 @@
+@API_NOTAS_HostAddress = http://localhost:5125
+
+GET {{API_NOTAS_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

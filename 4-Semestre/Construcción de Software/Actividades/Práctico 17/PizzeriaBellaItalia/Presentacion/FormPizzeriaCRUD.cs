@@ -90,6 +90,9 @@ namespace PizzeriaBellaItalia
             {
                 int promedioVenta = totalAcumulado / dt.Rows.Count;
                 txtPromedioVenta.Text = $"${promedioVenta:N0} CLP";
+            } else
+            {
+                txtPromedioVenta.Text = "$0 CLP";
             }
         }
 
@@ -151,8 +154,6 @@ namespace PizzeriaBellaItalia
         // C2: CARGAR SELECCIÓN PARA EDICIÓN
         private void dgvPedidos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            LimpiarFormulario();
-
             if (e.RowIndex >= 0 && dgvPedidos.Rows[e.RowIndex].Cells["Id"].Value != null)
             {
                 idPedidoSeleccionado = Convert.ToInt32(dgvPedidos.Rows[e.RowIndex].Cells["Id"].Value);
@@ -161,21 +162,10 @@ namespace PizzeriaBellaItalia
 
                 if (p != null)
                 {
-
                     txtCliente.Text = p.Cliente;
                     txtTelefono.Text = p.Telefono;
 
                     cboTamano.Text = p.TamanoNombre;
-                    /*string masaTexto = cboMasa.Text;
-
-                    chkQuesoExtra.Checked = p.QuesoExtra;
-                    bool pepperoniExtra = chkPepperoni.Checked;
-                    bool champinonesExtra = chkChampinones.Checked;
-                    bool aceitunasExtra = chkAceitunas.Checked;
-                    bool tocinoExtra = chkTocino.Checked;
-
-                    bool esDelivery = rdbDelivery.Checked;
-                    bool aplicaConvenio = chkConvenioEstudiante.Checked;*/
 
                     txtTotalValor.Text = $"${p.TotalPagar:N0}";
 
@@ -185,6 +175,9 @@ namespace PizzeriaBellaItalia
                     btnEliminarSQL.Enabled = true;
                     btnCancelarEdicion.Visible = true;
                 }
+            } else
+            {
+                LimpiarFormulario();
             }
         }
 
@@ -216,6 +209,7 @@ namespace PizzeriaBellaItalia
             bool aplicaConvenio = chkConvenioEstudiante.Checked;
 
             PedidoPizza pedidoEditado = new PedidoPizza(
+                idPedidoSeleccionado,
                 cliente,
                 telefono,
                 tamanoTexto,
@@ -231,10 +225,10 @@ namespace PizzeriaBellaItalia
                 aplicaConvenio
             );
 
-            txtSubtotalValor.Text = $"${pedidoEditado.Subtotal} CLP";
-            txtDescuentoValor.Text = $"-${pedidoEditado.Descuento} CLP";
-            txtDeliveryValor.Text = $"${pedidoEditado.RecargoDelivery} CLP";
-            txtIvaValor.Text = $"${pedidoEditado.MontoIva} CLP";
+            txtSubtotalValor.Text = $"${pedidoEditado.Subtotal:N0} CLP";
+            txtDescuentoValor.Text = $"-${pedidoEditado.Descuento:N0} CLP";
+            txtDeliveryValor.Text = $"${pedidoEditado.RecargoDelivery:N0} CLP";
+            txtIvaValor.Text = $"${pedidoEditado.MontoIva:N0} CLP";
             txtTotalValor.Text = $"${pedidoEditado.TotalPagar:N0} CLP";
 
             if (pedidoDAO.ActualizarPedido(pedidoEditado))
@@ -294,7 +288,7 @@ namespace PizzeriaBellaItalia
 
         private bool ValidarFormulario()
         {
-            if (string.IsNullOrWhiteSpace(txtCliente.Text) || string.IsNullOrWhiteSpace(txtTelefono.Text))
+            if (string.IsNullOrWhiteSpace(txtCliente.Text))
             {
                 MessageBox.Show("El nombre del cliente es obligatorio.", "Validación - Datos del Cliente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtCliente.Focus();
@@ -337,7 +331,18 @@ namespace PizzeriaBellaItalia
             txtTelefono.Clear();
 
             if (cboTamano.Items.Count > 0) cboTamano.SelectedIndex = 0;
-            if (cboMasa.Items.Count > 0) cboTamano.SelectedIndex = 0;
+            if (cboMasa.Items.Count > 0) cboMasa.SelectedIndex = 0;
+
+            chkQuesoExtra.Checked = false;
+            chkPepperoni.Checked = false;
+            chkChampinones.Checked = false;
+            chkAceitunas.Checked = false;
+            chkTocino.Checked = false;
+
+            rdbRetiro.Checked = false;
+            rdbDelivery.Checked = false;
+
+            chkConvenioEstudiante.Checked = false;
 
             EstablecerModoInsercion();
             txtCliente.Focus();

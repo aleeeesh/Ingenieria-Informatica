@@ -33,21 +33,6 @@
         
         public PedidoPizza() { }
 
-        public PedidoPizza(int id, string cliente, string telefono, string tamanoNombre, int recargoTamano, string masaNombre, int recargoMasa)
-        {
-            Id = id;
-            Cliente = cliente;
-            Telefono = telefono;
-            TamanoNombre = tamanoNombre;
-            RecargoTamano = recargoTamano;
-            MasaNombre = masaNombre;
-            RecargoMasa = recargoMasa;
-
-            Subtotal = CalcularSubtotal();
-            MontoIva = CalcularMontoIva();
-            TotalPagar = CalcularTotalPagar();
-        }
-
         public PedidoPizza(string cliente, string telefono, string tamanoNombre, int recargoTamano, string masaNombre, int recargoMasa)
         {
             Cliente = cliente;
@@ -57,15 +42,16 @@
             MasaNombre = masaNombre;
             RecargoMasa = recargoMasa;
 
-            Subtotal = CalcularSubtotal();
-            MontoIva = CalcularMontoIva();
-            TotalPagar = CalcularTotalPagar();
+            RecalcularMontos();
         }
 
-        public PedidoPizza(
-            string cliente, string telefono, string tamanoNombre, int recargoTamano,
-            string masaNombre, int recargoMasa, bool quesoExtra, bool pepperoni,
-            bool champinones, bool aceitunas, bool tocino, bool esDelivery, bool aplicaConvenioEstudiante)
+        public PedidoPizza(int id, string cliente, string telefono, string tamanoNombre, int recargoTamano, string masaNombre, int recargoMasa)
+            : this(cliente, telefono, tamanoNombre, recargoTamano, masaNombre, recargoMasa)
+        {
+            Id = id;
+        }
+
+        public PedidoPizza(string cliente, string telefono, string tamanoNombre, int recargoTamano, string masaNombre, int recargoMasa, bool quesoExtra, bool pepperoni, bool champinones, bool aceitunas, bool tocino, bool esDelivery, bool aplicaConvenioEstudiante)
             : this(cliente, telefono, tamanoNombre, recargoTamano, masaNombre, recargoMasa)
         {
             QuesoExtra = quesoExtra;
@@ -76,11 +62,13 @@
             EsDelivery = esDelivery;
             AplicaConvenioEstudiante = aplicaConvenioEstudiante;
 
-            Subtotal = CalcularSubtotal();
-            Descuento = CalcularMontoDescuento();
-            RecargoDelivery = CalcularCostoDelivery();
-            MontoIva = CalcularMontoIva();
-            TotalPagar = CalcularTotalPagar();
+            RecalcularMontos();
+        }
+
+        public PedidoPizza(int id, string cliente, string telefono, string tamanoNombre, int recargoTamano, string masaNombre, int recargoMasa, bool quesoExtra, bool pepperoni, bool champinones, bool aceitunas, bool tocino, bool esDelivery, bool aplicaConvenioEstudiante)
+            : this(cliente, telefono, tamanoNombre, recargoTamano, masaNombre, recargoMasa, quesoExtra, pepperoni, champinones, aceitunas, tocino, esDelivery, aplicaConvenioEstudiante)
+        {
+            Id = id;
         }
 
         private int ContarIngredientesExtra()
@@ -124,6 +112,15 @@
         internal int CalcularTotalPagar()
         {
             return CalcularNetoAfecto() + CalcularMontoIva();
+        }
+
+        private void RecalcularMontos()
+        {
+            Subtotal = CalcularSubtotal();
+            Descuento = CalcularMontoDescuento();
+            RecargoDelivery = CalcularCostoDelivery();
+            MontoIva = CalcularMontoIva();
+            TotalPagar = CalcularTotalPagar();
         }
     }
 }
