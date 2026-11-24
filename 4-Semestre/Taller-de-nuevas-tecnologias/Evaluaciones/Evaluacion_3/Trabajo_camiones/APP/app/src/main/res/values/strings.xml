@@ -1,3 +1,99 @@
 <resources>
-    <string name="app_name">APP_CAMIONES</string>
+    <string name="app_name">Transportes IPVG</string>
+
+    <!-- ===================== ERRORES ===================== -->
+    <string name="error_inesperado">Ocurrió un error inesperado.</string>
+    <string name="error_conexion">Falló la conexión.</string>
+
+    <string name="error_selector_planta_vacia">Debes seleccionar la planta.</string>
+    <string name="error_selector_estado_vacio">Debes seleccionar el estado.</string>
+
+    <!-- ===================== TEXTOS COMUNES ===================== -->
+    <string name="texto_aviso">Aviso</string>
+    <string name="texto_campo_vacio">Campo incompleto</string>
+    <string name="texto_campo_invalido">Campo inválido</string>
+    <string name="texto_error">Error</string>
+    <string name="texto_cerrar_sesion">Vas a cerrar tu sesión, estás seguro?</string>
+    <string name="texto_cambio_estado">Vas a cambiar el estado, estás seguro?</string>
+
+    <!-- ===================== ACCIONES COMUNES ===================== -->
+    <string name="action_si">Sí</string>
+    <string name="action_no">No</string>
+    <string name="action_ok">OK</string>
+
+    <!-- ===================== NAVEGACIÓN SUPERIOR ===================== -->
+    <string name="label_bienvenida">Bienvenido: %1$s</string>
+    <string name="action_cerrar_sesion">Cerrar Sesión</string>
+
+    <!-- ===================== NAVEGACIÓN INFERIOR ===================== -->
+    <string name="nav_usuarios">Usuario</string>
+    <string name="nav_conductores">Conductor</string>
+    <string name="nav_camiones">Camión</string>
+    <string name="nav_plantas">Planta</string>
+    <string name="nav_salidas">Salida</string>
+
+    <!--  ===================== CAMPOS COMPARTIDOS =====================  -->
+    <string name="label_nombre">Nombre</string>
+    <string name="label_usuario">Nombre de usuario</string>
+    <string name="label_contrasena">Contraseña</string>
+    <string name="label_combo_estado">Selecciona el estado</string>
+    <string name="label_combo_planta">Selecciona la planta</string>
+    
+    <string name="placeholder_nombre">Ingresa el nombre y apellido…</string>
+    <string name="placeholder_usuario">Ingresa el nombre de usuario…</string>
+    <string name="placeholder_contrasena">Ingresa la contraseña…</string>
+    
+    <string name="error_nombre_vacio">Debes ingresar el nombre.</string>
+    <string name="error_usuario_vacio">Debes ingresar el nombre de usuario.</string>
+    <string name="error_contrasena_vacia">Debes ingresar la contraseña.</string>
+
+    <!--  ===================== PANTALLA INICIO SESIÓN =====================  -->
+    <string name="login_titulo">Inicio de Sesión</string>
+    <string name="action_limpiar">Limpiar</string>
+    <string name="action_ingresar">Ingresar</string>
+
+    <!--  ===================== PANTALLA USUARIOS =====================  -->
+    <string name="action_agregar_usuario">Agregar usuario</string>
+
+    <string name="label_listado_usuarios">Listado de Usuarios</string>
+
+    <!--  ===================== PANTALLA CONDUCTORES =====================  -->
+    <string name="action_agregar_conductor">Agregar conductor</string>
+
+    <string name="label_listado_conductores">Listado de Conductores</string>
+
+    <!--  ===================== PANTALLA CAMIONES =====================  -->
+    <string name="label_cod_camion">Código camión</string>
+    <string name="placeholder_cod_camion">Ingresa el código…</string>
+    <string name="helper_cod_camion">Ej. AABB10</string>
+    <string name="error_cod_camion_vacio">Debes ingresar el código del camión.</string>
+
+    <string name="action_agregar_camion">Agregar camión</string>
+
+    <string name="label_listado_camiones">Listado de Camiones</string>
+
+    <!--  ===================== PANTALLA PLANTAS =====================  -->
+    <string name="label_planta">Planta</string>
+    <string name="placeholder_planta">Ingresa el nombre…</string>
+    <string name="helper_planta">Ej. Concepción</string>
+    <string name="error_planta_vacia">Debes ingresar el nombre de la planta.</string>
+
+    <string name="action_agregar_planta">Agregar planta</string>
+
+    <string name="label_listado_plantas">Listado de Plantas</string>
+
+    <!--  ===================== PANTALLA SALIDAS =====================  -->
+    <string name="label_fecha_salida">Selecciona la fecha de salida</string>
+    <string name="label_combo_conductor">Selecciona el conductor</string>
+    <string name="label_combo_camion">Seleccionar el camión</string>
+
+    <string name="error_selector_fecha_vacia">Debes seleccionar la fecha de salida.</string>
+    <string name="error_selector_conductor_vacio">Debes seleccionar el conductor.</string>
+    <string name="error_selector_camion_vacio">Debes seleccionar el camión.</string>
+
+    <string name="action_registrar_salida">Registrar salida</string>
+
+    <string name="texto_retorno">Vas a retonar la salida con ID #%1$s, estás seguro?</string>
+
+    <string name="label_listado_salidas">Listado de Salidas</string>
 </resources>

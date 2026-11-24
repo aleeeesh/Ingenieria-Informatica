@@ -1,32 +1,29 @@
 package cl.virginiogomez.app_camiones.clases
 
-import java.util.Date
+data class RegistrarSalida(
+    val fecha: String,
+    val idPlanta: Int,
+    val camion: String,
+    val idConductor: Int
+)
 
-data class Salida(
+data class ObtenerSalidas(
     val idSalida: Int,
-    val fecha: Date,
+    val fecha: String,
     val planta: String,
-    val patente: String,
+    val camion: String,
     val conductor: String,
     val idEstado: Int,
     val estado: String,
     val usuario: String
 )
 
-data class RegistrarSalida(
-    val fecha: Date,
-    val idPlanta: Int,
-    val patente: String,
-    val idConductor: Int
-)
-
-data class CambiarEstadoSalida(
-    val idSalida: Int,
-    val idEstado: Int
+data class RetornarSalida(
+    val idSalida: Int
 )
 
 data class DatosSalida(
     val exito: Boolean,
     val mensaje: String,
-    val datos: List<Salida>
+    val datos: List<ObtenerSalidas>
 )

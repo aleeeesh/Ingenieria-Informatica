@@ -5,7 +5,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitCliente {
-    const val DIRECCION = "192.168.1.14"
+    const val DIRECCION = "192.168.1.15"
     const val PUERTO = "5017"
 
     val api: Endpoints = Retrofit.Builder()

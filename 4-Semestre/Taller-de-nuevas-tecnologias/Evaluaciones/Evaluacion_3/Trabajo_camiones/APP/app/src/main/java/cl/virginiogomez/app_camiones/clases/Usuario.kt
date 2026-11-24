@@ -9,12 +9,11 @@ data class CrearUsuario(
 data class ObtenerUsuarios(
     val usuario: String,
     val nombreCompleto: String,
-    val idEstado: Int
+    val estado: String
 )
 
-data class CambiarEstadoUsuario(
-    val usuario: String,
-    val idEstado: Int
+data class EstadoUsuario(
+    val usuario: String
 )
 
 data class DatosUsuario(

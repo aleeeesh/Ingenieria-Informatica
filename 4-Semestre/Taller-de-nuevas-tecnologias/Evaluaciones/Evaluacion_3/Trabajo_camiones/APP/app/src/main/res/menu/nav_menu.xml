@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_usuarios"
+        android:icon="@drawable/ic_usuarios"
+        android:title="@string/nav_usuarios"/>
+    <item
+        android:id="@+id/nav_conductores"
+        android:icon="@drawable/ic_conductores"
+        android:title="@string/nav_conductores"/>
+    <item
+        android:id="@+id/nav_camiones"
+        android:icon="@drawable/ic_camiones"
+        android:title="@string/nav_camiones"/>
+    <item
+        android:id="@+id/nav_plantas"
+        android:icon="@drawable/ic_plantas"
+        android:title="@string/nav_plantas"/>
+    <item
+        android:id="@+id/nav_salidas"
+        android:icon="@drawable/ic_salidas"
+        android:title="@string/nav_salidas"/>
+</menu>

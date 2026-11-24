@@ -1,18 +1,24 @@
 package cl.virginiogomez.app_camiones.clases
 
-data class Conductor(
-    val idConductor: Int,
+data class CrearConductor(
     val nombreCompleto: String,
     val idEstado: Int
 )
 
-data class CambiarEstadoConductor(
+data class ObtenerConductores(
     val idConductor: Int,
-    val idEstado: Int
+    val nombreCompleto: String,
+    val estado: String
+) {
+    override fun toString(): String = nombreCompleto
+}
+
+data class EstadoConductor(
+    val idConductor: Int
 )
 
 data class DatosConductor(
     val exito: Boolean,
     val mensaje: String,
-    val datos: List<Conductor>
+    val datos: List<ObtenerConductores>
 )

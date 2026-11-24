@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.app_camiones" parent="Theme.Material3.DayNight">
+        <item name="colorPrimary">@color/noche_primario</item>
+        <item name="colorOnPrimary">@color/noche_texto</item>
+        <item name="colorPrimaryContainer">@color/noche_relleno</item>
+        <item name="colorOnPrimaryContainer">@color/noche_titulo</item>
+
+        <item name="colorSecondary">@color/amarillo</item>
+        <item name="colorOnSecondary">@color/noche_fondo</item>
+        <item name="colorSecondaryContainer">@color/amarillo</item>
+        <item name="colorOnSecondaryContainer">@color/noche_fondo</item>
+
+        <item name="android:colorBackground">@color/noche_fondo</item>
+        <item name="colorSurface">@color/noche_superficie</item>
+        <item name="colorOnSurface">@color/noche_texto</item>
+        <item name="colorSurfaceVariant">@color/noche_relleno</item>
+        <item name="colorOnSurfaceVariant">@color/noche_texto_suave</item>
+
+        <item name="colorOutline">@color/noche_campo</item>
+        <item name="colorOutlineVariant">@color/noche_borde</item>
+
+        <item name="colorError">@color/noche_rojo</item>
+        <item name="colorOnError">@color/noche_sobre_rojo</item>
+
+        <item name="actionBarStyle">@style/ActionBar.app_camiones</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.Material3.Dark.ActionBar</item>
+
+        <item name="fontFamily">@font/poppins</item>
+
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+
+    <style name="Theme.app_camiones.NoActionBar" parent="Theme.app_camiones">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="ActionBar.app_camiones" parent="Widget.Material3.ActionBar.Solid">
+        <item name="background">@color/noche_primario</item>
+        <item name="titleTextStyle">@style/ActionBarTitle.app_camiones</item>
+    </style>
+
+    <style name="ActionBarTitle.app_camiones" parent="TextAppearance.Material3.ActionBar.Title">
+        <item name="android:textColor">@color/noche_texto</item>
+    </style>
+</resources>
