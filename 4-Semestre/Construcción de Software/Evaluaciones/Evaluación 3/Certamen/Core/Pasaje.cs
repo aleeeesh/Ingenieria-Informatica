@@ -2,14 +2,6 @@
 
 public class Pasaje
 {
-    public Pasaje(int vueloSeleccionado, string asiento, string rut, bool aplicaDescuentoRut)
-    {
-        VueloSeleccionado = vueloSeleccionado;
-        Asiento = asiento;
-        Rut = rut;
-        AplicaDescuentoRut = aplicaDescuentoRut;
-    }
-
     public string Rut { get; set; }
     public string NombreCompleto { get; set; }= string.Empty;
     public int Edad { get; set; }
@@ -17,7 +9,7 @@ public class Pasaje
     public string Origen { get; set; } = string.Empty;
     public string Destino { get; set; } = string.Empty;
          
-    public string Asiento { get; }= string.Empty;
+    public string Asiento { get; } = string.Empty;
     public decimal PrecioBase { get; set; }
     public decimal PorcentajeDescuento { get; set; }
     public bool AplicaDescuentoRut { get; }
@@ -25,16 +17,39 @@ public class Pasaje
     public decimal ValorFinal { get; set; }
     public int VueloSeleccionado { get; }
 
+    public Pasaje(int vueloSeleccionado, string asiento, string rut, bool aplicaDescuentoRut)
+    {
+        VueloSeleccionado = vueloSeleccionado;
+        IDVuelo = vueloSeleccionado;
+        Asiento = asiento;
+        Rut = rut;
+        AplicaDescuentoRut = aplicaDescuentoRut;
+    }
+
+    internal decimal CalcularPorcentajeDescuento()
+    {
+        if (!AplicaDescuentoRut || string.IsNullOrWhiteSpace(Rut))
+        {
+            PorcentajeDescuento = 0m;
+        } else
+        {
+            int ultimoDigito = int.TryParse(Rut.Trim().Split("-")[1], out int dv) ? dv : 0;
+
+            PorcentajeDescuento = 10 + ultimoDigito;
+        }
+
+        return PorcentajeDescuento;
+    }
+
     internal decimal CalcularMontoDescuento(decimal PorcentajeDescuento)
     {
-       MontoDescuento = PrecioBase * PorcentajeDescuento / 100;
+        MontoDescuento = PrecioBase * PorcentajeDescuento / 100;
         return MontoDescuento;
     }
     public decimal CalcularValorFinal()
     {
+        CalcularPorcentajeDescuento();
         ValorFinal = PrecioBase - CalcularMontoDescuento(PorcentajeDescuento);
         return ValorFinal;
     }
-
-   
 }

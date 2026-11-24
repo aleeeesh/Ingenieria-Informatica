@@ -78,8 +78,9 @@ namespace StarOne.GUI
             pnlHeader.Controls.Add(lblTituloHeader);
             pnlHeader.Dock = DockStyle.Top;
             pnlHeader.Location = new Point(0, 0);
+            pnlHeader.Margin = new Padding(3, 4, 3, 4);
             pnlHeader.Name = "pnlHeader";
-            pnlHeader.Size = new Size(1084, 70);
+            pnlHeader.Size = new Size(1239, 93);
             pnlHeader.TabIndex = 0;
             // 
             // lblSubtituloHeader
@@ -87,9 +88,9 @@ namespace StarOne.GUI
             lblSubtituloHeader.AutoSize = true;
             lblSubtituloHeader.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             lblSubtituloHeader.ForeColor = Color.FromArgb(255, 170, 0);
-            lblSubtituloHeader.Location = new Point(20, 42);
+            lblSubtituloHeader.Location = new Point(23, 56);
             lblSubtituloHeader.Name = "lblSubtituloHeader";
-            lblSubtituloHeader.Size = new Size(406, 17);
+            lblSubtituloHeader.Size = new Size(526, 23);
             lblSubtituloHeader.TabIndex = 1;
             lblSubtituloHeader.Text = "Instituto Profesional Virginio Gómez — Certamen 3 (Semana 14)";
             // 
@@ -98,9 +99,9 @@ namespace StarOne.GUI
             lblTituloHeader.AutoSize = true;
             lblTituloHeader.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
             lblTituloHeader.ForeColor = Color.White;
-            lblTituloHeader.Location = new Point(18, 10);
+            lblTituloHeader.Location = new Point(21, 13);
             lblTituloHeader.Name = "lblTituloHeader";
-            lblTituloHeader.Size = new Size(568, 30);
+            lblTituloHeader.Size = new Size(695, 37);
             lblTituloHeader.TabIndex = 0;
             lblTituloHeader.Text = "SISTEMA AÉREO STARONE — VENTA DE PASAJES POS";
             // 
@@ -117,9 +118,11 @@ namespace StarOne.GUI
             grpPasajero.Controls.Add(lblNombre);
             grpPasajero.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             grpPasajero.ForeColor = Color.FromArgb(0, 47, 108);
-            grpPasajero.Location = new Point(20, 85);
+            grpPasajero.Location = new Point(23, 113);
+            grpPasajero.Margin = new Padding(3, 4, 3, 4);
             grpPasajero.Name = "grpPasajero";
-            grpPasajero.Size = new Size(520, 150);
+            grpPasajero.Padding = new Padding(3, 4, 3, 4);
+            grpPasajero.Size = new Size(594, 200);
             grpPasajero.TabIndex = 1;
             grpPasajero.TabStop = false;
             grpPasajero.Text = "1. Datos del Pasajero";
@@ -127,18 +130,19 @@ namespace StarOne.GUI
             // txtDVRut
             // 
             txtDVRut.CharacterCasing = CharacterCasing.Upper;
-            txtDVRut.Location = new Point(274, 77);
+            txtDVRut.Location = new Point(332, 104);
+            txtDVRut.Margin = new Padding(3, 4, 3, 4);
             txtDVRut.MaxLength = 1;
             txtDVRut.Name = "txtDVRut";
-            txtDVRut.Size = new Size(23, 24);
+            txtDVRut.Size = new Size(26, 29);
             txtDVRut.TabIndex = 3;
             // 
             // lblGuionRut
             // 
             lblGuionRut.AutoSize = true;
-            lblGuionRut.Location = new Point(256, 81);
+            lblGuionRut.Location = new Point(312, 109);
             lblGuionRut.Name = "lblGuionRut";
-            lblGuionRut.Size = new Size(13, 17);
+            lblGuionRut.Size = new Size(16, 21);
             lblGuionRut.TabIndex = 7;
             lblGuionRut.Text = "-";
             // 
@@ -149,9 +153,10 @@ namespace StarOne.GUI
             chkDescuentoRut.CheckState = CheckState.Checked;
             chkDescuentoRut.Font = new Font("Segoe UI", 9F);
             chkDescuentoRut.ForeColor = Color.DarkGreen;
-            chkDescuentoRut.Location = new Point(130, 115);
+            chkDescuentoRut.Location = new Point(149, 153);
+            chkDescuentoRut.Margin = new Padding(3, 4, 3, 4);
             chkDescuentoRut.Name = "chkDescuentoRut";
-            chkDescuentoRut.Size = new Size(284, 19);
+            chkDescuentoRut.Size = new Size(357, 24);
             chkDescuentoRut.TabIndex = 5;
             chkDescuentoRut.Text = "Aplicar Descuento por RUT (10 + último dígito)%";
             chkDescuentoRut.UseVisualStyleBackColor = true;
@@ -159,9 +164,10 @@ namespace StarOne.GUI
             // txtEdad
             // 
             txtEdad.Font = new Font("Segoe UI", 9F);
-            txtEdad.Location = new Point(395, 75);
+            txtEdad.Location = new Point(451, 100);
+            txtEdad.Margin = new Padding(3, 4, 3, 4);
             txtEdad.Name = "txtEdad";
-            txtEdad.Size = new Size(100, 23);
+            txtEdad.Size = new Size(114, 27);
             txtEdad.TabIndex = 4;
             // 
             // lblEdad
@@ -169,18 +175,19 @@ namespace StarOne.GUI
             lblEdad.AutoSize = true;
             lblEdad.Font = new Font("Segoe UI", 9F);
             lblEdad.ForeColor = Color.Black;
-            lblEdad.Location = new Point(350, 78);
+            lblEdad.Location = new Point(400, 104);
             lblEdad.Name = "lblEdad";
-            lblEdad.Size = new Size(36, 15);
+            lblEdad.Size = new Size(46, 20);
             lblEdad.TabIndex = 4;
             lblEdad.Text = "Edad:";
             // 
             // txtRut
             // 
             txtRut.Font = new Font("Segoe UI", 9F);
-            txtRut.Location = new Point(130, 75);
+            txtRut.Location = new Point(168, 101);
+            txtRut.Margin = new Padding(3, 4, 3, 4);
             txtRut.Name = "txtRut";
-            txtRut.Size = new Size(120, 23);
+            txtRut.Size = new Size(137, 27);
             txtRut.TabIndex = 2;
             // 
             // lblRut
@@ -188,18 +195,19 @@ namespace StarOne.GUI
             lblRut.AutoSize = true;
             lblRut.Font = new Font("Segoe UI", 9F);
             lblRut.ForeColor = Color.Black;
-            lblRut.Location = new Point(15, 78);
+            lblRut.Location = new Point(17, 104);
             lblRut.Name = "lblRut";
-            lblRut.Size = new Size(117, 15);
+            lblRut.Size = new Size(150, 20);
             lblRut.TabIndex = 2;
             lblRut.Text = "RUT (ej: 19876543-2):";
             // 
             // txtNombre
             // 
             txtNombre.Font = new Font("Segoe UI", 9F);
-            txtNombre.Location = new Point(130, 35);
+            txtNombre.Location = new Point(160, 48);
+            txtNombre.Margin = new Padding(3, 4, 3, 4);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(365, 23);
+            txtNombre.Size = new Size(417, 27);
             txtNombre.TabIndex = 1;
             // 
             // lblNombre
@@ -207,9 +215,9 @@ namespace StarOne.GUI
             lblNombre.AutoSize = true;
             lblNombre.Font = new Font("Segoe UI", 9F);
             lblNombre.ForeColor = Color.Black;
-            lblNombre.Location = new Point(15, 38);
+            lblNombre.Location = new Point(17, 51);
             lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(110, 15);
+            lblNombre.Size = new Size(137, 20);
             lblNombre.TabIndex = 0;
             lblNombre.Text = "Nombre Completo:";
             // 
@@ -221,9 +229,11 @@ namespace StarOne.GUI
             grpVuelo.Controls.Add(lblVuelo);
             grpVuelo.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             grpVuelo.ForeColor = Color.FromArgb(0, 47, 108);
-            grpVuelo.Location = new Point(555, 85);
+            grpVuelo.Location = new Point(634, 113);
+            grpVuelo.Margin = new Padding(3, 4, 3, 4);
             grpVuelo.Name = "grpVuelo";
-            grpVuelo.Size = new Size(510, 150);
+            grpVuelo.Padding = new Padding(3, 4, 3, 4);
+            grpVuelo.Size = new Size(583, 200);
             grpVuelo.TabIndex = 2;
             grpVuelo.TabStop = false;
             grpVuelo.Text = "2. Selección de Vuelo y Asiento";
@@ -231,9 +241,10 @@ namespace StarOne.GUI
             // txtAsiento
             // 
             txtAsiento.Font = new Font("Segoe UI", 9F);
-            txtAsiento.Location = new Point(130, 85);
+            txtAsiento.Location = new Point(149, 113);
+            txtAsiento.Margin = new Padding(3, 4, 3, 4);
             txtAsiento.Name = "txtAsiento";
-            txtAsiento.Size = new Size(120, 23);
+            txtAsiento.Size = new Size(137, 27);
             txtAsiento.TabIndex = 7;
             // 
             // lblAsiento
@@ -241,9 +252,9 @@ namespace StarOne.GUI
             lblAsiento.AutoSize = true;
             lblAsiento.Font = new Font("Segoe UI", 9F);
             lblAsiento.ForeColor = Color.Black;
-            lblAsiento.Location = new Point(15, 88);
+            lblAsiento.Location = new Point(17, 117);
             lblAsiento.Name = "lblAsiento";
-            lblAsiento.Size = new Size(92, 15);
+            lblAsiento.Size = new Size(115, 20);
             lblAsiento.TabIndex = 2;
             lblAsiento.Text = "Código Asiento:";
             // 
@@ -252,9 +263,10 @@ namespace StarOne.GUI
             cboVuelo.DropDownStyle = ComboBoxStyle.DropDownList;
             cboVuelo.Font = new Font("Segoe UI", 9F);
             cboVuelo.FormattingEnabled = true;
-            cboVuelo.Location = new Point(130, 38);
+            cboVuelo.Location = new Point(149, 51);
+            cboVuelo.Margin = new Padding(3, 4, 3, 4);
             cboVuelo.Name = "cboVuelo";
-            cboVuelo.Size = new Size(360, 23);
+            cboVuelo.Size = new Size(411, 28);
             cboVuelo.TabIndex = 6;
             // 
             // lblVuelo
@@ -262,9 +274,9 @@ namespace StarOne.GUI
             lblVuelo.AutoSize = true;
             lblVuelo.Font = new Font("Segoe UI", 9F);
             lblVuelo.ForeColor = Color.Black;
-            lblVuelo.Location = new Point(15, 41);
+            lblVuelo.Location = new Point(17, 55);
             lblVuelo.Name = "lblVuelo";
-            lblVuelo.Size = new Size(99, 15);
+            lblVuelo.Size = new Size(126, 20);
             lblVuelo.TabIndex = 0;
             lblVuelo.Text = "Vuelo Disponible:";
             // 
@@ -281,9 +293,11 @@ namespace StarOne.GUI
             grpResumen.Controls.Add(lblPrecioBase);
             grpResumen.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             grpResumen.ForeColor = Color.FromArgb(0, 47, 108);
-            grpResumen.Location = new Point(20, 245);
+            grpResumen.Location = new Point(23, 327);
+            grpResumen.Margin = new Padding(3, 4, 3, 4);
             grpResumen.Name = "grpResumen";
-            grpResumen.Size = new Size(520, 120);
+            grpResumen.Padding = new Padding(3, 4, 3, 4);
+            grpResumen.Size = new Size(594, 160);
             grpResumen.TabIndex = 3;
             grpResumen.TabStop = false;
             grpResumen.Text = "3. Desglose Financiero";
@@ -293,9 +307,9 @@ namespace StarOne.GUI
             lblTotalPagarVal.AutoSize = true;
             lblTotalPagarVal.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblTotalPagarVal.ForeColor = Color.DarkBlue;
-            lblTotalPagarVal.Location = new Point(380, 75);
+            lblTotalPagarVal.Location = new Point(433, 98);
             lblTotalPagarVal.Name = "lblTotalPagarVal";
-            lblTotalPagarVal.Size = new Size(52, 21);
+            lblTotalPagarVal.Size = new Size(64, 28);
             lblTotalPagarVal.TabIndex = 7;
             lblTotalPagarVal.Text = "-bash";
             // 
@@ -304,9 +318,9 @@ namespace StarOne.GUI
             lblTotalPagar.AutoSize = true;
             lblTotalPagar.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             lblTotalPagar.ForeColor = Color.Black;
-            lblTotalPagar.Location = new Point(270, 78);
+            lblTotalPagar.Location = new Point(309, 104);
             lblTotalPagar.Name = "lblTotalPagar";
-            lblTotalPagar.Size = new Size(94, 17);
+            lblTotalPagar.Size = new Size(114, 21);
             lblTotalPagar.TabIndex = 6;
             lblTotalPagar.Text = "Total a Pagar:";
             // 
@@ -315,9 +329,9 @@ namespace StarOne.GUI
             lblMontoDescuentoVal.AutoSize = true;
             lblMontoDescuentoVal.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             lblMontoDescuentoVal.ForeColor = Color.DarkRed;
-            lblMontoDescuentoVal.Location = new Point(380, 35);
+            lblMontoDescuentoVal.Location = new Point(445, 47);
             lblMontoDescuentoVal.Name = "lblMontoDescuentoVal";
-            lblMontoDescuentoVal.Size = new Size(42, 17);
+            lblMontoDescuentoVal.Size = new Size(52, 21);
             lblMontoDescuentoVal.TabIndex = 5;
             lblMontoDescuentoVal.Text = "-bash";
             // 
@@ -326,9 +340,9 @@ namespace StarOne.GUI
             lblMontoDescuento.AutoSize = true;
             lblMontoDescuento.Font = new Font("Segoe UI", 9F);
             lblMontoDescuento.ForeColor = Color.Black;
-            lblMontoDescuento.Location = new Point(270, 37);
+            lblMontoDescuento.Location = new Point(309, 49);
             lblMontoDescuento.Name = "lblMontoDescuento";
-            lblMontoDescuento.Size = new Size(105, 15);
+            lblMontoDescuento.Size = new Size(130, 20);
             lblMontoDescuento.TabIndex = 4;
             lblMontoDescuento.Text = "Monto Descuento:";
             // 
@@ -337,9 +351,9 @@ namespace StarOne.GUI
             lblPorcentajeDescVal.AutoSize = true;
             lblPorcentajeDescVal.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             lblPorcentajeDescVal.ForeColor = Color.DarkGreen;
-            lblPorcentajeDescVal.Location = new Point(120, 78);
+            lblPorcentajeDescVal.Location = new Point(137, 104);
             lblPorcentajeDescVal.Name = "lblPorcentajeDescVal";
-            lblPorcentajeDescVal.Size = new Size(26, 17);
+            lblPorcentajeDescVal.Size = new Size(33, 21);
             lblPorcentajeDescVal.TabIndex = 3;
             lblPorcentajeDescVal.Text = "0%";
             // 
@@ -348,9 +362,9 @@ namespace StarOne.GUI
             lblPorcentajeDesc.AutoSize = true;
             lblPorcentajeDesc.Font = new Font("Segoe UI", 9F);
             lblPorcentajeDesc.ForeColor = Color.Black;
-            lblPorcentajeDesc.Location = new Point(15, 78);
+            lblPorcentajeDesc.Location = new Point(17, 104);
             lblPorcentajeDesc.Name = "lblPorcentajeDesc";
-            lblPorcentajeDesc.Size = new Size(79, 15);
+            lblPorcentajeDesc.Size = new Size(98, 20);
             lblPorcentajeDesc.TabIndex = 2;
             lblPorcentajeDesc.Text = "% Descuento:";
             // 
@@ -359,9 +373,9 @@ namespace StarOne.GUI
             lblPrecioBaseVal.AutoSize = true;
             lblPrecioBaseVal.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             lblPrecioBaseVal.ForeColor = Color.Black;
-            lblPrecioBaseVal.Location = new Point(120, 35);
+            lblPrecioBaseVal.Location = new Point(137, 47);
             lblPrecioBaseVal.Name = "lblPrecioBaseVal";
-            lblPrecioBaseVal.Size = new Size(42, 17);
+            lblPrecioBaseVal.Size = new Size(52, 21);
             lblPrecioBaseVal.TabIndex = 1;
             lblPrecioBaseVal.Text = "-bash";
             // 
@@ -370,9 +384,9 @@ namespace StarOne.GUI
             lblPrecioBase.AutoSize = true;
             lblPrecioBase.Font = new Font("Segoe UI", 9F);
             lblPrecioBase.ForeColor = Color.Black;
-            lblPrecioBase.Location = new Point(15, 37);
+            lblPrecioBase.Location = new Point(17, 49);
             lblPrecioBase.Name = "lblPrecioBase";
-            lblPrecioBase.Size = new Size(70, 15);
+            lblPrecioBase.Size = new Size(88, 20);
             lblPrecioBase.TabIndex = 0;
             lblPrecioBase.Text = "Precio Base:";
             // 
@@ -385,9 +399,11 @@ namespace StarOne.GUI
             grpAcciones.Controls.Add(btnCalcular);
             grpAcciones.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             grpAcciones.ForeColor = Color.FromArgb(0, 47, 108);
-            grpAcciones.Location = new Point(555, 245);
+            grpAcciones.Location = new Point(634, 327);
+            grpAcciones.Margin = new Padding(3, 4, 3, 4);
             grpAcciones.Name = "grpAcciones";
-            grpAcciones.Size = new Size(510, 120);
+            grpAcciones.Padding = new Padding(3, 4, 3, 4);
+            grpAcciones.Size = new Size(583, 160);
             grpAcciones.TabIndex = 4;
             grpAcciones.TabStop = false;
             grpAcciones.Text = "4. Panel de Acciones";
@@ -398,9 +414,10 @@ namespace StarOne.GUI
             btnSalir.FlatStyle = FlatStyle.Flat;
             btnSalir.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnSalir.ForeColor = Color.White;
-            btnSalir.Location = new Point(395, 45);
+            btnSalir.Location = new Point(451, 60);
+            btnSalir.Margin = new Padding(3, 4, 3, 4);
             btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(95, 45);
+            btnSalir.Size = new Size(109, 60);
             btnSalir.TabIndex = 4;
             btnSalir.Text = "Salir";
             btnSalir.UseVisualStyleBackColor = false;
@@ -412,9 +429,10 @@ namespace StarOne.GUI
             btnLimpiar.FlatStyle = FlatStyle.Flat;
             btnLimpiar.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnLimpiar.ForeColor = Color.White;
-            btnLimpiar.Location = new Point(300, 45);
+            btnLimpiar.Location = new Point(343, 60);
+            btnLimpiar.Margin = new Padding(3, 4, 3, 4);
             btnLimpiar.Name = "btnLimpiar";
-            btnLimpiar.Size = new Size(90, 45);
+            btnLimpiar.Size = new Size(103, 60);
             btnLimpiar.TabIndex = 3;
             btnLimpiar.Text = "Limpiar";
             btnLimpiar.UseVisualStyleBackColor = false;
@@ -426,9 +444,10 @@ namespace StarOne.GUI
             btnEliminar.FlatStyle = FlatStyle.Flat;
             btnEliminar.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnEliminar.ForeColor = Color.Black;
-            btnEliminar.Location = new Point(205, 45);
+            btnEliminar.Location = new Point(234, 60);
+            btnEliminar.Margin = new Padding(3, 4, 3, 4);
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(90, 45);
+            btnEliminar.Size = new Size(103, 60);
             btnEliminar.TabIndex = 2;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = false;
@@ -440,9 +459,10 @@ namespace StarOne.GUI
             btnRegistrar.FlatStyle = FlatStyle.Flat;
             btnRegistrar.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnRegistrar.ForeColor = Color.White;
-            btnRegistrar.Location = new Point(110, 45);
+            btnRegistrar.Location = new Point(126, 60);
+            btnRegistrar.Margin = new Padding(3, 4, 3, 4);
             btnRegistrar.Name = "btnRegistrar";
-            btnRegistrar.Size = new Size(90, 45);
+            btnRegistrar.Size = new Size(103, 60);
             btnRegistrar.TabIndex = 1;
             btnRegistrar.Text = "Registrar (BD)";
             btnRegistrar.UseVisualStyleBackColor = false;
@@ -454,9 +474,10 @@ namespace StarOne.GUI
             btnCalcular.FlatStyle = FlatStyle.Flat;
             btnCalcular.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnCalcular.ForeColor = Color.White;
-            btnCalcular.Location = new Point(15, 45);
+            btnCalcular.Location = new Point(17, 60);
+            btnCalcular.Margin = new Padding(3, 4, 3, 4);
             btnCalcular.Name = "btnCalcular";
-            btnCalcular.Size = new Size(90, 45);
+            btnCalcular.Size = new Size(103, 60);
             btnCalcular.TabIndex = 0;
             btnCalcular.Text = "Calcular";
             btnCalcular.UseVisualStyleBackColor = false;
@@ -469,9 +490,11 @@ namespace StarOne.GUI
             grpBusqueda.Controls.Add(lblFiltro);
             grpBusqueda.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             grpBusqueda.ForeColor = Color.FromArgb(0, 47, 108);
-            grpBusqueda.Location = new Point(20, 375);
+            grpBusqueda.Location = new Point(23, 500);
+            grpBusqueda.Margin = new Padding(3, 4, 3, 4);
             grpBusqueda.Name = "grpBusqueda";
-            grpBusqueda.Size = new Size(1045, 60);
+            grpBusqueda.Padding = new Padding(3, 4, 3, 4);
+            grpBusqueda.Size = new Size(1194, 80);
             grpBusqueda.TabIndex = 5;
             grpBusqueda.TabStop = false;
             grpBusqueda.Text = "Búsqueda y Filtro Dinámico en Base de Datos";
@@ -482,9 +505,10 @@ namespace StarOne.GUI
             btnBuscar.FlatStyle = FlatStyle.Flat;
             btnBuscar.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnBuscar.ForeColor = Color.White;
-            btnBuscar.Location = new Point(480, 22);
+            btnBuscar.Location = new Point(563, 30);
+            btnBuscar.Margin = new Padding(3, 4, 3, 4);
             btnBuscar.Name = "btnBuscar";
-            btnBuscar.Size = new Size(120, 27);
+            btnBuscar.Size = new Size(137, 36);
             btnBuscar.TabIndex = 2;
             btnBuscar.Text = "Buscar / Filtrar";
             btnBuscar.UseVisualStyleBackColor = false;
@@ -493,9 +517,10 @@ namespace StarOne.GUI
             // txtFiltro
             // 
             txtFiltro.Font = new Font("Segoe UI", 9F);
-            txtFiltro.Location = new Point(170, 24);
+            txtFiltro.Location = new Point(208, 33);
+            txtFiltro.Margin = new Padding(3, 4, 3, 4);
             txtFiltro.Name = "txtFiltro";
-            txtFiltro.Size = new Size(300, 23);
+            txtFiltro.Size = new Size(342, 27);
             txtFiltro.TabIndex = 1;
             // 
             // lblFiltro
@@ -503,9 +528,9 @@ namespace StarOne.GUI
             lblFiltro.AutoSize = true;
             lblFiltro.Font = new Font("Segoe UI", 9F);
             lblFiltro.ForeColor = Color.Black;
-            lblFiltro.Location = new Point(15, 27);
+            lblFiltro.Location = new Point(17, 36);
             lblFiltro.Name = "lblFiltro";
-            lblFiltro.Size = new Size(148, 15);
+            lblFiltro.Size = new Size(185, 20);
             lblFiltro.TabIndex = 0;
             lblFiltro.Text = "Buscar por RUT o Nombre:";
             // 
@@ -514,9 +539,11 @@ namespace StarOne.GUI
             grpHistorial.Controls.Add(dgvPasajes);
             grpHistorial.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             grpHistorial.ForeColor = Color.FromArgb(0, 47, 108);
-            grpHistorial.Location = new Point(20, 445);
+            grpHistorial.Location = new Point(23, 593);
+            grpHistorial.Margin = new Padding(3, 4, 3, 4);
             grpHistorial.Name = "grpHistorial";
-            grpHistorial.Size = new Size(1045, 200);
+            grpHistorial.Padding = new Padding(3, 4, 3, 4);
+            grpHistorial.Size = new Size(1194, 267);
             grpHistorial.TabIndex = 6;
             grpHistorial.TabStop = false;
             grpHistorial.Text = "Registro en Base de Datos (StarOneDB — Tabla Pasajeros)";
@@ -546,12 +573,14 @@ namespace StarOne.GUI
             dgvPasajes.DefaultCellStyle = dataGridViewCellStyle2;
             dgvPasajes.Dock = DockStyle.Fill;
             dgvPasajes.EnableHeadersVisualStyles = false;
-            dgvPasajes.Location = new Point(3, 19);
+            dgvPasajes.Location = new Point(3, 24);
+            dgvPasajes.Margin = new Padding(3, 4, 3, 4);
             dgvPasajes.MultiSelect = false;
             dgvPasajes.Name = "dgvPasajes";
             dgvPasajes.ReadOnly = true;
+            dgvPasajes.RowHeadersWidth = 51;
             dgvPasajes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvPasajes.Size = new Size(1039, 178);
+            dgvPasajes.Size = new Size(1188, 239);
             dgvPasajes.TabIndex = 0;
             // 
             // grpMetricas
@@ -564,18 +593,21 @@ namespace StarOne.GUI
             grpMetricas.Controls.Add(lblTotalPasajeros);
             grpMetricas.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             grpMetricas.ForeColor = Color.FromArgb(0, 47, 108);
-            grpMetricas.Location = new Point(20, 655);
+            grpMetricas.Location = new Point(23, 873);
+            grpMetricas.Margin = new Padding(3, 4, 3, 4);
             grpMetricas.Name = "grpMetricas";
-            grpMetricas.Size = new Size(1045, 55);
+            grpMetricas.Padding = new Padding(3, 4, 3, 4);
+            grpMetricas.Size = new Size(1194, 73);
             grpMetricas.TabIndex = 7;
             grpMetricas.TabStop = false;
             grpMetricas.Text = "Métricas Globales Acumuladas de la Jornada";
             // 
             // btnProbarConexion
             // 
-            btnProbarConexion.Location = new Point(851, 19);
+            btnProbarConexion.Location = new Point(973, 25);
+            btnProbarConexion.Margin = new Padding(3, 4, 3, 4);
             btnProbarConexion.Name = "btnProbarConexion";
-            btnProbarConexion.Size = new Size(142, 23);
+            btnProbarConexion.Size = new Size(162, 31);
             btnProbarConexion.TabIndex = 4;
             btnProbarConexion.Text = "Probar Conexión";
             btnProbarConexion.UseVisualStyleBackColor = true;
@@ -586,9 +618,9 @@ namespace StarOne.GUI
             lblTotalRecaudadoVal.AutoSize = true;
             lblTotalRecaudadoVal.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             lblTotalRecaudadoVal.ForeColor = Color.DarkBlue;
-            lblTotalRecaudadoVal.Location = new Point(480, 23);
+            lblTotalRecaudadoVal.Location = new Point(558, 31);
             lblTotalRecaudadoVal.Name = "lblTotalRecaudadoVal";
-            lblTotalRecaudadoVal.Size = new Size(46, 19);
+            lblTotalRecaudadoVal.Size = new Size(54, 23);
             lblTotalRecaudadoVal.TabIndex = 3;
             lblTotalRecaudadoVal.Text = "-bash";
             // 
@@ -597,9 +629,9 @@ namespace StarOne.GUI
             lblTotalRecaudado.AutoSize = true;
             lblTotalRecaudado.Font = new Font("Segoe UI", 9F);
             lblTotalRecaudado.ForeColor = Color.Black;
-            lblTotalRecaudado.Location = new Point(330, 25);
+            lblTotalRecaudado.Location = new Point(377, 33);
             lblTotalRecaudado.Name = "lblTotalRecaudado";
-            lblTotalRecaudado.Size = new Size(139, 15);
+            lblTotalRecaudado.Size = new Size(175, 20);
             lblTotalRecaudado.TabIndex = 2;
             lblTotalRecaudado.Text = "Recaudación Total Venta:";
             // 
@@ -608,9 +640,9 @@ namespace StarOne.GUI
             lblTotalPasajerosVal.AutoSize = true;
             lblTotalPasajerosVal.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             lblTotalPasajerosVal.ForeColor = Color.DarkGreen;
-            lblTotalPasajerosVal.Location = new Point(180, 23);
+            lblTotalPasajerosVal.Location = new Point(221, 31);
             lblTotalPasajerosVal.Name = "lblTotalPasajerosVal";
-            lblTotalPasajerosVal.Size = new Size(17, 19);
+            lblTotalPasajerosVal.Size = new Size(20, 23);
             lblTotalPasajerosVal.TabIndex = 1;
             lblTotalPasajerosVal.Text = "0";
             // 
@@ -619,18 +651,18 @@ namespace StarOne.GUI
             lblTotalPasajeros.AutoSize = true;
             lblTotalPasajeros.Font = new Font("Segoe UI", 9F);
             lblTotalPasajeros.ForeColor = Color.Black;
-            lblTotalPasajeros.Location = new Point(20, 25);
+            lblTotalPasajeros.Location = new Point(23, 33);
             lblTotalPasajeros.Name = "lblTotalPasajeros";
-            lblTotalPasajeros.Size = new Size(152, 15);
+            lblTotalPasajeros.Size = new Size(192, 20);
             lblTotalPasajeros.TabIndex = 0;
             lblTotalPasajeros.Text = "Total Pasajeros Registrados:";
             // 
             // FormStarOne
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1084, 725);
+            ClientSize = new Size(1239, 967);
             Controls.Add(grpMetricas);
             Controls.Add(grpHistorial);
             Controls.Add(grpBusqueda);
@@ -641,6 +673,7 @@ namespace StarOne.GUI
             Controls.Add(pnlHeader);
             Font = new Font("Segoe UI", 9F);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
             Name = "FormStarOne";
             StartPosition = FormStartPosition.CenterScreen;

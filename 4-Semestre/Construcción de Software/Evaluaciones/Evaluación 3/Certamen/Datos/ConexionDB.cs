@@ -26,7 +26,7 @@ public static class ConexionBD
 
     public static SqlConnection ObtenerConexion()
     {
-        return new SqlConnection(ObtenerCadenaConexion());
+        return new SqlConnection(ObtenerCadenaConexion()); ;
     }
 
     public static bool ProbarConexion()

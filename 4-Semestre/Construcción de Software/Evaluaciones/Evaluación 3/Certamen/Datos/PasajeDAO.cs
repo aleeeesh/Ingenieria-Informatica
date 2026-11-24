@@ -23,15 +23,16 @@ public class PasajeDAO
             cmd.Parameters.AddWithValue("@ValorPasaje", pasaje.PrecioBase);
             cmd.Parameters.AddWithValue("@ValorFinalConDescuento", pasaje.ValorFinal);
 
+            conexion.Open();
             return cmd.ExecuteNonQuery() > 0;
         }
 
     }
 
-    public DataTable ObtenerPasajerosDesconectado()
+    public DataTable ObtenerPasajesDesconectado()
     {
         DataTable dt = new DataTable();
-        string query = "SELECT Nombre, Rut, Edad, Origen, Destino, NumeroAsiento AS Asiento, ValorPasaje, ValorFinalConDescuento AS Total FROM Pasajes";
+        string query = "SELECT IdPasaje, Nombre AS 'Nombre Completo', Rut, Edad, Origen, Destino, NumeroAsiento AS Asiento, ValorPasaje, ValorFinalConDescuento AS Total FROM Pasajes ORDER BY IdPasaje ASC";
 
         using (SqlConnection conexion = ConexionBD.ObtenerConexion())
         using (SqlDataAdapter adapter = new SqlDataAdapter(query, conexion))
@@ -41,13 +42,13 @@ public class PasajeDAO
         return dt;
     }
 
-    public DataTable BuscarPasajerosPorRutONombre(string filtro)
+    public DataTable BuscarPasajesPorRutONombre(string filtro)
     {
         DataTable dt = new DataTable();
-        string query = @"SELECT Id, Rut, Nombre, Edad, NumeroVuelo AS Vuelo, NumeroAsiento AS Asiento, Origen, Destino, ValorPasaje, ValorFinalConDescuento AS Total FROM Pasajes
+        string query = @"SELECT IdPasaje, Nombre AS 'Nombre Completo', Rut, Edad, Origen, Destino, NumeroAsiento AS Asiento, ValorPasaje, ValorFinalConDescuento AS Total
                             FROM Pasajes 
                             WHERE Nombre LIKE @Filtro OR Rut LIKE @Filtro
-                            ORDER BY Id ASC";
+                            ORDER BY IdPasaje ASC";
 
         using (SqlConnection conexion = ConexionBD.ObtenerConexion())
         using (SqlCommand cmd = new SqlCommand(query, conexion))
@@ -63,12 +64,14 @@ public class PasajeDAO
 
     public bool EliminarPasaje(int id)
     {
-        string query = "DELETE FROM Pasajes WHERE Id = @Id";
+        string query = "DELETE FROM Pasajes WHERE IdPasaje = @IdPasaje";
 
         using (SqlConnection conexion = ConexionBD.ObtenerConexion())
         using (SqlCommand cmd = new SqlCommand(query, conexion))
         {
-            cmd.Parameters.AddWithValue("@Id", id);
+            cmd.Parameters.AddWithValue("@IdPasaje", id);
+
+            conexion.Open();
             return cmd.ExecuteNonQuery() > 0;
         }
     }
