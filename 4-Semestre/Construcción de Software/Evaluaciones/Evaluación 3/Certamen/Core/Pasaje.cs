@@ -8,7 +8,7 @@ public class Pasaje
     public int IDVuelo { get; set; }
     public string Origen { get; set; } = string.Empty;
     public string Destino { get; set; } = string.Empty;
-    public string Asiento { get; } = string.Empty; // Dejar como int? asi viene de la BD
+    public string Asiento { get; } = string.Empty; // En la BD viene como int, lo dejé como string. Pero al poner un string en el asiento este lanza excepción controlada indicando que no puede convertir de string a int.
     public decimal PrecioBase { get; set; }
     public decimal PorcentajeDescuento { get; set; }
     public bool AplicaDescuentoRut { get; }
@@ -16,15 +16,16 @@ public class Pasaje
     public decimal ValorFinal { get; set; }
     public int VueloSeleccionado { get; }
 
-    /*public Pasaje(int vueloSeleccionado, string asiento, string rut, bool aplicaDescuentoRut)
+    public Pasaje(int vueloSeleccionado, string asiento, string rut, bool aplicaDescuentoRut)
     {
         VueloSeleccionado = vueloSeleccionado;
         IDVuelo = vueloSeleccionado;
         Asiento = asiento;
         Rut = rut;
         AplicaDescuentoRut = aplicaDescuentoRut;
-    }*/
+    }
 
+    // Agrega constructor parcial con los datos que se ingresaran.
     public Pasaje(string nombre, string rut, int edad, int idVuelo, string origen, string destino, string asiento, decimal precioBase, bool aplicaDescuentoRut)
     {
         NombreCompleto = nombre;
@@ -34,13 +35,14 @@ public class Pasaje
         VueloSeleccionado = idVuelo;
         Origen = origen;
         Destino = destino;
-        Asiento = asiento.Trim();
+        Asiento = asiento;
         PrecioBase = precioBase;
         AplicaDescuentoRut = aplicaDescuentoRut;
 
         CalcularValorFinal();
     }
 
+    // Crea método para calcular el porcentaje de descuento según el DV del rut ingresado.
     internal decimal CalcularPorcentajeDescuento()
     {
         if (!AplicaDescuentoRut)

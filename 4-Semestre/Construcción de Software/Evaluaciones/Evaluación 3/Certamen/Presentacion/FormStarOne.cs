@@ -15,7 +15,7 @@ namespace StarOne.GUI
         {
             InitializeComponent();
             pasajeDAO = new PasajeDAO();
-            vueloDAO = new VueloDAO();
+            vueloDAO = new VueloDAO(); // Instancia clase VueloDAO para cargar el combo Vuelos.
 
         }
 
@@ -306,12 +306,14 @@ namespace StarOne.GUI
         /// </summary>
         private Pasaje CrearObjetoPasajeDesdeGUI(int vueloSeleccionado)
         {
+            // Obtiene la fila del vuelo seleccionado en cboVuelo con sus datos (ej: origen, destino, PrecioBase)
             DataRowView vuelo = (DataRowView)cboVuelo.SelectedItem;
 
             string nombre = txtNombre.Text.Trim();
             string rut = txtRut.Text.Trim() + "-" + txtDVRut.Text.Trim();
             int edad = int.Parse(txtEdad.Text.Trim());
             string asiento = txtAsiento.Text.Trim().ToUpper();
+
             string origen = vuelo["Origen"].ToString();
             string destino = vuelo["Destino"].ToString();
             decimal valorPasaje = Convert.ToDecimal(vuelo["PrecioBase"]);
@@ -322,11 +324,10 @@ namespace StarOne.GUI
             /*Pasaje pasaje = new Pasaje(vueloSeleccionado, asiento, rut, aplicaDescuentoRut);
             pasaje.NombreCompleto = nombre;
             pasaje.Edad = edad;
-            pasaje.PrecioBase = valorPasaje;
-            pasaje.Origen = origen;
-            pasaje.Destino = destino;*/ // Versión original
+            */ // Versión original
 
-            Pasaje pasaje = new Pasaje(nombre, rut, edad, vueloSeleccionado, origen, destino, asiento, valorPasaje, aplicaDescuentoRut); // Nueva versión
+            // Instanciar el Pasaje usando el constructor completo, además de calcular porcentaje según el RUT. (versión nueva)
+            Pasaje pasaje = new Pasaje(nombre, rut, edad, vueloSeleccionado, origen, destino, asiento, valorPasaje, aplicaDescuentoRut);
 
             // Instanciar la Entidad de Dominio Pasaje
             return pasaje;
