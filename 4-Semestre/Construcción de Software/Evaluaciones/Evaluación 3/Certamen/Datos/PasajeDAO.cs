@@ -32,7 +32,8 @@ public class PasajeDAO
     public DataTable ObtenerPasajesDesconectado()
     {
         DataTable dt = new DataTable();
-        string query = "SELECT IdPasaje, Nombre AS 'Nombre Completo', Rut, Edad, Origen, Destino, NumeroAsiento AS Asiento, ValorPasaje, ValorFinalConDescuento AS Total FROM Pasajes ORDER BY IdPasaje ASC";
+
+        string query = "SELECT IdPasaje, Nombre, Rut, Edad, Origen, Destino, NumeroAsiento AS Asiento, ValorPasaje, ValorFinalConDescuento AS Total FROM Pasajes ORDER BY IdPasaje ASC";
 
         using (SqlConnection conexion = ConexionBD.ObtenerConexion())
         using (SqlDataAdapter adapter = new SqlDataAdapter(query, conexion))
@@ -45,10 +46,8 @@ public class PasajeDAO
     public DataTable BuscarPasajesPorRutONombre(string filtro)
     {
         DataTable dt = new DataTable();
-        string query = @"SELECT IdPasaje, Nombre AS 'Nombre Completo', Rut, Edad, Origen, Destino, NumeroAsiento AS Asiento, ValorPasaje, ValorFinalConDescuento AS Total
-                            FROM Pasajes 
-                            WHERE Nombre LIKE @Filtro OR Rut LIKE @Filtro
-                            ORDER BY IdPasaje ASC";
+
+        string query = @"SELECT IdPasaje, Nombre, Rut, Edad, Origen, Destino, NumeroAsiento AS Asiento, ValorPasaje, ValorFinalConDescuento AS Total FROM Pasajes WHERE Nombre LIKE @Filtro OR Rut LIKE @Filtro ORDER BY IdPasaje ASC";
 
         using (SqlConnection conexion = ConexionBD.ObtenerConexion())
         using (SqlCommand cmd = new SqlCommand(query, conexion))

@@ -45,11 +45,11 @@ namespace StarOne.GUI
                 cboVuelo.DataSource = new BindingSource(vuelos, null);
                 cboVuelo.DisplayMember = "Codigo";
                 cboVuelo.ValueMember = "IdVuelo";
-                cboVuelo.DropDownStyle = ComboBoxStyle.DropDownList;
+                cboVuelo.DropDownStyle = ComboBoxStyle.DropDownList;    
             }
             catch (SqlException ex)
             {
-                MessageBox.Show($"Error de base de datos: {ex.Message}", "Error SQL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error al cargar vuelos: {ex.Message}", "Error SQL", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -73,10 +73,9 @@ namespace StarOne.GUI
             {
                 DataTable dt = pasajeDAO.ObtenerPasajesDesconectado();
                 dgvPasajes.DataSource = dt;
-                ActualizarMetricas();
             } catch(SqlException ex)
             {
-                MessageBox.Show($"Error de base de datos: {ex.Message}", "Error SQL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error al cargar pasajes: {ex.Message}", "Error SQL", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -85,7 +84,7 @@ namespace StarOne.GUI
         /// </summary>
         private void ActualizarMetricas()
         {
-            int recaudacionTotal = 0;
+            decimal recaudacionTotal = 0;
 
             if (dgvPasajes.Rows.Count > 0)
             {
@@ -115,14 +114,14 @@ namespace StarOne.GUI
                 Pasaje pasaje = CrearObjetoPasajeDesdeGUI(GetVueloSeleccionado());
 
                 // Mostrar resumen financiero en el Panel de Desglose
-                lblPrecioBaseVal.Text = $"${pasaje.PrecioBase} CLP";
-                lblMontoDescuentoVal.Text = $"${pasaje.MontoDescuento} CLP";
+                lblPrecioBaseVal.Text = $"${pasaje.PrecioBase:N0} CLP";
+                lblMontoDescuentoVal.Text = $"${pasaje.MontoDescuento:N0} CLP";
                 lblPorcentajeDescVal.Text = $"{pasaje.PorcentajeDescuento}%";
-                lblTotalPagarVal.Text = $"${pasaje.ValorFinal} CLP";
+                lblTotalPagarVal.Text = $"${pasaje.ValorFinal:N0} CLP";
 
-                MessageBox.Show($"Cálculo realizado con éxito para el pasajero: {pasaje.NombreCompleto}.\n\n" +
+                MessageBox.Show($"Cálculo realizado con éxito para el pasajero: {pasaje.NombreCompleto}\n\n" +
                                 $"Descuento de RUT aplicado: {pasaje.PorcentajeDescuento}%\n" +
-                                $"Total a pagar: ${pasaje.ValorFinal} CLP\n",
+                                $"Total a pagar: ${pasaje.ValorFinal:N0} CLP\n",
                                 "Simulación de Tarifa", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -147,10 +146,11 @@ namespace StarOne.GUI
                     MessageBox.Show($"¡Venta registrada con éxito en StarOneDB!\n\n" +
                                     $"Pasajero: {pasaje.NombreCompleto}\n" +
                                     $"RUT: {pasaje.Rut}\n" +
-                                    $"Total Cobrado: ${pasaje.CalcularValorFinal()} CLP\n",
+                                    $"Total Cobrado: ${pasaje.ValorFinal:N0} CLP\n",
                                     "Registro Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     CargarGrillaPasajes();
+                    ActualizarMetricas();
                     LimpiarFormulario();
                 }
                 else
@@ -160,7 +160,7 @@ namespace StarOne.GUI
             }
             catch (SqlException ex)
             {
-                MessageBox.Show($"Error de base de datos: {ex.Message}", "Error SQL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error al registrar pasaje: {ex.Message}", "Error SQL", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -180,7 +180,7 @@ namespace StarOne.GUI
             }
             catch (SqlException ex)
             {
-                MessageBox.Show($"Error de base de datos: {ex.Message}", "Error SQL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error al buscar registro: {ex.Message}", "Error SQL", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -212,6 +212,7 @@ namespace StarOne.GUI
                         MessageBox.Show("Pasaje eliminado de la base de datos.", "Eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         CargarGrillaPasajes();
+                        ActualizarMetricas();
                         LimpiarFormulario();
                     }
                 }
@@ -305,22 +306,27 @@ namespace StarOne.GUI
         /// </summary>
         private Pasaje CrearObjetoPasajeDesdeGUI(int vueloSeleccionado)
         {
-            DataRowView filaVuelo = (DataRowView)cboVuelo.SelectedItem;
+            DataRowView vuelo = (DataRowView)cboVuelo.SelectedItem;
 
             string nombre = txtNombre.Text.Trim();
             string rut = txtRut.Text.Trim() + "-" + txtDVRut.Text.Trim();
             int edad = int.Parse(txtEdad.Text.Trim());
             string asiento = txtAsiento.Text.Trim().ToUpper();
+            string origen = vuelo["Origen"].ToString();
+            string destino = vuelo["Destino"].ToString();
+            decimal valorPasaje = Convert.ToDecimal(vuelo["PrecioBase"]);
+
             bool aplicaDescuentoRut = chkDescuentoRut.Checked;
 
             // Instanciar el Pasaje calculando el porcentaje según el RUT
-            Pasaje pasaje = new Pasaje(vueloSeleccionado, asiento, rut, aplicaDescuentoRut);
+            /*Pasaje pasaje = new Pasaje(vueloSeleccionado, asiento, rut, aplicaDescuentoRut);
             pasaje.NombreCompleto = nombre;
             pasaje.Edad = edad;
-            pasaje.PrecioBase = Convert.ToDecimal(filaVuelo["PrecioBase"]);
-            pasaje.Origen = filaVuelo["Origen"].ToString() ?? string.Empty;
-            pasaje.Destino = filaVuelo["Destino"].ToString() ?? string.Empty;
-            pasaje.CalcularValorFinal();
+            pasaje.PrecioBase = valorPasaje;
+            pasaje.Origen = origen;
+            pasaje.Destino = destino;*/ // Versión original
+
+            Pasaje pasaje = new Pasaje(nombre, rut, edad, vueloSeleccionado, origen, destino, asiento, valorPasaje, aplicaDescuentoRut); // Nueva versión
 
             // Instanciar la Entidad de Dominio Pasaje
             return pasaje;

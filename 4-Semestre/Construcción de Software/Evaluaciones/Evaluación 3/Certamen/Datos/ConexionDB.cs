@@ -11,7 +11,6 @@ public static class ConexionBD
 
         // Apunta a la subcarpeta BaseDatos/StarOneDB.mdf
         string rutaArchivoMdf = Path.Combine(rutaBase, "BaseDatos", "StarOneDB.mdf");
-
         SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder
         {
             DataSource = @"(LocalDB)\MSSQLLocalDB", // O @".\SQLEXPRESS" según el motor usado
@@ -23,10 +22,10 @@ public static class ConexionBD
 
         return builder.ConnectionString;
     }
-
+        
     public static SqlConnection ObtenerConexion()
     {
-        return new SqlConnection(ObtenerCadenaConexion()); ;
+        return new SqlConnection(ObtenerCadenaConexion());
     }
 
     public static bool ProbarConexion()

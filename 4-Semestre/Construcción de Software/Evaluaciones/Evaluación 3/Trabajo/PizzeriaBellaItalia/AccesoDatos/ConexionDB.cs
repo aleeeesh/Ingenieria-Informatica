@@ -5,7 +5,7 @@ namespace PizzeriaBellaItalia.AccesoDatos
     public static class ConexionBD
     {
         // Cadena de conexión hacia la instancia local de SQL Express obtenida de VS 2026
-        private static readonly string cadenaConexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={System.IO.Path.GetFullPath(AppDomain.CurrentDomain.BaseDirectory + @"..\..\..\AccesoDatos\PizzeriaDB.mdf")};Integrated Security=True;Connect Timeout=30;Encrypt=False";
+        private static readonly string cadenaConexion = $@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={Path.GetFullPath(AppDomain.CurrentDomain.BaseDirectory + @"..\..\..\AccesoDatos\PizzeriaDB.mdf")};Integrated Security=True;Connect Timeout=30;Encrypt=False";
 
         /// <summary>
         /// Abre y retorna una conexión activa a SQL Server Express.

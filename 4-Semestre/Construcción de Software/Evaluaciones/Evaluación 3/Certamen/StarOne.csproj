@@ -10,22 +10,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="BaseDatos\StarOneDB.mdf" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="BaseDatos\StarOneDB.mdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="7.1.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="BaseDatos\StarOneDB.mdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="BaseDatos\StarOneDB_log.ldf">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
